@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca</title>
     <script src="./dist/script/main.js" defer></script>
 </head>
+
 <body>
     <nav>
-        <img alt="Logo" />
-        <ul>
-            <li><a>Ínicio</a></li>
-            <li><a>Estante</a></li>
-        </ul>
-        <div>
-            <input type="text" placeholder="Busque um livro">
-            <img src="" alt="Lupa" />
-        </div>
-        <div>
-            <a>Entrar</a>
-            <a>Cadastrar-se</a>
-        </div>
+        <img src="" alt="Logo da Biblioteca" />
+
+        <section aria-label="Menu principal">
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Estante</a></li>
+            </ul>
+        </section>
+
+        <section aria-label="Buscar de livro" role="search">
+            <input type="text" placeholder="Busque um livro" aria-label="Buscar por nome do livro">
+            <button aria-label="Pesquisar livro">
+                <img src="" alt="Lupa" />
+            </button>
+        </section>
+
+        <section aria-label="Acesso ao usuário">
+            <a href="#">Entrar</a>
+            <a href="#">Cadastrar-se</a>
+        </section>
     </nav>
 </body>
+
 </html>
