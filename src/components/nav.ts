@@ -10,8 +10,8 @@ class MyNav extends HTMLElement {
             nav {
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                background-color: #f5f5f5;
+                justify-content: space-between;
+                background-color: var(--bege);
                 padding: 1rem;
             }
         </style>
