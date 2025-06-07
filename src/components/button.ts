@@ -5,11 +5,16 @@ class MyButton extends HTMLElement {
     }
 
     connectedCallback(){
-        const label = this.getAttribute('label') || '';
-
         this.shadowRoot!.innerHTML = `
-            <button>${label}</button>
-        `
+            <style>
+            button {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            </style>
+            <button><slot></slot></button>
+        `;
         this.shadowRoot!.querySelector('button')!.addEventListener(
             'click', () => {
                 this.dispatchEvent(
