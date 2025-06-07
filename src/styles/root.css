@@ -46,3 +46,10 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+:root {
+    --azul: #72A4F2;
+    --black: #000000;
+    --bege: #F4EFE7;
+    --branco-gelo: #FFFAFA;
+}
