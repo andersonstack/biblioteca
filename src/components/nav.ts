@@ -9,20 +9,11 @@ class MyNav extends HTMLElement {
       <style>
         nav {
           display: flex;
-          gap: 1rem;
           background-color: var(--bege);
           justify-content: space-between;
           align-items: center;
-          padding: 1rem;
+          padding: 0.5rem;
           font-family: Arial, sans-serif;
-        }
-
-        section {
-          margin-bottom: 1rem;
-          display: flex;
-          gap: 1rem;
-          align-items: center;
-          justify-content: space-between;
         }
 
         ul {
@@ -38,10 +29,23 @@ class MyNav extends HTMLElement {
           font-weight: bold;
         }
 
-        input[type="text"] {
-          padding: 0.4rem;
-          font-size: 1rem;
-          width: 200px;
+        .menu {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 40%;
+        }
+
+        .menu__principal {
+          display: flex;
+          align-items: center;
+        }
+
+        .menu__user {
+          display: flex;
+          align-items: center;
+          gap: 5rem;
+          padding: 1rem;
         }
 
       </style>
@@ -49,19 +53,22 @@ class MyNav extends HTMLElement {
       <nav>
         <img src="./src/assets/icons/logo.png" alt="Logo da Biblioteca" />
 
-        <section aria-label="Menu principal">
-          <ul>
-            <li><a href="#">Início</a></li>
-            <li><a href="#">Estante</a></li>
-          </ul>
+        <section aria-label="Menu" class="menu">
+          <section aria-label="Menu principal" class="menu__principal">
+            <ul>
+              <li><a href="#">Início</a></li>
+              <li><a href="#">Estante</a></li>
+            </ul>
+          </section>
+
+          
+          <section aria-label="Acesso ao usuário" class="menu__user">
+          <input-button></input-button>
+            <a href="#">Entrar</a>
+            <a href="#">Cadastrar-se</a>
+          </section>
         </section>
 
-        <input-button></input-button>
-
-        <section aria-label="Acesso ao usuário">
-          <a href="#">Entrar</a>
-          <a href="#">Cadastrar-se</a>
-        </section>
       </nav>
     `;
   }
