@@ -33,7 +33,6 @@ class MyNav extends HTMLElement {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          width: 40%;
         }
 
         .menu__principal {
@@ -46,6 +45,7 @@ class MyNav extends HTMLElement {
           align-items: center;
           gap: 5rem;
           padding: 1rem;
+          width: auto;
         }
 
       </style>
@@ -56,16 +56,16 @@ class MyNav extends HTMLElement {
         <section aria-label="Menu" class="menu">
           <section aria-label="Menu principal" class="menu__principal">
             <ul>
-              <li><a href="#">Início</a></li>
-              <li><a href="#">Estante</a></li>
+              <li><text-button page="#">Início</text-button></li>
+              <li><text-button page="#">Estante</text-button></li>
             </ul>
           </section>
 
           
           <section aria-label="Acesso ao usuário" class="menu__user">
           <input-button></input-button>
-            <a href="#">Entrar</a>
-            <a href="#">Cadastrar-se</a>
+            <text-button page="#">Entrar</text-button>
+            <text-button page="#" class="with_background">Cadastrar-se</text-button>
           </section>
         </section>
 
