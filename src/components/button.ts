@@ -11,6 +11,9 @@ class MyButton extends HTMLElement {
                 display: flex;
                 align-items: center;
                 gap: 0.5rem;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
             }
             </style>
             <button><slot></slot></button>
