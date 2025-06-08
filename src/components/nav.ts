@@ -90,18 +90,24 @@ class MyNav extends HTMLElement {
             align-items: center;
             gap: 2rem;
             width: 100%;
-
+            transform: translateX(100%);
+            transition: transform 0.5s linear;
+            
             &::after{
               content: "";
               background-color: var(--azul);
               width: 100%;
-              height: 160%;
+              height: 120%;
               border-radius: 0 0 1rem 1rem;
               top: 0;
               left: 0;
               position: absolute;
               z-index: -1;
             }
+          }
+
+          .menu.active {
+            transform: translateX(0);
           }
 
           .menu__user {
@@ -160,9 +166,14 @@ class MyNav extends HTMLElement {
     isOpen = !isOpen;
 
     if (img) {
-      // Força a reinicialização da animação se já tiver sido aplicada
+      if(menu?.classList.contains("active")){
+        menu?.classList.remove("active");
+      } else {
+        menu?.classList.add("active");
+      }
+
       img.classList.remove("rotate");
-      void img.offsetWidth; // força reflow
+      void img.offsetWidth;
       img.classList.add("rotate");
 
       img.src = isOpen
