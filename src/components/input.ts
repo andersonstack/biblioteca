@@ -16,12 +16,10 @@ class MyInput extends HTMLElement {
                     border: 0.1rem solid transparent;
                     outline: none;
                     color: var(--black);
+                    background-color: var(--branco-gelo);
                     font-size: 1rem;
                     border-radius: 1rem;
                     position: relative;
-                }
-                input:focus {
-                    border: 0.1rem solid var(--azul)
                 }
             </style>
             <input 
