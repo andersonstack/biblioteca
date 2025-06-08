@@ -7,6 +7,15 @@ class MyNav extends HTMLElement {
   connectedCallback() {
     this.shadowRoot!.innerHTML = `
       <style>
+        @keyframes rotation {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        .rotate {
+          animation: rotation 0.5s linear;
+        }
+
         nav {
           display: flex;
           background-color: var(--bege);
@@ -14,6 +23,18 @@ class MyNav extends HTMLElement {
           align-items: center;
           padding: 0.5rem;
           font-family: Arial, sans-serif;
+          position: relative; 
+        }
+
+        div {
+          display: flex;
+          align-items: center;
+          gap: 5rem;
+
+          img {
+            width: 2rem;
+            display: none;
+          }
         }
 
         ul {
@@ -33,6 +54,7 @@ class MyNav extends HTMLElement {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          gap: 5rem;
         }
 
         .menu__principal {
@@ -44,33 +66,113 @@ class MyNav extends HTMLElement {
           display: flex;
           align-items: center;
           gap: 5rem;
-          padding: 1rem;
           width: auto;
         }
 
+        @media screen and (max-width: 768px) {
+          nav {
+            padding: 0 0.5rem;
+          }
+
+          div {
+            gap: 2rem;
+
+            img {
+              display: block;
+            }
+          }
+
+          .menu {
+            flex-direction: column;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+
+            &::after{
+              content: "";
+              background-color: var(--azul);
+              width: 100%;
+              height: 160%;
+              border-radius: 0 0 1rem 1rem;
+              top: 0;
+              left: 0;
+              position: absolute;
+              z-index: -1;
+            }
+          }
+
+          .menu__user {
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            gap: 2rem;
+          }
+
+          .menu__principal {
+            flex-direction: column;
+
+            ul {
+              display: flex;
+              flex-direction: column;
+            }
+          }
+
+        }
       </style>
 
       <nav>
         <img src="./src/assets/icons/logo.png" alt="Logo da Biblioteca" />
-
-        <section aria-label="Menu" class="menu">
-          <section aria-label="Menu principal" class="menu__principal">
-            <ul>
-              <li><text-button href="#">Início</text-button></li>
-              <li><text-button href="#">Estante</text-button></li>
-            </ul>
-          </section>
-
-          
-          <section aria-label="Acesso ao usuário" class="menu__user">
+        
+        <div>
           <input-button></input-button>
-            <text-button href="./login.html">Entrar</text-button>
-            <text-button href="./singup.html" class="with_background">Cadastrar-se</text-button>
+          <my-button >
+            <img src="./src/assets/icons/menu.png" class="toggle-icon"/>
+          </my-button>
+
+          <section aria-label="Menu" class="menu">
+            <section aria-label="Menu principal" class="menu__principal">
+              <ul>
+                <li><text-button href="#">Início</text-button></li>
+                <li><text-button href="#">Estante</text-button></li>
+              </ul>
+            </section>
+
+            
+            <section aria-label="Acesso ao usuário" class="menu__user">
+              <text-button href="./login.html">Entrar</text-button>
+              <text-button href="./singup.html" class="with_background">Cadastrar-se</text-button>
+            </section>
           </section>
-        </section>
+        <div>
 
       </nav>
     `;
+
+    const btn = this.shadowRoot?.querySelector("my-button");
+    const img = btn?.querySelector("img");
+    const menu = this.shadowRoot?.querySelector(".menu");
+    let isOpen = false;
+
+    btn?.addEventListener('click', () => {
+    isOpen = !isOpen;
+
+    if (img) {
+      // Força a reinicialização da animação se já tiver sido aplicada
+      img.classList.remove("rotate");
+      void img.offsetWidth; // força reflow
+      img.classList.add("rotate");
+
+      img.src = isOpen
+        ? "./src/assets/icons/close.png"
+        : "./src/assets/icons/menu.png";
+    }
+
+    menu?.classList.toggle("open", isOpen);
+  });
+
   }
 }
 
