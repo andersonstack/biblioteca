@@ -56,16 +56,16 @@ class MyNav extends HTMLElement {
         <section aria-label="Menu" class="menu">
           <section aria-label="Menu principal" class="menu__principal">
             <ul>
-              <li><text-button page="#">Início</text-button></li>
-              <li><text-button page="#">Estante</text-button></li>
+              <li><text-button href="#">Início</text-button></li>
+              <li><text-button href="#">Estante</text-button></li>
             </ul>
           </section>
 
           
           <section aria-label="Acesso ao usuário" class="menu__user">
           <input-button></input-button>
-            <text-button page="#">Entrar</text-button>
-            <text-button page="#" class="with_background">Cadastrar-se</text-button>
+            <text-button href="./login.html">Entrar</text-button>
+            <text-button href="./singup.html" class="with_background">Cadastrar-se</text-button>
           </section>
         </section>
 

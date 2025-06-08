@@ -57,9 +57,9 @@ class InputButton extends HTMLElement {
 
         <section aria-label="Buscar de livro" role="search">
             <my-input 
-                typeInput="text"
-                placeHolder="Busque um livro"
-                ariaLabel="Buscar por nome do livro"
+                type="text"
+                placholder="Busque um livro"
+                aria-label="Buscar por nome do livro"
                 id="btn"
                 >
             </my-input>

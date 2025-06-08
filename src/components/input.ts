@@ -25,7 +25,7 @@ class MyInput extends HTMLElement {
             <input 
                 type=${typeInput}
                 placeholder=${placeHolder}
-                arialLabel=${arialLabel}
+                aria-label=${arialLabel}
             />
         `;
     }
