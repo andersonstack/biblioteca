@@ -1,0 +1,36 @@
+class MyInput extends HTMLElement {
+    constructor(){
+        super();
+        this.attachShadow({mode: 'open'});
+    }
+
+    connectedCallback(){
+        const typeInput = this.getAttribute('type') || 'text';
+        const placeHolder = this.getAttribute('placeholder');
+        const arialLabel = this.getAttribute('aria-label');
+
+        this.shadowRoot!.innerHTML = `
+            <style>
+                input {
+                    padding: 0.5rem;
+                    border: 0.1rem solid transparent;
+                    outline: none;
+                    color: var(--black);
+                    font-size: 1rem;
+                    border-radius: 1rem;
+                    position: relative;
+                }
+                input:focus {
+                    border: 0.1rem solid var(--azul)
+                }
+            </style>
+            <input 
+                type=${typeInput}
+                placeholder=${placeHolder}
+                arialLabel=${arialLabel}
+            />
+        `;
+    }
+}
+
+customElements.define('my-input', MyInput);
