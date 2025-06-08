@@ -24,6 +24,7 @@ class MyNav extends HTMLElement {
           padding: 0.5rem;
           font-family: Arial, sans-serif;
           position: relative; 
+          overflow-x: clip;
         }
 
         div {
@@ -126,6 +127,24 @@ class MyNav extends HTMLElement {
             }
           }
 
+          @media screen and (max-width: 480px){
+            nav {
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              padding: 1rem;
+            }
+
+            div {
+              align-items: center;
+              justify-contente: center;
+              gap: 1rem;
+              
+              input-button {
+                width: 100%;
+              }
+            }
+          }
         }
       </style>
 
