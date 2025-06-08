@@ -19,6 +19,10 @@ class MyNav extends HTMLElement {
 
         section {
           margin-bottom: 1rem;
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+          justify-content: space-between;
         }
 
         ul {
@@ -52,12 +56,7 @@ class MyNav extends HTMLElement {
           </ul>
         </section>
 
-        <section aria-label="Buscar de livro" role="search">
-          <input type="text" placeholder="Busque um livro" aria-label="Buscar por nome do livro" />
-          <my-button aria-label="Pesquisar livro">
-            <img src="./src/assets/icons/lupa.png" alt="Lupa" />
-          </my-button>
-        </section>
+        <input-button></input-button>
 
         <section aria-label="Acesso ao usuário">
           <a href="#">Entrar</a>
