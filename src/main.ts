@@ -5,7 +5,9 @@ import './components/button.js';
 import './components/nav.js';
 import './components/card.js';
 
-const livros = [
+import './interfaces/card_interface.js'
+
+const livros: CardInterface[] = [
     {
         titulo: "Querido John",
         ano: "2010",
