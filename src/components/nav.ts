@@ -149,12 +149,12 @@ class MyNav extends HTMLElement {
       </style>
 
       <nav>
-        <img src="./src/assets/icons/logo.png" alt="Logo da Biblioteca" />
+        <img src="./src/images/icons/logo.png" alt="Logo da Biblioteca" />
         
         <div>
           <input-button></input-button>
           <my-button >
-            <img src="./src/assets/icons/menu.png" class="toggle-icon"/>
+            <img src="./src/images/icons/menu.png" class="toggle-icon"/>
           </my-button>
 
           <section aria-label="Menu" class="menu">
@@ -196,8 +196,8 @@ class MyNav extends HTMLElement {
       img.classList.add("rotate");
 
       img.src = isOpen
-        ? "./src/assets/icons/close.png"
-        : "./src/assets/icons/menu.png";
+        ? "./src/images/icons/close.png"
+        : "./src/images/icons/menu.png";
     }
 
     menu?.classList.toggle("open", isOpen);
