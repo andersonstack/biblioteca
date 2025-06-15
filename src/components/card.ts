@@ -37,7 +37,7 @@ class MyCard extends HTMLElement {
                 .livro-img {
                     grid-area: img;
                     width: 100%;
-                    height: auto;
+                    height: 100%;
                     border-radius: 8px;
                 }
 
