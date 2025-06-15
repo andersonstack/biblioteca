@@ -20,12 +20,12 @@ class MyCard extends HTMLElement {
                     grid-template-areas:
                         "img titulo"
                         "img ano"
-                        "img descricao"
+                        "img escritor"
                         "img escritor"
                         "img btn";
                     gap: 0.5rem 1rem;
                     width: 100%;
-                    max-width: 50rem;
+                    max-width: 20rem;
                     padding: 1rem;
                     margin: 1rem auto;
                     background-color: #fff;
@@ -55,6 +55,7 @@ class MyCard extends HTMLElement {
                 }
 
                 .livro-descricao {
+                    display: none;
                     grid-area: descricao;
                     font-size: 1rem;
                     line-height: 1.4;
@@ -70,6 +71,31 @@ class MyCard extends HTMLElement {
                 .livro-btn {
                     grid-area: btn;
                     justify-self: start;
+                }
+
+                @media screen and (min-width: 720px){
+                    section {
+                        grid-template-areas:
+                            "img titulo"
+                            "img ano"
+                            "img descricao"
+                            "img escritor"
+                            "img btn";
+                        max-width: 40rem;
+                    }
+                    .livro-descricao {
+                        display: -webkit-box;
+                        -webkit-line-clamp: 6;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+
+                @media screen and (min-width: 110px) {
+                    section {
+                        max-width: 35rem;
+                    }
                 }
             </style>
 

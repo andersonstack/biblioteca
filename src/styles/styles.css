@@ -1,0 +1,15 @@
+#livros {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+@media screen and (min-width: 1024px) {
+    #livros {
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+  }
