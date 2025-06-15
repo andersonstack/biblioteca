@@ -25,7 +25,7 @@ class TextButton extends HTMLElement {
                 transition: 0.5s ease-in-out;
                 
                 &:hover {
-                    background-color: var(--azul);
+                    background-color: var(--rosa);
                 }
 
             }
@@ -38,6 +38,11 @@ class TextButton extends HTMLElement {
 
                 &:hover {
                     color: var(--azul);
+                }
+            }
+            @media screen and (max-width: 1120px){
+                .default:hover{
+                    color: var(--branco-gelo);
                 }
             }
             </style>

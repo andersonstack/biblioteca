@@ -70,7 +70,7 @@ class MyNav extends HTMLElement {
           width: auto;
         }
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 1120px) {
           nav {
             padding: 0 0.5rem;
           }
