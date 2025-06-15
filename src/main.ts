@@ -41,3 +41,4 @@ for (const livro of livros){
     card.setAttribute("imagem", livro.imagem);
     container.appendChild(card);
 }
+

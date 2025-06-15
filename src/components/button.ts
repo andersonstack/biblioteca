@@ -14,6 +14,8 @@ class MyButton extends HTMLElement {
                 background-color: transparent;
                 border: none;
                 cursor: pointer;
+                font-family: var(--poppins);
+                font-weight: 800;
             }
             </style>
             <button><slot></slot></button>

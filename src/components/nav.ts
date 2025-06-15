@@ -22,7 +22,6 @@ class MyNav extends HTMLElement {
           justify-content: center;
           align-items: center;
           padding: 0.5rem;
-          font-family: Arial, sans-serif;
           position: relative; 
           overflow-x: clip;
         }

@@ -31,7 +31,6 @@ class MyCard extends HTMLElement {
                     background-color: #fff;
                     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
                     border-radius: 10px;
-                    font-family: Arial, sans-serif;
                 }
 
                 .livro-img {
@@ -45,6 +44,8 @@ class MyCard extends HTMLElement {
                     grid-area: titulo;
                     font-size: 1.5rem;
                     margin: 0;
+                    font-family: var(--poppins);
+                    font-weight: 600;
                 }
 
                 .livro-ano {
@@ -52,6 +53,8 @@ class MyCard extends HTMLElement {
                     font-size: 1rem;
                     color: #888;
                     margin: 0;
+                    font-family: var(--poppins);
+                    font-weight: 600;
                 }
 
                 .livro-descricao {
@@ -59,6 +62,8 @@ class MyCard extends HTMLElement {
                     grid-area: descricao;
                     font-size: 1rem;
                     line-height: 1.4;
+                    font-family: var(--poppins);
+                    font-weight: 400;
                 }
 
                 .livro-escritor {
@@ -66,6 +71,8 @@ class MyCard extends HTMLElement {
                     font-size: 1rem;
                     font-weight: bold;
                     color: #555;
+                    font-family: var(--poppins);
+                    font-weight: 500;
                 }
 
                 .livro-btn {
