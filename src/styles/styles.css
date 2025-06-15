@@ -5,6 +5,7 @@
     justify-content: space-around;
     flex-direction: column;
     padding: 1rem;
+    background: linear-gradient(var(--azul-oceanic) -90%, var(--branco-gelo));
 }
 
 @media screen and (min-width: 1024px) {
