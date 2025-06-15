@@ -19,7 +19,7 @@ class MyNav extends HTMLElement {
         nav {
           display: flex;
           background-color: var(--bege);
-          justify-content: space-between;
+          justify-content: center;
           align-items: center;
           padding: 0.5rem;
           font-family: Arial, sans-serif;
@@ -73,6 +73,7 @@ class MyNav extends HTMLElement {
         @media screen and (max-width: 1120px) {
           nav {
             padding: 0 0.5rem;
+            justify-content: space-between;
           }
 
           div {
