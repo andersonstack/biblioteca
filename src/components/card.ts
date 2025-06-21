@@ -24,7 +24,8 @@ class MyCard extends HTMLElement {
                         "img escritor"
                         "img btn";
                     gap: 0.5rem 1rem;
-                    width: 100%;
+                    width: 20rem;
+                    height: 18rem;
                     max-width: 20rem;
                     padding: 1rem;
                     margin: 1rem auto;
