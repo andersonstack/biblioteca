@@ -7,3 +7,5 @@ import './components/card.js';
 
 import './interfaces/card_interface.js';
 import './scripts/carrousel.js';
+
+import './scripts/categorias.js';
