@@ -1,0 +1,21 @@
+.filtros {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    padding: 1rem;
+    gap: 2rem;
+    position: relative;
+    top: 2rem;
+}
+
+
+.filtros text-button:hover {
+    transform: 1s scale(1.02) ;
+}
+
+.filtros:hover text-button:not(:hover){
+    filter: blur(0.05rem);
+    opacity: 0.8;
+}
+

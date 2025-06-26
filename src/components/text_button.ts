@@ -11,6 +11,7 @@ class TextButton extends HTMLElement {
         this.shadowRoot!.innerHTML = `
             <style>
             .with_background,
+            .btn_filter,
             .default {
                 text-decoration: none;
                 border-radius: 1rem;
@@ -29,6 +30,13 @@ class TextButton extends HTMLElement {
                     background-color: var(--rosa);
                 }
 
+            }
+
+            .btn_filter {
+                background-color: var(--rosa);
+                padding: 1rem;
+                width: 100%;
+                color: white;
             }
 
             .default {
