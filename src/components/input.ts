@@ -1,15 +1,15 @@
 class MyInput extends HTMLElement {
-    constructor(){
-        super();
-        this.attachShadow({mode: 'open'});
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
 
-    connectedCallback(){
-        const typeInput = this.getAttribute('type') || 'text';
-        const placeHolder = this.getAttribute('placeholder');
-        const arialLabel = this.getAttribute('aria-label');
+  connectedCallback() {
+    const typeInput = this.getAttribute("type") || "text";
+    const placeHolder = this.getAttribute("placeholder");
+    const arialLabel = this.getAttribute("aria-label");
 
-        this.shadowRoot!.innerHTML = `
+    this.shadowRoot!.innerHTML = `
             <style>
                 input {
                     padding: 0.5rem;
@@ -28,7 +28,11 @@ class MyInput extends HTMLElement {
                 aria-label=${arialLabel}
             />
         `;
-    }
+  }
+
+  get value() {
+    return this.shadowRoot!.querySelector("input")!.value;
+  }
 }
 
-customElements.define('my-input', MyInput);
+customElements.define("my-input", MyInput);
