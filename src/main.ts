@@ -4,8 +4,7 @@ import "./components/input.js";
 import "./components/button.js";
 import "./components/nav.js";
 import "./components/card.js";
-
 import "./interfaces/card_interface.js";
+import "./interfaces/usuario.js";
 import "./scripts/carrousel.js";
-
 import "./scripts/categorias.js";
