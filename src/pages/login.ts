@@ -81,6 +81,12 @@ class TelaLogin extends HTMLElement {
           gap: 2rem;
           align-items: center;
         }
+
+        @media screen and (min-width: 700px) {
+          .credenciais {
+            width: 50%;
+          }
+        }
       </style>
 
       <section aria-label="Credenciais de login" type="submit" id="section">
