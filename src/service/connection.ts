@@ -5,6 +5,9 @@ export async function login(usuario: UsuarioLogin) {
     const url = "http://localhost:3000/login/";
     const response = await fetch(url!, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(usuario),
     });
     console.log("login feito");
