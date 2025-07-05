@@ -1,13 +1,14 @@
 class MyButton extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({mode: 'open'});
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
 
-    connectedCallback(){
-        this.shadowRoot!.innerHTML = `
+  connectedCallback() {
+    const style = this.getAttribute("class") || "default";
+    this.shadowRoot!.innerHTML = `
             <style>
-            button {
+            .default {
                 display: flex;
                 align-items: center;
                 gap: 0.5rem;
@@ -17,18 +18,23 @@ class MyButton extends HTMLElement {
                 font-family: var(--poppins);
                 font-weight: 800;
             }
-            </style>
-            <button><slot></slot></button>
-        `;
-        this.shadowRoot!.querySelector('button')!.addEventListener(
-            'click', () => {
-                this.dispatchEvent(
-                    new CustomEvent('onClick', {bubbles: true})
-                )
+            .login {
+                background-color: var(--azul);
+                border: none;
+                cursor: pointer;
+                font-family: var(--poppins);
+                font-wieght: 500;
+                padding: 1rem;
+                border-radius: 1rem;
+                width: auto;
             }
-        )
-    }
-    
+            </style>
+            <button class=${style}><slot></slot></button>
+        `;
+    this.shadowRoot!.querySelector("button")!.addEventListener("click", () => {
+      this.dispatchEvent(new CustomEvent("onClick", { bubbles: true }));
+    });
+  }
 }
 
-customElements.define('my-button', MyButton);
+customElements.define("my-button", MyButton);
