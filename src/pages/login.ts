@@ -2,6 +2,8 @@ import "../components/input.js";
 import "../components/button.js";
 import "../components/text_button.js";
 import "../components/toggle_password.js";
+import "../interfaces/usuario.js";
+import { login } from "../service/connection.js";
 
 class TelaLogin extends HTMLElement {
   constructor() {
@@ -10,7 +12,27 @@ class TelaLogin extends HTMLElement {
   }
 
   connectedCallback() {
-    this.shadowRoot!.innerHTML = /*html*/ `
+    this.render();
+
+    const userName = this.shadowRoot!.getElementById(
+      "usuario"
+    ) as HTMLInputElement;
+    const senha = this.shadowRoot!.getElementById("senha") as HTMLInputElement;
+
+    const btnSubmit = this.shadowRoot!.getElementById("submit");
+    btnSubmit!.addEventListener("click", async (event) => {
+      console.log(`${userName.value} ${senha.value}`);
+      event!.preventDefault();
+      let user: UsuarioLogin = {
+        userName: userName.value,
+        senha: senha.value,
+      };
+      await login(user);
+    });
+  }
+
+  render() {
+    this.shadowRoot!.innerHTML = `
       <style>
         section {
           display: flex;
@@ -61,8 +83,8 @@ class TelaLogin extends HTMLElement {
         }
       </style>
 
-      <section aria-label="Credenciais de login">
-        <div class="credenciais" id="credenciais">
+      <section aria-label="Credenciais de login" type="submit" id="section">
+        <form class="credenciais" id="credenciais">
           <img class="logo" src="./src/images/icons/logo.png" alt="Logo do sistema" />
           <h2>Login</h2>
 
@@ -78,10 +100,10 @@ class TelaLogin extends HTMLElement {
           </toggle-password>
 
           <div class="buttons">
-            <my-button class="login">Entrar</my-button>
+            <my-button class="login" id="submit">Entrar</my-button>
             <text-button class="btn_filter" href="./singup.html">Cadastrar-se</text-button>
           </div>
-        </div>
+        </form>
       </section>
     `;
   }
