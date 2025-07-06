@@ -67,13 +67,38 @@ class TelaCadastro extends HTMLElement {
           align-items: center;
         }
 
-        .message 
+        .message {
+          position: relative;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+          display: flex;
+        }
+
+        .tile-message {
+          display: flex;
+          position: absolute;
+          font-family: var(--poppins);
+          font-weight: 800;
+          padding: 1rem;
+          border-radius: 1rem;
+          color: white;
+        } 
 
         .error {
+          background-color: red;
+          opacity: 0;
+        }
+        .error.active {
+          opacity: 1;
         }
 
         .sucess {
-
+          background-color: green;
+          opacity: 0;
+        }
+        .sucess.active {
+          opacity: 1;
         }
 
         @media screen and (min-width: 700px) {
@@ -122,18 +147,45 @@ class TelaCadastro extends HTMLElement {
           </toggle-password>
 
           <my-button class="login" id="submit">Confirmar</my-button>
+          <p class="message" id="message">
+            <span class="tile-message sucess">Cadastro efetuado com sucesso!</span>
+            <span class="tile-message error">Usuário já existente!</span>
+            <span class="tile-message error">Preencha todos os campos!</span>
+          </p>
         </form>
       </section>
     `;
   }
 
   setup() {
+    function mostrarMensagem(tipo: "sucesso" | "erro" | "vazio") {
+      const mensagens = message?.querySelectorAll(".tile-message")!;
+      mensagens.forEach((msg) => msg.classList.remove("active"));
+
+      switch (tipo) {
+        case "sucesso":
+          mensagens[0].classList.add("active"); // sucesso
+          break;
+        case "erro":
+          mensagens[1].classList.add("active"); // erro
+          break;
+        case "vazio":
+          mensagens[2].classList.add("active"); // campos vazios
+          break;
+      }
+
+      setTimeout(() => {
+        mensagens.forEach((msg) => msg.classList.remove("active"));
+      }, 2000);
+    }
+
     const nome = this.shadowRoot!.getElementById("nome") as HTMLInputElement;
     const userName = this.shadowRoot!.getElementById(
       "usuario"
     ) as HTMLInputElement;
     const senha = this.shadowRoot!.getElementById("senha") as HTMLInputElement;
     const btn = this.shadowRoot!.getElementById("submit");
+    const message = this.shadowRoot!.getElementById("message");
 
     btn?.addEventListener("click", async (event: Event) => {
       event.preventDefault();
@@ -145,10 +197,15 @@ class TelaCadastro extends HTMLElement {
           senha: senha.value,
         };
         const res = await singup(user);
-        if (!res) {
-          console.log("Não cadastrado!");
+        if (res) {
+          console.log("cadastro?");
+          mostrarMensagem("sucesso");
+        } else {
+          mostrarMensagem("erro");
         }
-      } else console.log("Entradas incompletas!");
+      } else {
+        mostrarMensagem("vazio");
+      }
     });
   }
 }

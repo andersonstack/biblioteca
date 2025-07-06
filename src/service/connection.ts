@@ -29,7 +29,12 @@ export async function singup(usuario: UsuarioCadastro): Promise<boolean> {
       },
       body: JSON.stringify(usuario),
     });
-    return true;
+    if (response.status == 201) {
+      return true;
+    } else if (response.status == 401) {
+      return false;
+    }
+    return false;
   } catch (error) {
     return false;
   }
