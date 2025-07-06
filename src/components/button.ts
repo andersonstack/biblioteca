@@ -19,10 +19,11 @@ class MyButton extends HTMLElement {
                 font-weight: 800;
             }
             .login {
-                background-color: var(--azul);
+                background-color: var(--onSecondary);
                 border: none;
                 cursor: pointer;
                 font-family: var(--poppins);
+                color: white;
                 font-weight: 500;
                 font-size: 1rem;
                 padding: 1rem;

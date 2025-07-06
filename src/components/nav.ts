@@ -1,7 +1,7 @@
 class MyNav extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
@@ -18,12 +18,18 @@ class MyNav extends HTMLElement {
 
         nav {
           display: flex;
-          background-color: var(--bege);
+          background-color: var(--onPrimary);
           justify-content: center;
           align-items: center;
           padding: 0.5rem;
           position: relative; 
           overflow-x: clip;
+
+          img {
+            width: 3rem;
+            height: auto;
+            border-radius: 50%;
+          }
         }
 
         div {
@@ -96,7 +102,7 @@ class MyNav extends HTMLElement {
             
             &::after{
               content: "";
-              background-color: var(--azul);
+              background-color: var(--primary);
               width: 100%;
               height: 120%;
               border-radius: 0 0 1rem 1rem;
@@ -149,7 +155,7 @@ class MyNav extends HTMLElement {
       </style>
 
       <nav>
-        <img src="./src/images/icons/logo.png" alt="Logo da Biblioteca" />
+        <img src="./src/images/banners/bg.jpg" alt="Logo da Biblioteca" />
         
         <div>
           <input-button></input-button>
@@ -181,28 +187,27 @@ class MyNav extends HTMLElement {
     const menu = this.shadowRoot?.querySelector(".menu");
     let isOpen = false;
 
-    btn?.addEventListener('click', () => {
-    isOpen = !isOpen;
+    btn?.addEventListener("click", () => {
+      isOpen = !isOpen;
 
-    if (img) {
-      if(menu?.classList.contains("active")){
-        menu?.classList.remove("active");
-      } else {
-        menu?.classList.add("active");
+      if (img) {
+        if (menu?.classList.contains("active")) {
+          menu?.classList.remove("active");
+        } else {
+          menu?.classList.add("active");
+        }
+
+        img.classList.remove("rotate");
+        void img.offsetWidth;
+        img.classList.add("rotate");
+
+        img.src = isOpen
+          ? "./src/images/icons/close.png"
+          : "./src/images/icons/menu.png";
       }
 
-      img.classList.remove("rotate");
-      void img.offsetWidth;
-      img.classList.add("rotate");
-
-      img.src = isOpen
-        ? "./src/images/icons/close.png"
-        : "./src/images/icons/menu.png";
-    }
-
-    menu?.classList.toggle("open", isOpen);
-  });
-
+      menu?.classList.toggle("open", isOpen);
+    });
   }
 }
 

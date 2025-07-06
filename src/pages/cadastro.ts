@@ -67,6 +67,15 @@ class TelaCadastro extends HTMLElement {
           align-items: center;
         }
 
+        .message 
+
+        .error {
+        }
+
+        .sucess {
+
+        }
+
         @media screen and (min-width: 700px) {
           .credenciais {
             width: 50%;
@@ -92,7 +101,6 @@ class TelaCadastro extends HTMLElement {
 
       <section aria-label="Credenciais de cadastro" type="submit" id="section">
         <form class="credenciais" id="credenciais">
-          <img class="logo" src="./src/images/icons/logo.png" alt="Logo do sistema" />
           <h2>Cadastro</h2>
 
           <my-input

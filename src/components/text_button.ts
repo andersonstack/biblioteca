@@ -20,20 +20,22 @@ class TextButton extends HTMLElement {
             }
 
             .with_background {
-                background-color: var(--black);
+                background-color: var(--secondary);
                 padding: 1rem;
                 width: 100%;
-                color: white;
+                color: black;
+                font-weight: 500;
                 transition: 0.5s ease-in-out;
                 
                 &:hover {
-                    background-color: var(--rosa);
+                    background-color: var(--primary);
+                    color: black;
                 }
 
             }
 
             .btn_filter {
-                background-color: var(--rosa);
+                background-color: var(--onPrimary);
                 padding: 1rem;
                 width: 100%;
                 color: white;
@@ -47,11 +49,16 @@ class TextButton extends HTMLElement {
                 transition: 0.5s ease-in-out;
 
                 &:hover {
-                    color: var(--azul);
+                    color: var(--primary);
                 }
             }
             @media screen and (max-width: 1120px){
                 .default:hover{
+                    color: var(--destaque);
+                    font-wight: 500;
+                }
+                .with_background:hover{
+                    background-color: var(--onSecondary);
                     color: var(--branco-gelo);
                 }
             }

@@ -92,7 +92,6 @@ class TelaLogin extends HTMLElement {
 
       <section aria-label="Credenciais de login" type="submit" id="section">
         <form class="credenciais" id="credenciais">
-          <img class="logo" src="./src/images/icons/logo.png" alt="Logo do sistema" />
           <h2>Login</h2>
 
           <my-input
