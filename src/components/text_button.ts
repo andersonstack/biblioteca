@@ -37,7 +37,7 @@ class TextButton extends HTMLElement {
                 padding: 1rem;
                 width: 100%;
                 color: white;
-                font-weight: 800;
+                font-weight: 500;
             }
 
             .default {
