@@ -18,3 +18,19 @@ export async function login(usuario: UsuarioLogin) {
     return false;
   }
 }
+
+export async function singup(usuario: UsuarioCadastro): Promise<boolean> {
+  try {
+    const url = "http://localhost:3000/usuario/";
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(usuario),
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+}

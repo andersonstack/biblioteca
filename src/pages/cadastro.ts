@@ -2,6 +2,7 @@ import "../components/input.js";
 import "../components/button.js";
 import "../components/toggle_password.js";
 import "../interfaces/usuario.js";
+import { singup } from "../service/connection.js";
 
 class TelaCadastro extends HTMLElement {
   constructor() {
@@ -126,12 +127,20 @@ class TelaCadastro extends HTMLElement {
     const senha = this.shadowRoot!.getElementById("senha") as HTMLInputElement;
     const btn = this.shadowRoot!.getElementById("submit");
 
-    btn?.addEventListener("click", (event: Event) => {
+    btn?.addEventListener("click", async (event: Event) => {
       event.preventDefault();
 
-      if (nome.value && userName.value && senha.value)
-        console.log(nome.value, userName.value, senha.value);
-      else console.log("Entradas incompletas!");
+      if (nome.value && userName.value && senha.value) {
+        const user: UsuarioCadastro = {
+          userName: userName.value,
+          name: nome.value,
+          senha: senha.value,
+        };
+        const res = await singup(user);
+        if (!res) {
+          console.log("Não cadastrado!");
+        }
+      } else console.log("Entradas incompletas!");
     });
   }
 }
