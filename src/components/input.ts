@@ -20,6 +20,7 @@ class MyInput extends HTMLElement {
                     font-size: 1rem;
                     border-radius: 1rem;
                     position: relative;
+                    width: 100%;
                 }
             </style>
             <input 
