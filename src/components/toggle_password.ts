@@ -13,16 +13,24 @@ class TogglePassword extends HTMLElement {
     this.shadowRoot!.innerHTML = `
       <style>
         .container {
-          position: relative;
           display: flex;
+          flex-direction: column;
           align-items: center;
+          gap: 1rem;
         }
 
         .eye-icon {
-          position: absolute;
-          right: 1rem;
           cursor: pointer;
           width: 1.2rem;
+        }
+
+        .container_row {
+          position: relative;
+          display: flex;
+          align-items: center;
+          width: 90%;
+          justify-content: start;
+          gap: 1rem;
         }
 
         ::slotted(my-input) {
@@ -32,7 +40,10 @@ class TogglePassword extends HTMLElement {
 
       <div class="container">
         <slot></slot>
-        <img class="eye-icon" src="./src/images/icons/eye-closed.png" alt="mostrar senha" />
+        <div class="container_row">
+          <img class="eye-icon" src="./src/images/icons/eye-closed.png" alt="mostrar senha" />
+          <p>Mostrar senha</p>
+        </div>
       </div>
     `;
   }
