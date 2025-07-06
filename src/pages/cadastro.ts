@@ -158,7 +158,7 @@ class TelaCadastro extends HTMLElement {
   }
 
   setup() {
-    function mostrarMensagem(tipo: "sucesso" | "erro" | "vazio") {
+    function mostrarMensagem(tipo: String) {
       const mensagens = message?.querySelectorAll(".tile-message")!;
       mensagens.forEach((msg) => msg.classList.remove("active"));
 
@@ -176,6 +176,7 @@ class TelaCadastro extends HTMLElement {
 
       setTimeout(() => {
         mensagens.forEach((msg) => msg.classList.remove("active"));
+        if (tipo == "sucesso") window.location.href = "login.html";
       }, 2000);
     }
 
@@ -198,7 +199,6 @@ class TelaCadastro extends HTMLElement {
         };
         const res = await singup(user);
         if (res) {
-          console.log("cadastro?");
           mostrarMensagem("sucesso");
         } else {
           mostrarMensagem("erro");
