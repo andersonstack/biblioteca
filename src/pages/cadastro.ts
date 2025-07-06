@@ -11,6 +11,7 @@ class TelaCadastro extends HTMLElement {
 
   connectedCallback() {
     this.render();
+    this.setup();
   }
 
   render() {
@@ -111,10 +112,27 @@ class TelaCadastro extends HTMLElement {
             <my-input id="senha" type="password" placeholder="Senha" aria-label="Digite sua senha"></my-input>
           </toggle-password>
 
-            <my-button class="login" id="submit">Confirmar</my-button>
+          <my-button class="login" id="submit">Confirmar</my-button>
         </form>
       </section>
     `;
+  }
+
+  setup() {
+    const nome = this.shadowRoot!.getElementById("nome") as HTMLInputElement;
+    const userName = this.shadowRoot!.getElementById(
+      "usuario"
+    ) as HTMLInputElement;
+    const senha = this.shadowRoot!.getElementById("senha") as HTMLInputElement;
+    const btn = this.shadowRoot!.getElementById("submit");
+
+    btn?.addEventListener("click", (event: Event) => {
+      event.preventDefault();
+
+      if (nome.value && userName.value && senha.value)
+        console.log(nome.value, userName.value, senha.value);
+      else console.log("Entradas incompletas!");
+    });
   }
 }
 
