@@ -13,6 +13,28 @@ class TelaLogin extends HTMLElement {
 
   connectedCallback() {
     this.render();
+    const message = this.shadowRoot!.getElementById("message");
+
+    function mostrarMensagem(tipo: String) {
+      const mensagens = message?.querySelectorAll(".tile-message")!;
+      mensagens.forEach((msg) => msg.classList.remove("active"));
+
+      switch (tipo) {
+        case "sucesso":
+          mensagens[0].classList.add("active"); // sucesso
+          break;
+        case "erro":
+          mensagens[1].classList.add("active"); // erro
+          break;
+        case "server":
+          mensagens[2].classList.add("active"); // erro-servidor
+          break;
+      }
+      setTimeout(() => {
+        mensagens.forEach((msg) => msg.classList.remove("active"));
+        if (tipo == "sucesso") window.location.href = "index.html";
+      }, 1500);
+    }
 
     const userName = this.shadowRoot!.getElementById(
       "usuario"
@@ -27,7 +49,14 @@ class TelaLogin extends HTMLElement {
         userName: userName.value,
         senha: senha.value,
       };
-      await login(user);
+      const auth = await login(user);
+      if (auth == 200) {
+        mostrarMensagem("sucesso");
+      } else if (auth == 401) {
+        mostrarMensagem("erro");
+      } else {
+        mostrarMensagem("server");
+      }
     });
   }
 
@@ -83,6 +112,41 @@ class TelaLogin extends HTMLElement {
           align-items: center;
         }
 
+        .message {
+        margin-top: 5rem;
+          position: relative;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+          display: flex;
+        }
+
+        .tile-message {
+          display: flex;
+          position: absolute;
+          font-family: var(--poppins);
+          font-weight: 800;
+          padding: 1rem;
+          border-radius: 1rem;
+          color: white;
+        } 
+
+        .error {
+          background-color: red;
+          opacity: 0;
+        }
+        .error.active {
+          opacity: 1;
+        }
+
+        .sucess {
+          background-color: green;
+          opacity: 0;
+        }
+        .sucess.active {
+          opacity: 1;
+        }
+
         @media screen and (min-width: 700px) {
           .credenciais {
             width: 50%;
@@ -109,6 +173,12 @@ class TelaLogin extends HTMLElement {
             <my-button class="login" id="submit">Entrar</my-button>
             <text-button class="btn_filter" href="./singup.html">Cadastre-se</text-button>
           </div>
+
+          <p class="message" id="message">
+            <span class="tile-message sucess">Login efetuado!</span>
+            <span class="tile-message error">Login incorreto!</span>
+            <span class="tile-message error">Erro no servidor!</span>
+          </p>
         </form>
       </section>
     `;

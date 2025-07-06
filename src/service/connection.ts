@@ -1,6 +1,6 @@
 import "../interfaces/usuario.js";
 
-export async function login(usuario: UsuarioLogin) {
+export async function login(usuario: UsuarioLogin): Promise<200 | 401 | 501> {
   try {
     const url = "http://localhost:3000/login/";
     const response = await fetch(url!, {
@@ -10,12 +10,12 @@ export async function login(usuario: UsuarioLogin) {
       },
       body: JSON.stringify(usuario),
     });
-    console.log("login feito");
+    if (response.status == 200) {
+      return 200;
+    }
+    return 401;
   } catch (error) {
-    console.log(JSON.stringify(usuario));
-
-    console.log("erro no login");
-    return false;
+    return 501;
   }
 }
 
