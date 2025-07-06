@@ -42,7 +42,8 @@ class TelaLogin extends HTMLElement {
           height: 100vh;
           width: 100vw;
           gap: 1rem;
-          background-color: var(--bege);
+          background-image: url("src/images/banners/bg.jpg");
+          background-size: cover;
           position: relative;
         }
 
@@ -57,7 +58,7 @@ class TelaLogin extends HTMLElement {
           border: 1px solid var(--bege);
           background: rgba(255, 255, 255, 0.35);
           box-shadow: 0 8px 32px 0 rgba(92, 92, 92, 0.37);
-          backdrop-filter: blur(13.5px);
+          backdrop-filter: blur(7px);
           -webkit-backdrop-filter: blur(13.5px);
           padding: 1rem;
           position: relative;
@@ -107,7 +108,7 @@ class TelaLogin extends HTMLElement {
 
           <div class="buttons">
             <my-button class="login" id="submit">Entrar</my-button>
-            <text-button class="btn_filter" href="./singup.html">Cadastrar-se</text-button>
+            <text-button class="btn_filter" href="./singup.html">Cadastre-se</text-button>
           </div>
         </form>
       </section>

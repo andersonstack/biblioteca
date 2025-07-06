@@ -23,7 +23,7 @@ class MyButton extends HTMLElement {
                 border: none;
                 cursor: pointer;
                 font-family: var(--poppins);
-                font-wieght: 500;
+                font-weight: 800;
                 padding: 1rem;
                 border-radius: 1rem;
                 width: auto;

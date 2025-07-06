@@ -1,14 +1,14 @@
 class TextButton extends HTMLElement {
-    constructor(){
-        super();
-        this.attachShadow({mode: 'open'});
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
 
-    connectedCallback(){
-        const page = this.getAttribute('href') || '#';
-        const classButton = this.getAttribute('class') || 'default';
+  connectedCallback() {
+    const page = this.getAttribute("href") || "#";
+    const classButton = this.getAttribute("class") || "default";
 
-        this.shadowRoot!.innerHTML = `
+    this.shadowRoot!.innerHTML = `
             <style>
             .with_background,
             .btn_filter,
@@ -37,6 +37,7 @@ class TextButton extends HTMLElement {
                 padding: 1rem;
                 width: 100%;
                 color: white;
+                font-weight: 800;
             }
 
             .default {
@@ -60,7 +61,7 @@ class TextButton extends HTMLElement {
                 <slot></slot>
             </a>
         `;
-    }
+  }
 }
 
-customElements.define('text-button', TextButton);
+customElements.define("text-button", TextButton);
