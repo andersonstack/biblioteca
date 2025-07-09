@@ -2,6 +2,7 @@ import "../components/input.js";
 import "../components/button.js";
 import "../components/toggle_password.js";
 import "../interfaces/usuario.js";
+import { mostrarMensagem } from "../utils/messagem.js";
 import { singup } from "../service/connection.js";
 
 class TelaCadastro extends HTMLElement {
@@ -147,39 +148,13 @@ class TelaCadastro extends HTMLElement {
           </toggle-password>
 
           <my-button class="login" id="submit">Confirmar</my-button>
-          <p class="message" id="message">
-            <span class="tile-message sucess">Cadastro efetuado com sucesso!</span>
-            <span class="tile-message error">Usuário já existente!</span>
-            <span class="tile-message error">Preencha todos os campos!</span>
-          </p>
+          <p class="message" id="message"></p>
         </form>
       </section>
     `;
   }
 
   setup() {
-    function mostrarMensagem(tipo: String) {
-      const mensagens = message?.querySelectorAll(".tile-message")!;
-      mensagens.forEach((msg) => msg.classList.remove("active"));
-
-      switch (tipo) {
-        case "sucesso":
-          mensagens[0].classList.add("active"); // sucesso
-          break;
-        case "erro":
-          mensagens[1].classList.add("active"); // erro
-          break;
-        case "vazio":
-          mensagens[2].classList.add("active"); // campos vazios
-          break;
-      }
-
-      setTimeout(() => {
-        mensagens.forEach((msg) => msg.classList.remove("active"));
-        if (tipo == "sucesso") window.location.href = "login.html";
-      }, 2000);
-    }
-
     const nome = this.shadowRoot!.getElementById("nome") as HTMLInputElement;
     const userName = this.shadowRoot!.getElementById(
       "usuario"
@@ -198,13 +173,15 @@ class TelaCadastro extends HTMLElement {
           senha: senha.value,
         };
         const res = await singup(user);
-        if (res) {
-          mostrarMensagem("sucesso");
+        if (res == 200) {
+          mostrarMensagem("sucessoC", message!);
+        } else if (res == 400) {
+          mostrarMensagem("erroC", message!);
         } else {
-          mostrarMensagem("erro");
+          mostrarMensagem("server", message!);
         }
       } else {
-        mostrarMensagem("vazio");
+        mostrarMensagem("vazio", message!);
       }
     });
   }

@@ -19,7 +19,9 @@ export async function login(usuario: UsuarioLogin): Promise<200 | 401 | 501> {
   }
 }
 
-export async function singup(usuario: UsuarioCadastro): Promise<boolean> {
+export async function singup(
+  usuario: UsuarioCadastro
+): Promise<200 | 400 | 500> {
   try {
     const url = "http://localhost:3000/usuario/";
     const response = await fetch(url, {
@@ -30,12 +32,10 @@ export async function singup(usuario: UsuarioCadastro): Promise<boolean> {
       body: JSON.stringify(usuario),
     });
     if (response.status == 201) {
-      return true;
-    } else if (response.status == 401) {
-      return false;
+      return 200;
     }
-    return false;
+    return 400;
   } catch (error) {
-    return false;
+    return 500;
   }
 }

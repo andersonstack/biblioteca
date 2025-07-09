@@ -3,6 +3,7 @@ import "../components/button.js";
 import "../components/text_button.js";
 import "../components/toggle_password.js";
 import "../interfaces/usuario.js";
+import { mostrarMensagem } from "../utils/messagem.js";
 import { login } from "../service/connection.js";
 
 class TelaLogin extends HTMLElement {
@@ -14,27 +15,6 @@ class TelaLogin extends HTMLElement {
   connectedCallback() {
     this.render();
     const message = this.shadowRoot!.getElementById("message");
-
-    function mostrarMensagem(tipo: String) {
-      const mensagens = message?.querySelectorAll(".tile-message")!;
-      mensagens.forEach((msg) => msg.classList.remove("active"));
-
-      switch (tipo) {
-        case "sucesso":
-          mensagens[0].classList.add("active"); // sucesso
-          break;
-        case "erro":
-          mensagens[1].classList.add("active"); // erro
-          break;
-        case "server":
-          mensagens[2].classList.add("active"); // erro-servidor
-          break;
-      }
-      setTimeout(() => {
-        mensagens.forEach((msg) => msg.classList.remove("active"));
-        if (tipo == "sucesso") window.location.href = "index.html";
-      }, 1500);
-    }
 
     const userName = this.shadowRoot!.getElementById(
       "usuario"
@@ -51,11 +31,11 @@ class TelaLogin extends HTMLElement {
       };
       const auth = await login(user);
       if (auth == 200) {
-        mostrarMensagem("sucesso");
+        mostrarMensagem("sucessoL", message!);
       } else if (auth == 401) {
-        mostrarMensagem("erro");
+        mostrarMensagem("erroL", message!);
       } else {
-        mostrarMensagem("server");
+        mostrarMensagem("server", message!);
       }
     });
   }
@@ -174,11 +154,7 @@ class TelaLogin extends HTMLElement {
             <text-button class="btn_filter" href="./singup.html">Cadastre-se</text-button>
           </div>
 
-          <p class="message" id="message">
-            <span class="tile-message sucess">Login efetuado!</span>
-            <span class="tile-message error">Login incorreto!</span>
-            <span class="tile-message error">Erro no servidor!</span>
-          </p>
+          <p class="message" id="message"></p>
         </form>
       </section>
     `;
