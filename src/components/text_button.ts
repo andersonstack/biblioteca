@@ -12,11 +12,18 @@ class TextButton extends HTMLElement {
             <style>
             .with_background,
             .btn_filter,
-            .default {
+            .default,
+            .actions {
                 text-decoration: none;
                 border-radius: 1rem;
                 font-family: var(--poppins);
                 font-weight: 400;
+            }
+            .actions {
+                padding: 0.5rem;
+                color: var(--black);
+                transition: 2s ease;
+                font-weight: 500;
             }
 
             .with_background {
