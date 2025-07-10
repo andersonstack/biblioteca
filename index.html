@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./src/styles/root.css">
-    <link rel="stylesheet" href="./src/styles/carrousel.css">
-    <link rel="stylesheet" href="./src/styles/filter.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="./src/styles/root.css" />
+    <link rel="stylesheet" href="./src/styles/carrousel.css" />
+    <link rel="stylesheet" href="./src/styles/filter.css" />
+    <link rel="stylesheet" href="./src/styles/colecao.css" />
     <title>Biblioteca</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <my-nav></my-nav>
 
     <!-- Carrossel -->
     <section id="slider" aria-label="Estante de livros">
+      <div id="slides"></div>
 
-        <div id="slides"></div>
-
-        <div id="manual-navigation" class="manual-navigation"></div>
-
+      <div id="manual-navigation" class="manual-navigation"></div>
     </section>
 
-    <section id="filtros" aria-label="Categorias dos livros" class="filtros"></section>
+    <section
+      id="filtros"
+      aria-label="Categorias dos livros"
+      class="filtros"></section>
 
-
+    <section id="colecao_livros">
+      <div class="livros_container">
+        <h2 class="container_titulo">Seção de ficção</h2>
+        <div class="livros_colecao">
+          <my-collection></my-collection>
+        </div>
+      </div>
+    </section>
     <script src="./dist/script/main.js" type="module"></script>
-</body>
-
+  </body>
 </html>
