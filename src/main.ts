@@ -8,3 +8,4 @@ import "./interfaces/card_interface.js";
 import "./interfaces/usuario.js";
 import "./scripts/carrousel.js";
 import "./scripts/categorias.js";
+import "./components/colecao.js";
