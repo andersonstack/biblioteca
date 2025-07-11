@@ -29,14 +29,14 @@ class MyCollection extends HTMLElement {
                 justify-content: center;
                 flex-direction: column;
                 align-items: center;
-                background-color: var(--primary);
+                background-color: var(--onPrimary);
                 width: 15rem;
             }
             
             img {
                 width: 100%;
                 height: auto;
-                border-radius: 1rem;
+                border-radius: 1rem 1rem 0 0;
                 object-fit: cover;
             }
 
@@ -70,17 +70,8 @@ class MyCollection extends HTMLElement {
                 background-color: red;
             }
             
-            .buttons_actions {
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                gap: 1.5rem;
-                position: absolute;
-                top: 90%;
-                background-color: var(--onPrimary);
-                border-radius: 0 0 1rem 1rem;
+            text-button {
+                padding: 0.5rem;
             }
 
         </style>
@@ -88,10 +79,7 @@ class MyCollection extends HTMLElement {
         <section aria-lawidthbel=${secaoName} class="container_livro">
             <img src="./src/images/banners/alem_da_fumaca.jpg" />
             <div class=${disponibilidade}></div>
-            <div class="buttons_actions">
-                <text-button class="actions">Pegar emprestado</text-button>
-                <text-button class="actions">Visualizar livro</text-button>
-            </div>
+            <text-button class="actions">Visualizar</text-button>
         </section>
         
     `;
