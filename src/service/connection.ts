@@ -41,3 +41,19 @@ export async function singup(
     return 500;
   }
 }
+
+export async function getLivros() {
+  try {
+    const url = "http://localhost:3000/livros/";
+    const response = await fetch(url);
+
+    if (response.status === 200) {
+      const livros = await response.json();
+      localStorage.setItem("livros", JSON.stringify(livros.livros));
+    } else {
+      localStorage.setItem("livros", "[]");
+    }
+  } catch (error) {
+    localStorage.setItem("livros", "[]");
+  }
+}
