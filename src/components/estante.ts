@@ -1,6 +1,7 @@
 interface LivroBD {
   titulo: string;
   imagem_caminho: string;
+  disponivel: boolean;
 }
 
 export function renderLivros() {
@@ -13,7 +14,7 @@ export function renderLivros() {
       const livro = {
         titulo: livroRaw.titulo,
         imagem: `http://localhost:3000${livroRaw.imagem_caminho}`,
-        disponivel: Math.random() > 0.5,
+        disponivel: livroRaw.disponivel,
       };
 
       const elemento = document.createElement("livro-estante") as LivroEstante;
