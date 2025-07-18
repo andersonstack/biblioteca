@@ -23,7 +23,7 @@ export async function singup(
   usuario: UsuarioCadastro
 ): Promise<200 | 400 | 500> {
   try {
-    const url = "http://localhost:3000/usuario/";
+    const url = "http://localhost:3000/cadastro/";
     const response = await fetch(url, {
       method: "POST",
       headers: {
