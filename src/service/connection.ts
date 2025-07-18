@@ -11,6 +11,8 @@ export async function login(usuario: UsuarioLogin): Promise<200 | 401 | 501> {
       body: JSON.stringify(usuario),
     });
     if (response.status == 200) {
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
       return 200;
     }
     return 401;

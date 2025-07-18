@@ -23,7 +23,6 @@ class TelaLogin extends HTMLElement {
 
     const btnSubmit = this.shadowRoot!.getElementById("submit");
     btnSubmit!.addEventListener("click", async (event) => {
-      console.log(`${userName.value} ${senha.value}`);
       event!.preventDefault();
       let user: UsuarioLogin = {
         userName: userName.value,
