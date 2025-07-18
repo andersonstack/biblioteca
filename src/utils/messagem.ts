@@ -36,6 +36,11 @@ export function mostrarMensagem(tipo: String, message: HTMLElement) {
   }
   setTimeout(() => {
     message.innerHTML = ``;
-    if (tipo == "sucesso") window.location.href = "index.html";
+    if (tipo == "sucessoL") {
+      const token = localStorage.getItem("token");
+      if (token != null) {
+        window.location.href = "index.html";
+      }
+    }
   }, 1500);
 }
