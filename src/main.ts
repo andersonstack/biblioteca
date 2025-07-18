@@ -9,3 +9,8 @@ import "./interfaces/usuario.js";
 import "./scripts/carrousel.js";
 import "./scripts/categorias.js";
 import "./components/livro_colecao.js";
+import { getLivros } from "./service/connection.js";
+import { renderLivros } from "./components/grid_estante.js";
+
+(() => getLivros())();
+renderLivros();

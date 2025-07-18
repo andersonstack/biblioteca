@@ -1,22 +1,31 @@
 .container_titulo {
-  margin: 5rem 0 0 0;
+  margin: 5rem 0 2rem 0;
   width: 100%;
   background-color: var(--onPrimary);
-  padding: 1rem;
+  padding: 1.5rem;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--branco-gelo);
+  font-family: var(--poppins);
+  border-radius: 0.5rem;
 }
 
-.livros_container {
+.livro_container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  align-items: start;
-  justify-self: unset;
+  align-items: center;
+  width: 100%;
 }
 
 .livros_colecao {
-  display: flex;
-  justify-content: start;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
 }
