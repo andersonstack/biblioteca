@@ -1,5 +1,13 @@
+#colecao_livros {
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+}
+
 .container_titulo {
-  margin: 5rem 0 2rem 0;
   width: 100%;
   background-color: var(--onPrimary);
   padding: 1.5rem;
@@ -8,7 +16,6 @@
   text-align: center;
   color: var(--branco-gelo);
   font-family: var(--poppins);
-  border-radius: 0.5rem;
 }
 
 .livro_container {
@@ -26,6 +33,5 @@
   justify-items: center;
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
   padding: 1rem;
 }
