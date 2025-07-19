@@ -10,5 +10,4 @@ import "./utils/carrousel.js";
 import "./utils/categorias.js";
 import "./components/livro_estante.js";
 import { renderLivros } from "./utils/estante.js";
-
 (() => renderLivros())();
