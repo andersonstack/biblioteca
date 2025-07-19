@@ -1,7 +1,7 @@
 interface CardInterface {
-    titulo: string,
-    ano: string,
-    escritor: string,
-    descricao: string,
-    imagem: string
+  titulo: string;
+  ano: number;
+  descricao: string;
+  imagem: string;
+  disponibilidade: number;
 }

@@ -1,18 +1,17 @@
 class MyCard extends HTMLElement {
-    constructor(){
-        super();
-        this.attachShadow({mode: 'open'});
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
 
-    connectedCallback(){
-        const titulo = this.getAttribute("titulo") || "";
-        const ano = this.getAttribute("ano") || "";
-        const escritor = this.getAttribute("escritor") || "";
-        const descricao = this.getAttribute("descricao") || "";
-        const imagem = this.getAttribute("imagem") || "";
-        const ariaLabel = `Livro ${titulo}`;
+  connectedCallback() {
+    const titulo = this.getAttribute("titulo") || "";
+    const ano = this.getAttribute("ano") || "";
+    const descricao = this.getAttribute("descricao") || "";
+    const imagem = this.getAttribute("imagem") || "";
+    const ariaLabel = `Livro ${titulo}`;
 
-        this.shadowRoot!.innerHTML = `
+    this.shadowRoot!.innerHTML = `
             <style>
                 section {
                     display: grid;
@@ -110,14 +109,12 @@ class MyCard extends HTMLElement {
                 <h2 class="livro-titulo">${titulo}</h2>
                 <h3 class="livro-ano">${ano}</h3>
                 <p class="livro-descricao">${descricao}</p>
-                <h3 class="livro-escritor">${escritor}</h3>
                 <div class="livro-btn">
                     <text-button >Ver livro</text-button>
                 </div>
             </section>
             `;
-
-    }
+  }
 }
 
-customElements.define('my-card', MyCard);
+customElements.define("my-card", MyCard);

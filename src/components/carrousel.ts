@@ -1,37 +1,38 @@
+import "./card.js";
+
 class Carrousel extends HTMLElement {
-  livros: CardInterface[] = [
-    {
-      titulo: "Querido John",
-      ano: "2010",
-      escritor: "Nicholas Sparks",
-      descricao:
-        "O soldado John Tyree conhece a universitária idealista Savannah Curtis e uma forte ligação nasce entre eles...",
-      imagem: "./src/images/banners/querido-john.jpg",
-    },
-    {
-      titulo: "O Mundo Superior",
-      ano: "2023",
-      escritor: "Femi Fadugba",
-      descricao:
-        "O Mundo Superior é o primeiro livro de uma duologia afrofuturista que acompanha dois jovens...",
-      imagem: "./src/images/banners/o-mundo-superior.jpg",
-    },
-    {
-      titulo: "Além da Fumaça",
-      ano: "2023",
-      escritor: "Edvaldo Silva",
-      descricao:
-        "Na Berlim Ocidental, em 1987, o taxista Bruno Fischer é designado a conduzir a misteriosa passageira Ingrid Bergunson...",
-      imagem: "./src/images/banners/alem_da_fumaca.jpg",
-    },
-  ];
+  livros: CardInterface[] = [];
 
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
   }
 
+  getLivros() {
+    const data = sessionStorage.getItem("livros");
+    if (!data) return;
+
+    const dataLivros = JSON.parse(data);
+    const todos = dataLivros.livros.map((livroRaw: any) => ({
+      titulo: livroRaw.titulo,
+      ano: livroRaw.ano,
+      descricao: livroRaw.descricao,
+      imagem: `http://localhost:3000${livroRaw.imagem_caminho}`,
+      disponibilidade: livroRaw.disponibilidade,
+    }));
+
+    const indices: Set<number> = new Set();
+
+    while (indices.size < 3 && indices.size < todos.length) {
+      const aleatorio = Math.floor(Math.random() * todos.length);
+      indices.add(aleatorio);
+    }
+
+    this.livros = [...indices].map((i) => todos[i]);
+  }
+
   connectedCallback() {
+    this.getLivros();
     this.render();
     this.renderLivros();
   }
@@ -57,8 +58,7 @@ class Carrousel extends HTMLElement {
 
       const card = document.createElement("my-card");
       card.setAttribute("titulo", livro.titulo);
-      card.setAttribute("ano", livro.ano);
-      card.setAttribute("escritor", livro.escritor);
+      card.setAttribute("ano", livro.ano.toString());
       card.setAttribute("descricao", livro.descricao);
       card.setAttribute("imagem", livro.imagem);
       if (this.livros.indexOf(livro) === 0) divCard.classList.add("first");
