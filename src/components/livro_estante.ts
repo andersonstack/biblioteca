@@ -20,7 +20,10 @@ class LivroEstante extends HTMLElement {
   render() {
     if (!this.livro) return;
 
-    const { titulo, imagem, disponivel } = this.livro;
+    const token = sessionStorage.getItem("token");
+    const titulo = this.livro.titulo;
+    const imagem = this.livro.imagem;
+    const disponivel = token != null ? this.livro.disponivel : false;
 
     this.shadowRoot!.innerHTML = `
   <style>
