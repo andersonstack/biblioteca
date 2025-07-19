@@ -1,6 +1,5 @@
 export function mostrarMensagem(tipo: String, message: HTMLElement) {
   const mensagens = message?.querySelectorAll(".tile-message")!;
-  console.log(mensagens);
   mensagens.forEach((msg) => msg.classList.remove("active"));
 
   switch (tipo) {
@@ -37,7 +36,7 @@ export function mostrarMensagem(tipo: String, message: HTMLElement) {
   setTimeout(() => {
     message.innerHTML = ``;
     if (tipo == "sucessoL") {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       if (token != null) {
         window.location.href = "index.html";
       }
