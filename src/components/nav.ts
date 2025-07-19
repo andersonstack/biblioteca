@@ -5,8 +5,41 @@ class MyNav extends HTMLElement {
   }
 
   connectedCallback() {
+    this.render();
+    this.setupMenuToggle();
+    this.setupLogoutHandler();
+  }
+
+  getUserName(): string | null {
+    return sessionStorage.getItem("name");
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getUserName();
+  }
+
+  renderUserSection(): string {
+    const userName = this.getUserName();
+    if (this.isAuthenticated()) {
+      return `
+        <span>Olá, ${userName}!</span>
+        <text-button id="logout-btn" class="with_background">Sair</text-button>
+      `;
+    } else {
+      return `
+        <text-button href="./login.html">Entrar</text-button>
+        <text-button href="./singup.html" class="with_background">Cadastrar-se</text-button>
+      `;
+    }
+  }
+
+  render() {
     this.shadowRoot!.innerHTML = `
-      <style>
+    <style>
+        :host {
+          font-family: var(--poppins);
+        }
+  
         @keyframes rotation {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
@@ -159,7 +192,7 @@ class MyNav extends HTMLElement {
         
         <div>
           <input-button></input-button>
-          <my-button >
+          <my-button>
             <img src="./src/images/icons/menu.png" class="toggle-icon"/>
           </my-button>
 
@@ -171,17 +204,16 @@ class MyNav extends HTMLElement {
               </ul>
             </section>
 
-            
             <section aria-label="Acesso ao usuário" class="menu__user">
-              <text-button href="./login.html">Entrar</text-button>
-              <text-button href="./singup.html" class="with_background">Cadastrar-se</text-button>
+              ${this.renderUserSection()}
             </section>
           </section>
-        <div>
-
+        </div>
       </nav>
     `;
+  }
 
+  setupMenuToggle() {
     const btn = this.shadowRoot?.querySelector("my-button");
     const img = btn?.querySelector("img");
     const menu = this.shadowRoot?.querySelector(".menu");
@@ -191,12 +223,7 @@ class MyNav extends HTMLElement {
       isOpen = !isOpen;
 
       if (img) {
-        if (menu?.classList.contains("active")) {
-          menu?.classList.remove("active");
-        } else {
-          menu?.classList.add("active");
-        }
-
+        menu?.classList.toggle("active");
         img.classList.remove("rotate");
         void img.offsetWidth;
         img.classList.add("rotate");
@@ -207,6 +234,14 @@ class MyNav extends HTMLElement {
       }
 
       menu?.classList.toggle("open", isOpen);
+    });
+  }
+
+  setupLogoutHandler() {
+    const logoutBtn = this.shadowRoot?.querySelector("#logout-btn");
+    logoutBtn?.addEventListener("click", () => {
+      sessionStorage.removeItem("name");
+      location.reload(); // Atualiza a navbar após logout
     });
   }
 }
