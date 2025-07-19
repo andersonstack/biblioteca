@@ -6,7 +6,7 @@ import "./components/nav.js";
 import "./components/card.js";
 import "./interfaces/card_interface.js";
 import "./interfaces/usuario.js";
-import "./utils/carrousel.js";
+import "./components/carrousel.js";
 import "./utils/categorias.js";
 import "./components/livro_estante.js";
 import { renderLivros } from "./utils/estante.js";
