@@ -8,7 +8,7 @@ import "./interfaces/card_interface.js";
 import "./interfaces/usuario.js";
 import "./scripts/carrousel.js";
 import "./scripts/categorias.js";
-import "./components/livro_colecao.js";
+import "./components/livro_estante.js";
 import { renderLivros } from "./utils/estante.js";
 
 (() => renderLivros())();
