@@ -18,11 +18,12 @@ class HelloText extends HTMLElement {
           margin-right: 1rem;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1120px) {
           span {
             display: block;
             margin: 0.5rem 0;
             text-align: center;
+            color: black;
           }
         }
       </style>
