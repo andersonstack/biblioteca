@@ -9,72 +9,85 @@ class TextButton extends HTMLElement {
     const classButton = this.getAttribute("class") || "default";
 
     this.shadowRoot!.innerHTML = `
-            <style>
-            .with_background,
-            .btn_filter,
-            .default,
-            .actions {
-                text-decoration: none;
-                border-radius: 1rem;
-                font-family: var(--poppins);
-                font-weight: 400;
-            }
-            .actions {
-                padding: 0.5rem;
-                color: var(--black);
-                transition: 2s ease;
-                font-weight: 500;
-            }
+      <style>
+        a {
+          display: inline-block;
+          border-radius: 0.75rem;
+          font-family: var(--poppins, sans-serif);
+          font-size: 1rem;
+          font-weight: 500;
+          text-decoration: none;
+          transition: all 0.3s ease-in-out;
+          padding: 0.75rem 1.25rem;
+          text-align: center;
+          user-select: none;
+        }
 
-            .with_background {
-                background-color: var(--secondary);
-                padding: 1rem;
-                width: 100%;
-                color: black;
-                font-weight: 500;
-                transition: 0.5s ease-in-out;
-                
-                &:hover {
-                    background-color: var(--primary);
-                    color: black;
-                }
+        a:focus {
+          outline: 2px solid var(--primary, #000);
+          outline-offset: 2px;
+        }
 
-            }
+        /* Default: transparente */
+        .default {
+          background: transparent;
+          color: var(--black, #000);
+        }
+        .default:hover {
+          color: var(--primary, #6200ee);
+        }
 
-            .btn_filter {
-                background-color: var(--onPrimary);
-                padding: 1rem;
-                width: 100%;
-                color: white;
-                font-weight: 500;
-            }
+        /* Com fundo */
+        .with_background {
+          background-color: var(--secondary, #e0e0e0);
+          color: var(--black, #000);
+        }
+        .with_background:hover {
+          background-color: var(--primary, #6200ee);
+          color: #fff;
+        }
 
-            .default {
-                background-color: transparent;
-                text-decoration: none;
-                color: black;
-                transition: 0.5s ease-in-out;
+        /* Filtro */
+        .btn_filter {
+          background-color: var(--onPrimary, #333);
+          color: #fff;
+        }
+        .btn_filter:hover {
+          background-color: var(--primary, #6200ee);
+          color: #fff;
+        }
 
-                &:hover {
-                    color: var(--primary);
-                }
-            }
-            @media screen and (max-width: 1120px){
-                .default:hover{
-                    color: var(--destaque);
-                    font-wight: 500;
-                }
-                .with_background:hover{
-                    background-color: var(--onSecondary);
-                    color: var(--branco-gelo);
-                }
-            }
-            </style>
+        /* Ações */
+        .actions {
+          background-color: var(--highlight, #f5f5f5);
+          color: var(--black, #000);
+        }
+        .actions:hover {
+          background-color: var(--primary, #6200ee);
+          color: #fff;
+        }
 
-            <a href=${page} class=${classButton}>
-                <slot></slot>
-            </a>
-        `;
+        @media screen and (max-width: 1120px) {
+          a {
+            width: 100%;
+            padding: 1rem;
+          }
+
+          .default:hover {
+            color: var(--destaque, #ff4081);
+          }
+
+          .with_background:hover {
+            background-color: var(--onSecondary, #444);
+            color: var(--branco-gelo, #fdfdfd);
+          }
+        }
+      </style>
+
+      <a href="${page}" class="${classButton}" role="button">
+        <slot></slot>
+      </a>
+    `;
   }
 }
 
