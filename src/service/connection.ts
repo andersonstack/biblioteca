@@ -1,4 +1,5 @@
 import "../interfaces/usuario.js";
+import { LivroCache } from "../interfaces/livros_api.js";
 
 export async function login(usuario: UsuarioLogin): Promise<200 | 401 | 501> {
   try {
@@ -49,11 +50,21 @@ export async function getLivros() {
 
     if (response.status === 200) {
       const livros = await response.json();
-      localStorage.setItem("livros", JSON.stringify(livros.livros));
+      const cache: LivroCache = {
+        livros: livros.livros,
+        timestamp: Date.now(),
+      };
+      sessionStorage.setItem("livros", JSON.stringify(cache));
     } else {
-      localStorage.setItem("livros", "[]");
+      sessionStorage.setItem(
+        "livros",
+        JSON.stringify({ livros: [], timestamp: Date.now() })
+      );
     }
   } catch (error) {
-    localStorage.setItem("livros", "[]");
+    sessionStorage.setItem(
+      "livros",
+      JSON.stringify({ livros: [], timestamp: Date.now() })
+    );
   }
 }
