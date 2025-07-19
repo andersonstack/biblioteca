@@ -1,3 +1,5 @@
+import "./hello_text.js";
+
 class MyNav extends HTMLElement {
   constructor() {
     super();
@@ -22,7 +24,7 @@ class MyNav extends HTMLElement {
     const userName = this.getUserName();
     if (this.isAuthenticated()) {
       return `
-        <span>Olá, ${userName}!</span>
+        <hello-text>Olá, ${userName}!</hello-text>
         <text-button id="logout-btn" class="with_background">Sair</text-button>
       `;
     } else {
