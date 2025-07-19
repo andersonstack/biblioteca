@@ -13,7 +13,8 @@ export async function login(usuario: UsuarioLogin): Promise<200 | 401 | 501> {
     });
     if (response.status == 200) {
       const data = await response.json();
-      localStorage.setItem("token", data.token);
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("name", data.name);
       return 200;
     }
     return 401;
