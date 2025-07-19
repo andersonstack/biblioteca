@@ -45,6 +45,7 @@ class LivroEstante extends HTMLElement {
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
+      text-align: center;
     }
 
     .container_livro:hover {
@@ -73,16 +74,17 @@ class LivroEstante extends HTMLElement {
       font-weight: 600;
       font-size: 1rem;
       text-align: center;
-      padding: 0.5rem 1rem;
       color: var(--branco-gelo);
       text-overflow: ellipsis;
+      withe-space: nowrap;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     text-button.actions {
-      margin: 0.5rem 0 1rem 0;
+      margin: 0 0 1rem 0;
       color: var(--secondary);
       background: none;
       border: none;
@@ -93,15 +95,6 @@ class LivroEstante extends HTMLElement {
 
     text-button.actions:hover {
       color: var(--destaque);
-    }
-
-    .container_infor {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      width: 100%;
-      align-items: center;
-      height: 100%;
     }
   </style>
 
