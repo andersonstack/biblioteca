@@ -202,7 +202,7 @@ class MyNav extends HTMLElement {
             <section aria-label="Menu principal" class="menu__principal">
               <ul>
                 <li><text-button href="#">Início</text-button></li>
-                <li><text-button href="#">Estante</text-button></li>
+                <li><text-button href="#">Meus empréstimos</text-button></li>
               </ul>
             </section>
 
