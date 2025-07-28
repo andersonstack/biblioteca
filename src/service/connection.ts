@@ -15,6 +15,7 @@ export async function login(usuario: UsuarioLogin): Promise<200 | 401 | 501> {
       const data = await response.json();
       sessionStorage.setItem("token", data.token);
       sessionStorage.setItem("name", data.name);
+      sessionStorage.setItem("userName", data.userName);
       return 200;
     }
     return 401;
