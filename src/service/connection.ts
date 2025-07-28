@@ -70,3 +70,26 @@ export async function getLivros() {
     );
   }
 }
+
+export async function getEmprestimos() {
+  try {
+    const url = "http://localhost:3000/livrosEmprestimos";
+    const userName = sessionStorage.getItem("userName");
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userName }),
+    })
+
+    if (response.status === 200) {
+      const data = await response.json();
+      sessionStorage.setItem("livrosEmprestados", JSON.stringify(data.livrosEmprestados));
+    }
+
+  } catch (error) {
+    console.log("Livros não encontrados!");
+  }
+}
