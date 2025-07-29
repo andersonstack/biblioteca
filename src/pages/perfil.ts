@@ -65,8 +65,8 @@ class TelaPerfil extends HTMLElement {
         }
 
         .container__informacoes {
-          background-color: var(--secondary);
-          color: var(--onSecondary);
+          background-color: var(--onPrimary);
+          color: white;
           padding: 1rem;
           border-radius: 0.625rem;
           font-family: var(--poppins);
