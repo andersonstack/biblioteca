@@ -1,3 +1,4 @@
+import "../components/nav.js";
 import "../components/text_button.js";
 import "../components/livro_estante.js";
 
@@ -62,18 +63,6 @@ class TelaPerfil extends HTMLElement {
           overflow: hidden;
         }
 
-        .container__informacoes {
-          background-color: var(--onPrimary);
-          color: white;
-          padding: 1rem;
-          border-radius: 0.625rem;
-          font-family: var(--poppins);
-        }
-
-        .container__informacoes h2 {
-          margin: 0.2rem 0;
-        }
-
         .container__emprestimo {
           margin-top: 1rem;
           background-color: var(--branco-gelo);
@@ -119,11 +108,6 @@ class TelaPerfil extends HTMLElement {
       </style>
       
       <section class="container__perfil" aria-label="Perfil do Usuário">
-        <div class="container__informacoes">
-          <h2 aria-label="Nome do usuário">${nome}</h2>
-          <h2 aria-label="Username">${userName}</h2>
-        </div>
-
         <section class="container__emprestimo">
           <h2 class="container__titulo" aria-label="Título da sessão">
             Meus empréstimos
