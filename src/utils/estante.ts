@@ -1,5 +1,6 @@
 import { getLivros } from "../service/connection.js";
 import { LivroBD, LivroCache } from "../interfaces/livros_api.js";
+import "../components/livro_estante.js";
 
 const CACHE_KEY = "livros";
 const CACHE_TTL = 1000 * 60 * 10;

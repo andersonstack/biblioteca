@@ -140,3 +140,7 @@ table {
   --branco-gelo: #fffafa;
   --poppins: "Poppins";
 }
+
+body {
+  font-family: "Poppins";
+}

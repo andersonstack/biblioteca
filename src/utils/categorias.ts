@@ -1,3 +1,5 @@
+import "../components/text_button.js";
+
 const categorias = ["Romance", "Ficção Científica", "Terror", "Psicológico", "Auto Ajudo"]
 const rowCategorias = document.getElementById("filtros");
 

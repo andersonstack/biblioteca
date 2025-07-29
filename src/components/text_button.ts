@@ -10,10 +10,13 @@ class TextButton extends HTMLElement {
 
     this.shadowRoot!.innerHTML = `
       <style>
+        :host {
+          font-family: var(--poppins);
+        }
+
         a {
           display: inline-block;
           border-radius: 0.75rem;
-          font-family: var(--poppins, sans-serif);
           font-size: 1rem;
           font-weight: 500;
           text-decoration: none;

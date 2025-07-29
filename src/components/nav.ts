@@ -1,3 +1,7 @@
+import "./text_button.js";
+import "./input_button.js";
+import "./input.js";
+import "./button.js";
 import "./hello_text.js";
 
 class MyNav extends HTMLElement {

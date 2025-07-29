@@ -45,13 +45,11 @@ class TelaPerfil extends HTMLElement {
   }
 
   render() {
-    const nome = sessionStorage.getItem("name");
-    const userName = sessionStorage.getItem("userName");
 
     this.shadowRoot!.innerHTML = `
       <style>
         :host {
-          all: initial;
+          font-family: "Poppins";
         }
 
         .container__perfil {
