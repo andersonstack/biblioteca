@@ -112,6 +112,12 @@ class TelaPerfil extends HTMLElement {
         ::-webkit-scrollbar-track {
           background-color: transparent;
         }
+
+        @media (min-width: 600px) {
+          .estante {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
       </style>
       
       <section class="container__perfil" aria-label="Perfil do Usuário">
