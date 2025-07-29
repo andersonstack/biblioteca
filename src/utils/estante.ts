@@ -1,15 +1,14 @@
 import { getLivros } from "../service/connection.js";
 import { LivroBD, LivroCache } from "../interfaces/livros_api.js";
 
-const CACHE_KEY = "livros";
 const CACHE_TTL = 1000 * 60 * 10;
 
-export async function renderLivros() {
+export async function renderLivros(cacheKey: string) {
   document.addEventListener("DOMContentLoaded", async () => {
     const container = document.querySelector(".livros_colecao");
 
     // Tenta carregar do cache
-    const cacheRaw = sessionStorage.getItem(CACHE_KEY);
+    const cacheRaw = sessionStorage.getItem(cacheKey);
     let livros: LivroBD[] = [];
 
     if (cacheRaw) {
@@ -34,7 +33,7 @@ export async function renderLivros() {
       await getLivros(); // só grava no sessionStorage
 
       // Agora relê os livros do cache
-      const novosDados = sessionStorage.getItem(CACHE_KEY);
+      const novosDados = sessionStorage.getItem(cacheKey);
       if (novosDados) {
         try {
           const novoCache: LivroCache = JSON.parse(novosDados);

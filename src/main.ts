@@ -9,5 +9,5 @@ import "./interfaces/usuario.js";
 import "./utils/categorias.js";
 import "./components/livro_estante.js";
 import { renderLivros } from "./utils/estante.js";
-(() => renderLivros())();
+(() => renderLivros("livros"))();
 import "./components/carrousel.js";
