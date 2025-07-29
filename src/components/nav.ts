@@ -247,6 +247,8 @@ class MyNav extends HTMLElement {
     const logoutBtn = this.shadowRoot?.querySelector("#logout-btn");
     logoutBtn?.addEventListener("click", () => {
       sessionStorage.removeItem("name");
+      sessionStorage.removeItem("userName");
+      sessionStorage.removeItem("livrosEmprestados");
       location.reload(); // Atualiza a navbar após logout
     });
   }
