@@ -102,7 +102,7 @@ class TelaPerfil extends HTMLElement {
 
         @media (min-width: 600px) {
           .estante {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
           }
         }
       </style>
