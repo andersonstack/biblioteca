@@ -25,6 +25,8 @@ class LivroEstante extends HTMLElement {
     const imagem = this.livro.imagem;
     const disponivel = token != null ? this.livro.disponivel : false;
 
+    const esconderDisponibilidade = this.hasAttribute("esconder-disponibilidade");
+
     this.shadowRoot!.innerHTML = `
   <style>
     :host {
@@ -40,7 +42,7 @@ class LivroEstante extends HTMLElement {
       overflow: hidden;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       position: relative;
-      height: 23rem;
+      ${esconderDisponibilidade ? "height: 20rem" : "23rem"};
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -68,6 +70,7 @@ class LivroEstante extends HTMLElement {
       top: 0.75rem;
       left: 0.75rem;
       border: 2px solid var(--branco-gelo);
+      ${esconderDisponibilidade ? "display: none" : ""};
     }
 
     .titulo {
@@ -91,6 +94,7 @@ class LivroEstante extends HTMLElement {
       font-weight: 500;
       cursor: pointer;
       transition: color 0.2s;
+      ${esconderDisponibilidade ? "display: none" : ""};
     }
 
     text-button.actions:hover {

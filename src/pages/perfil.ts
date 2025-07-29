@@ -1,3 +1,4 @@
+import "../components/text_button.js";
 import "../components/livro_estante.js";
 
 class TelaPerfil extends HTMLElement {
@@ -8,6 +9,40 @@ class TelaPerfil extends HTMLElement {
 
   connectedCallback() {
     this.render();
+    this.setup();
+  }
+
+  setup() {
+    window.addEventListener("DOMContentLoaded", () => {
+      const container = this.shadowRoot!.querySelector("#estante-livros");
+      if (!container) {
+        console.log("container não encontrado");
+        return;
+      };
+
+      const livrosJSON = sessionStorage.getItem("livrosEmprestados");
+      if (!livrosJSON) {
+        console.log("livros não encontrados");
+        return;
+      };
+
+      try {
+        const livros = JSON.parse(livrosJSON);
+
+        livros.forEach((livro: any) => {
+          const livroElement = document.createElement("livro-estante") as any;
+          livroElement.setAttribute("esconder-disponibilidade", "");
+
+          livroElement.data = {
+            titulo: livro.titulo,
+            imagem: `http://localhost:3000${livro.imagem_caminho}`
+          };
+          container.appendChild(livroElement);
+        });
+      } catch (error) {
+        console.error("Erro ao processar os livros emprestados:", error);
+      }
+    });
   }
 
   render() {
@@ -33,7 +68,7 @@ class TelaPerfil extends HTMLElement {
           background-color: var(--secondary);
           color: var(--onSecondary);
           padding: 1rem;
-          border-radius: 8px;
+          border-radius: 0.625rem;
           font-family: var(--poppins);
         }
 
@@ -45,7 +80,7 @@ class TelaPerfil extends HTMLElement {
           margin-top: 1rem;
           background-color: var(--branco-gelo);
           border: 1px solid var(--destaque);
-          border-radius: 8px;
+          border-radius: 0.625rem;
           padding: 1rem;
           overflow-y: auto;
           flex: 1;
@@ -62,6 +97,7 @@ class TelaPerfil extends HTMLElement {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
           gap: 1rem;
+          width: 100%;
         }
 
         ::-webkit-scrollbar {
