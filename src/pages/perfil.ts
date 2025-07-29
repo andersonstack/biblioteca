@@ -16,13 +16,11 @@ class TelaPerfil extends HTMLElement {
     window.addEventListener("DOMContentLoaded", () => {
       const container = this.shadowRoot!.querySelector("#estante-livros");
       if (!container) {
-        console.log("container não encontrado");
         return;
       };
 
       const livrosJSON = sessionStorage.getItem("livrosEmprestados");
       if (!livrosJSON) {
-        console.log("livros não encontrados");
         return;
       };
 
