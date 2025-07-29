@@ -1,6 +1,7 @@
 import "../components/nav.js";
 import "../components/text_button.js";
 import "../components/livro_estante.js";
+import { getEmprestimos } from "../service/connection.js";
 
 class TelaPerfil extends HTMLElement {
   constructor() {
@@ -9,11 +10,13 @@ class TelaPerfil extends HTMLElement {
   }
 
   connectedCallback() {
-    this.render();
     this.setup();
+    this.render();
   }
 
   setup() {
+    getEmprestimos();
+
     window.addEventListener("DOMContentLoaded", () => {
       const container = this.shadowRoot!.querySelector("#estante-livros");
       if (!container) {
