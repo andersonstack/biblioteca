@@ -11,6 +11,9 @@ class TelaPerfil extends HTMLElement {
   }
 
   render() {
+    const nome = sessionStorage.getItem("name");
+    const userName = sessionStorage.getItem("userName");
+
     this.shadowRoot!.innerHTML = `
       <style>
         :host {
@@ -77,8 +80,8 @@ class TelaPerfil extends HTMLElement {
       
       <section class="container__perfil" aria-label="Perfil do Usuário">
         <div class="container__informacoes">
-          <h2 aria-label="Nome do usuário">Anderson</h2>
-          <h2 aria-label="Username">@andsgabs</h2>
+          <h2 aria-label="Nome do usuário">${nome}</h2>
+          <h2 aria-label="Username">${userName}</h2>
         </div>
 
         <section class="container__emprestimo">
