@@ -1,7 +1,6 @@
 import "../components/nav.js";
 import "../components/text_button.js";
 import "../components/livro_estante.js";
-import { getEmprestimos } from "../service/connection.js";
 
 class TelaPerfil extends HTMLElement {
   constructor() {
@@ -15,31 +14,35 @@ class TelaPerfil extends HTMLElement {
   }
 
   setup() {
-    getEmprestimos();
-
     window.addEventListener("DOMContentLoaded", () => {
-      const container = this.shadowRoot!.querySelector("#estante-livros");
-      if (!container) {
-        return;
-      };
+      const containerAtivos = this.shadowRoot!.querySelector("#estante-livros-ativos");
+      const containerVencidos = this.shadowRoot!.querySelector("#estante-livros-vencidos");
+
+      if (!containerAtivos || !containerVencidos) return;
 
       const livrosJSON = sessionStorage.getItem("livrosEmprestados");
-      if (!livrosJSON) {
-        return;
-      };
+      if (!livrosJSON) return;
 
       try {
         const livros = JSON.parse(livrosJSON);
+        const hoje = new Date();
 
         livros.forEach((livro: any) => {
+          const vencimento = new Date(livro.data_vencimento);
           const livroElement = document.createElement("livro-estante") as any;
           livroElement.setAttribute("esconder-disponibilidade", "");
-
           livroElement.data = {
             titulo: livro.titulo,
-            imagem: `http://localhost:3000${livro.imagem_caminho}`
+            imagem: `http://localhost:3000${livro.imagem_caminho}`,
           };
-          container.appendChild(livroElement);
+
+          if (vencimento >= hoje) {
+            containerAtivos.appendChild(livroElement);
+          } else {
+            if (livro.devolucao === 0){
+              containerVencidos.appendChild(livroElement);
+            }
+          }
         });
       } catch (error) {
         console.error("Erro ao processar os livros emprestados:", error);
@@ -48,7 +51,6 @@ class TelaPerfil extends HTMLElement {
   }
 
   render() {
-
     this.shadowRoot!.innerHTML = `
       <style>
         :host {
@@ -75,9 +77,10 @@ class TelaPerfil extends HTMLElement {
         }
 
         .container__titulo {
-          font-family: var(--poppins);
           font-size: 1.2rem;
+          font-weight: 600;
           color: var(--onPrimary);
+          margin-top: 1rem;
           margin-bottom: 0.5rem;
         }
 
@@ -107,13 +110,14 @@ class TelaPerfil extends HTMLElement {
           }
         }
       </style>
-      
+
       <section class="container__perfil" aria-label="Perfil do Usuário">
         <section class="container__emprestimo">
-          <h2 class="container__titulo" aria-label="Título da sessão">
-            Meus empréstimos
-          </h2>
-          <div class="estante" id="estante-livros"></div>
+          <h2 class="container__titulo">Meus empréstimos ativos</h2>
+          <div class="estante" id="estante-livros-ativos"></div>
+
+          <h2 class="container__titulo">Empréstimos vencidos</h2>
+          <div class="estante" id="estante-livros-vencidos"></div>
         </section>
       </section>
     `;
