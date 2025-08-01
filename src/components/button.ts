@@ -16,7 +16,7 @@ class MyButton extends HTMLElement {
                 border: none;
                 cursor: pointer;
                 font-family: var(--poppins);
-                font-weight: 800;
+                font-weight: 600;
             }
             .login {
                 background-color: var(--onSecondary);
