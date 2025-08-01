@@ -40,6 +40,8 @@ class MyNav extends HTMLElement {
   }
 
   render() {
+    const isAdmin = sessionStorage.getItem("role") === "admin";
+
     this.shadowRoot!.innerHTML = `
     <style>
         :host {
@@ -214,6 +216,7 @@ class MyNav extends HTMLElement {
               <ul>
                 <li><text-button href="index.html">Início</text-button></li>
                 <li><text-button href="profile.html" id="emprestimos">Meus empréstimos</text-button></li>
+                ${isAdmin ? `<li><text-button href="admin.html">Administração</text-button></li>` : ""}
               </ul>
             </section>
 
@@ -223,7 +226,7 @@ class MyNav extends HTMLElement {
           </section>
         </div>
       </nav>
-    `;
+      `;
   }
 
   setupMenuToggle() {
