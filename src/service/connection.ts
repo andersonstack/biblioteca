@@ -1,5 +1,5 @@
 import "../interfaces/usuario.js";
-import { LivroCache } from "../interfaces/livros_api.js";
+import { LivroCache, LivroCadastro } from "../interfaces/livros_api.js";
 
 export async function login(usuario: UsuarioLogin): Promise<200 | 401 | 501> {
   try {
@@ -94,4 +94,23 @@ export async function getEmprestimos() {
   } catch (error) {
     console.log("Livros não encontrados!");
   }
+}
+
+export async function addBook(livro: LivroCadastro) {
+  console.log(livro);
+  const url = "http://localhost:3000/cadastrarLivro/";
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(livro),
+  });
+
+  console.log(response);
+
+  if (response.status === 201) 
+    return 200;
+  else if (response.status === 400) return 401;
+  return 501;
 }
