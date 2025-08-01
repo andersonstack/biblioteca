@@ -1,7 +1,7 @@
 export interface LivroBD {
   titulo: string;
   imagem_caminho: string;
-  disponivel: boolean;
+  disponibilidade: boolean;
 }
 
 export interface LivroCache {

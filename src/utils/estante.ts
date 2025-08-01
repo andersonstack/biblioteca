@@ -51,7 +51,7 @@ export async function renderLivros() {
       const livro = {
         titulo: livroRaw.titulo,
         imagem: `http://localhost:3000${livroRaw.imagem_caminho}`,
-        disponivel: livroRaw.disponivel,
+        disponivel: livroRaw.disponibilidade,
       };
 
       const elemento = document.createElement("livro-estante") as any;
