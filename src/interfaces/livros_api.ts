@@ -8,3 +8,11 @@ export interface LivroCache {
   livros: LivroBD[];
   timestamp: number;
 }
+
+export interface LivroCadastro {
+  titulo: string;
+  descricao: string;
+  ano: string;
+  imagem: string;
+  disponivel: boolean;
+}
