@@ -1,6 +1,7 @@
 import "../components/nav.js";
 import "../components/button.js";
 import "../components/text_button.js";
+import "../components/livroview.js";
 
 class TelaAdmin extends HTMLElement {
     constructor() {
@@ -49,9 +50,10 @@ class TelaAdmin extends HTMLElement {
                     transition: transform 0.3s ease-in-out;
                     display: flex;
                     flex-direction: column;
-                    justify-content: center;
+                    justify-content: start;
                     align-items: center;
                     text-align: center;
+                    overflow: auto;
                 }
 
                 .modal.show {
@@ -97,30 +99,35 @@ class TelaAdmin extends HTMLElement {
     private openModal(title: string) {
         const modal = document.createElement("div");
         modal.classList.add("overlay");
+
+        let content = "";
+
+        if (title === "Buscar livro") {
+            content = `
+                    <livro-view></livro-view>
+            `;
+        } else {
+            content = `<p>Conteúdo da opção: <strong>${title}</strong></p>`;
+        }
+
         modal.innerHTML = `
             <div class="modal">
                 <img src="./src/images/icons/close.png" alt="Fechar" class="close-btn" />
                 <h2>${title}</h2>
-                <p>Conteúdo da opção: <strong>${title}</strong></p>
+                ${content}
             </div>
         `;
-        
+
         this.shadowRoot!.appendChild(modal);
 
         requestAnimationFrame(() => {
-            const innerModal = modal.querySelector(".modal");
-            innerModal?.classList.add("show");
+            modal.querySelector(".modal")?.classList.add("show");
         });
 
         const closeBtn = modal.querySelector(".close-btn");
         closeBtn?.addEventListener("click", () => {
-            const innerModal = modal.querySelector(".modal");
-            innerModal?.classList.remove("show");
-
-
-            setTimeout(() => {
-                modal.remove();
-            }, 300);
+            modal.querySelector(".modal")?.classList.remove("show");
+            setTimeout(() => modal.remove(), 300);
         });
     }
 }
