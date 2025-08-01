@@ -96,21 +96,33 @@ export async function getEmprestimos() {
   }
 }
 
-export async function addBook(livro: LivroCadastro) {
-  console.log(livro);
-  const url = "http://localhost:3000/cadastrarLivro/";
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(livro),
-  });
+export async function addBook(livro: LivroCadastro, file?: File): Promise<200 | 401 | 501> {
+  try {
+    let response: Response;
 
-  console.log(response);
+    if (file) {
+      const formData = new FormData();
+      formData.append("titulo", livro.titulo);
+      formData.append("descricao", livro.descricao);
+      formData.append("ano", livro.ano.toString());
+      formData.append("imagem", file);
 
-  if (response.status === 201) 
-    return 200;
-  else if (response.status === 400) return 401;
-  return 501;
+      response = await fetch("http://localhost:3000/cadastrarLivro/", {
+        method: "POST",
+        body: formData,
+      });
+    } else {
+      response = await fetch("http://localhost:3000/cadastrarLivro/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(livro),
+      });
+    }
+
+    if (response.status === 201) return 200;
+    if (response.status === 400) return 401;
+    return 501;
+  } catch (error) {
+    return 501;
+  }
 }
