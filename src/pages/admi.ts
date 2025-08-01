@@ -2,6 +2,7 @@ import "../components/nav.js";
 import "../components/button.js";
 import "../components/text_button.js";
 import "../components/livroview.js";
+import "../components/livro_add.js";
 
 class TelaAdmin extends HTMLElement {
     constructor() {
@@ -104,7 +105,11 @@ class TelaAdmin extends HTMLElement {
 
         if (title === "Buscar livro") {
             content = `
-                    <livro-view></livro-view>
+                <livro-view></livro-view>
+            `;
+        } else if (title === "Adicionar livro") {
+            content = `
+                <livro-add></livro-add>
             `;
         } else {
             content = `<p>Conteúdo da opção: <strong>${title}</strong></p>`;
