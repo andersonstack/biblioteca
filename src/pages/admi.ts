@@ -1,7 +1,7 @@
 import "../components/nav.js";
 import "../components/button.js";
 import "../components/text_button.js";
-import "../components/livroview.js";
+import "../components/livro_view.js";
 import "../components/livro_add.js";
 
 class TelaAdmin extends HTMLElement {
