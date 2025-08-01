@@ -63,12 +63,17 @@ class MyNav extends HTMLElement {
           padding: 0.5rem;
           position: relative; 
           overflow-x: clip;
+          padding: 1rem;
 
           img {
             width: 3rem;
             height: auto;
-            border-radius: 50%;
           }
+
+        }
+        
+        .logo__icon {
+          border-radius: 50%;
         }
 
         div {
@@ -103,6 +108,7 @@ class MyNav extends HTMLElement {
         }
 
         .menu__principal {
+          width: 100%;
           display: flex;
           align-items: center;
         }
@@ -116,7 +122,7 @@ class MyNav extends HTMLElement {
 
         @media screen and (max-width: 1120px) {
           nav {
-            padding: 0 0.5rem;
+            padding: 1rem;
             justify-content: space-between;
           }
 
@@ -133,7 +139,7 @@ class MyNav extends HTMLElement {
             position: absolute;
             right: 0;
             top: 100%;
-            align-items: center;
+            align-items: start;
             gap: 2rem;
             width: 100%;
             transform: translateX(100%);
@@ -158,10 +164,11 @@ class MyNav extends HTMLElement {
           }
 
           .menu__user {
-            flex-direction: column;
-            align-items: center;
             padding: 0;
-            gap: 2rem;
+            padding: 1rem;
+            gap: 1rem;
+            width: 100%;
+            justify-content: center;
           }
 
           .menu__principal {
@@ -175,7 +182,6 @@ class MyNav extends HTMLElement {
 
           @media screen and (max-width: 480px){
             nav {
-              flex-direction: column;
               align-items: center;
               justify-content: center;
               padding: 1rem;
@@ -195,7 +201,7 @@ class MyNav extends HTMLElement {
       </style>
 
       <nav>
-        <img src="./src/images/banners/bg.jpg" alt="Logo da Biblioteca" />
+        <img class="logo__icon" src="./src/images/banners/bg.jpg" alt="Logo da Biblioteca" />
         
         <div>
           <input-button></input-button>
