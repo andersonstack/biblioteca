@@ -171,6 +171,7 @@ class TelaCadastro extends HTMLElement {
           userName: userName.value,
           name: nome.value,
           senha: senha.value,
+          role: "user",
         };
         const res = await singup(user);
         if (res == 200) {

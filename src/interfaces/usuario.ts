@@ -1,8 +1,9 @@
 interface UsuarioLogin {
-  userName: String;
-  senha: String;
+  userName: string;
+  senha: string;
 }
 
 interface UsuarioCadastro extends UsuarioLogin {
-  name: String;
+  name: string;
+  role: string;
 }
