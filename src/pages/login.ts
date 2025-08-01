@@ -81,7 +81,7 @@ class TelaLogin extends HTMLElement {
         }
 
         h2 {
-          margin-top: 2rem;
+          margin-top: 5rem;
         }
 
         .buttons {
