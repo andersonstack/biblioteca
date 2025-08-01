@@ -29,7 +29,7 @@ class MyNav extends HTMLElement {
     if (this.isAuthenticated()) {
       return `
         <hello-text>Olá, ${userName}!</hello-text>
-        <text-button id="logout-btn" class="with_background">Sair</text-button>
+        <text-button id="logout-btn" href="./login.html" class="with_background">Sair</text-button>
       `;
     } else {
       return `
@@ -259,6 +259,8 @@ class MyNav extends HTMLElement {
       sessionStorage.removeItem("name");
       sessionStorage.removeItem("userName");
       sessionStorage.removeItem("livrosEmprestados");
+      sessionStorage.removeItem("role");
+      sessionStorage.removeItem("token");
       location.reload(); // Atualiza a navbar após logout
     });
   }
