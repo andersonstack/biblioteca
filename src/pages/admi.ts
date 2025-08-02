@@ -4,6 +4,7 @@ import "../components/text_button.js";
 import "../components/livro_view.js";
 import "../components/livro_add.js";
 import "../components/livro_edit.js";
+import "../components/modal_component.js";
 
 class TelaAdmin extends HTMLElement {
     constructor() {
@@ -30,50 +31,6 @@ class TelaAdmin extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                     gap: 1.5rem;
-                }
-
-                .overlay {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100vw;
-                    height: 100vh;
-                    background: rgba(0, 0, 0, 0.5);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 1000;
-                }
-
-                .modal {
-                    width: 70%;
-                    max-width: 900px;
-                    height: 70%;
-                    background: var(--primary);
-                    border-radius: 0.8rem;
-                    padding: 2rem;
-                    position: relative;
-                    transform: scale(0);
-                    transition: transform 0.3s ease-in-out;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: start;
-                    align-items: stretch;
-                    overflow: auto;
-                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-                }
-
-                .modal.show {
-                    transform: scale(1);
-                }
-
-                .close-btn {
-                    position: absolute;
-                    top: 1rem;
-                    right: 1rem;
-                    width: 32px;
-                    height: 32px;
-                    cursor: pointer;
                 }
 
                 h2 {
@@ -107,47 +64,26 @@ class TelaAdmin extends HTMLElement {
     }
 
     private openModal(title: string) {
-        const modal = document.createElement("div");
-        modal.classList.add("overlay");
+        const modal = document.createElement("modal-component");
+        modal.setAttribute("title", title);
 
-        let content = "";
+        let content: HTMLElement;
 
         if (title === "Buscar livro") {
-            content = `
-                <livro-view></livro-view>
-            `;
+            content = document.createElement("livro-view");
         } else if (title === "Adicionar livro") {
-            content = `
-                <livro-add></livro-add>
-            `;
+            content = document.createElement("livro-add");
         } else if (title === "Atualizar livro") {
-            content = `
-                <livro-edit></livro-edit>
-            `;
+            content = document.createElement("livro-edit");
         } else {
-            content = `<p>Conteúdo da opção: <strong>${title}</strong></p>`;
+            content = document.createElement("p");
+            content.innerHTML = `Conteúdo da opção: <strong>${title}</strong>`;
         }
 
-        modal.innerHTML = `
-            <div class="modal">
-                <img src="./src/images/icons/close-modal.png" alt="Fechar" class="close-btn" />
-                <h2>${title}</h2>
-                ${content}
-            </div>
-        `;
-
+        modal.appendChild(content);
         this.shadowRoot!.appendChild(modal);
-
-        requestAnimationFrame(() => {
-            modal.querySelector(".modal")?.classList.add("show");
-        });
-
-        const closeBtn = modal.querySelector(".close-btn");
-        closeBtn?.addEventListener("click", () => {
-            modal.querySelector(".modal")?.classList.remove("show");
-            setTimeout(() => modal.remove(), 300);
-        });
     }
+
 }
 
 customElements.define("tela-admin", TelaAdmin);
