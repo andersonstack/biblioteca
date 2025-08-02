@@ -3,6 +3,7 @@ import "../components/button.js";
 import "../components/text_button.js";
 import "../components/livro_view.js";
 import "../components/livro_add.js";
+import "../components/livro_edit.js";
 
 class TelaAdmin extends HTMLElement {
     constructor() {
@@ -79,10 +80,9 @@ class TelaAdmin extends HTMLElement {
             <section class="container__admin">
                 <my-button value="Buscar livro">Buscar livro</my-button>
                 <my-button value="Adicionar livro">Adicionar livro</my-button>
-                <my-button value="Inativar livro">Inativar livro</my-button>
                 <my-button value="Atualizar livro">Atualizar livro</my-button>
-                <my-button value="Fazer empréstimo">Fazer empréstimo</my-button>
                 <my-button value="Realizar empréstimo">Realizar empréstimo</my-button>
+                <my-button value="Realizar devolução">Realizar devolução</my-button>
             </section>
         `;
     }
@@ -110,6 +110,10 @@ class TelaAdmin extends HTMLElement {
         } else if (title === "Adicionar livro") {
             content = `
                 <livro-add></livro-add>
+            `;
+        } else if (title === "Atualizar livro") {
+            content = `
+                <livro-edit></livro-edit>
             `;
         } else {
             content = `<p>Conteúdo da opção: <strong>${title}</strong></p>`;
