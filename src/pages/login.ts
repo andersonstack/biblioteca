@@ -150,7 +150,7 @@ class TelaLogin extends HTMLElement {
 
           <div class="buttons">
             <my-button class="login" id="submit">Entrar</my-button>
-            <text-button class="btn_filter" href="./singup.html">Cadastre-se</text-button>
+            <text-button class="singup" href="./singup.html">Cadastre-se</text-button>
           </div>
 
           <p class="message" id="message"></p>
