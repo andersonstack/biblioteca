@@ -49,7 +49,7 @@ class TelaAdmin extends HTMLElement {
                     width: 70%;
                     max-width: 900px;
                     height: 70%;
-                    background: #f9f9f9;
+                    background: var(--primary);
                     border-radius: 0.8rem;
                     padding: 2rem;
                     position: relative;
@@ -130,7 +130,7 @@ class TelaAdmin extends HTMLElement {
 
         modal.innerHTML = `
             <div class="modal">
-                <img src="./src/images/icons/close.png" alt="Fechar" class="close-btn" />
+                <img src="./src/images/icons/close-modal.png" alt="Fechar" class="close-btn" />
                 <h2>${title}</h2>
                 ${content}
             </div>
