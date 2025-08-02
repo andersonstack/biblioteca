@@ -22,7 +22,6 @@ class TextButton extends HTMLElement {
           text-decoration: none;
           transition: all 0.3s ease-in-out;
           padding: 0.75rem 1.25rem;
-          text-align: center;
           user-select: none;
         }
 
@@ -58,6 +57,11 @@ class TextButton extends HTMLElement {
         .btn_filter:hover {
           background-color: var(--primary, #6200ee);
           color: #fff;
+        }
+
+        .singup {
+          color: black;
+          font-weight: 700;
         }
 
         /* Ações */
