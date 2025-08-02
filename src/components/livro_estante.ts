@@ -28,79 +28,80 @@ class LivroEstante extends HTMLElement {
     const esconderDisponibilidade = this.hasAttribute("esconder-disponibilidade");
 
     this.shadowRoot!.innerHTML = `
-  <style>
-    :host {
-      font-family: var(--poppins);
-    }
+    <style>
+      :host {
+        font-family: var(--poppins);
+      }
 
-    .container_livro {
-      background-color: var(--onPrimary);
-      border-radius: 1rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      width: 100%;
-      max-width: 15rem;
-      overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      position: relative;
-      ${esconderDisponibilidade ? "height: 20rem" : "23rem"};
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      text-align: center;
-    }
+      .container_livro {
+        background-color: var(--onPrimary);
+        border-radius: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 15rem;
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        position: relative;
+        ${esconderDisponibilidade ? "height: 20rem" : "23rem"};
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+      }
 
-    .container_livro:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    }
+      .container_livro:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      }
 
-    img {
-      width: 15rem;
-      height: 15rem;
-      object-fit: cover;
-    }
+      img {
+        width: 15rem;
+        height: 15rem;
+        object-fit: cover;
+      }
 
-    .livro_disponibilidade {
-      width: 1rem;
-      height: 1rem;
-      border-radius: 50%;
-      background-color: ${disponivel ? "#28a745" : "#dc3545"};
-      position: absolute;
-      top: 0.75rem;
-      left: 0.75rem;
-      border: 2px solid var(--branco-gelo);
-      ${esconderDisponibilidade ? "display: none" : ""};
-    }
+      .livro_disponibilidade {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: ${disponivel ? "#28a745" : "#dc3545"};
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        border: 2px solid var(--branco-gelo);
+        ${esconderDisponibilidade ? "display: none" : ""};
+      }
 
-    .titulo {
-      font-weight: 600;
-      font-size: 1rem;
-      text-align: center;
-      color: var(--branco-gelo);
-      text-overflow: ellipsis;
-      withe-space: nowrap;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
+      .titulo {
+        font-weight: 600;
+        font-size: 1rem;
+        text-align: center;
+        color: var(--branco-gelo);
+        text-overflow: ellipsis;
+        withe-space: nowrap;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
 
-    text-button.actions {
-      margin: 0 0 1rem 0;
-      color: var(--secondary);
-      background: none;
-      border: none;
-      font-weight: 500;
-      cursor: pointer;
-      transition: color 0.2s;
-      ${esconderDisponibilidade ? "display: none" : ""};
-    }
+      text-button.actions {
+        width: 80%;
+        margin: 0 0 1rem 0;
+        color: var(--secondary);
+        background: none;
+        border: none;
+        font-weight: 500;
+        cursor: pointer;
+        transition: color 0.2s;
+        ${esconderDisponibilidade ? "display: none" : ""};
+      }
 
-    text-button.actions:hover {
-      color: var(--destaque);
-    }
-  </style>
+      text-button.actions:hover {
+        color: var(--destaque);
+      }
+    </style>
 
     <div class="container_livro">
       <div class="livro_disponibilidade" title="${

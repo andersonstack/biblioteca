@@ -66,7 +66,10 @@ class TextButton extends HTMLElement {
 
         /* Ações */
         .actions {
-          background-color: var(--highlight, #f5f5f5);
+          display: flex;
+          justify-content: center;
+          padding: 1rem 0;
+          background-color: var(--primary);
           color: var(--black, #000);
         }
         .actions:hover {
