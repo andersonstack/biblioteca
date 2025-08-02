@@ -20,12 +20,16 @@ class TelaAdmin extends HTMLElement {
         this.shadowRoot!.innerHTML = `
             <style>
                 .container__admin {
-                    display: flex;
-                    flex-wrap: wrap;
-                    flex-direction: column;
-                    align-items: start;
-                    gap: 1rem;
+                    background: white;
+                    border: 1px solid #ccc;
+                    border-radius: 0.8rem;
+                    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
                     padding: 2rem;
+                    margin: 2rem auto;
+                    max-width: 800px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
                 }
 
                 .overlay {
@@ -38,14 +42,15 @@ class TelaAdmin extends HTMLElement {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    z-index: 1;
+                    z-index: 1000;
                 }
 
                 .modal {
-                    width: 80%;
-                    height: 80%;
-                    background: white;
-                    border-radius: 1rem;
+                    width: 70%;
+                    max-width: 900px;
+                    height: 70%;
+                    background: #f9f9f9;
+                    border-radius: 0.8rem;
                     padding: 2rem;
                     position: relative;
                     transform: scale(0);
@@ -53,9 +58,9 @@ class TelaAdmin extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                     justify-content: start;
-                    align-items: center;
-                    text-align: center;
+                    align-items: stretch;
                     overflow: auto;
+                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
                 }
 
                 .modal.show {
@@ -72,17 +77,21 @@ class TelaAdmin extends HTMLElement {
                 }
 
                 h2 {
-                    margin-bottom: 2rem;
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    color: #333;
+                    margin-bottom: 1rem;
                 }
             </style>
 
             <my-nav></my-nav>
             <section class="container__admin">
-                <my-button value="Buscar livro">Buscar livro</my-button>
-                <my-button value="Adicionar livro">Adicionar livro</my-button>
-                <my-button value="Atualizar livro">Atualizar livro</my-button>
-                <my-button value="Realizar empréstimo">Realizar empréstimo</my-button>
-                <my-button value="Realizar devolução">Realizar devolução</my-button>
+                <h2>Área Administrativa</h2>
+                <my-button class="admin" value="Buscar livro">Buscar livro</my-button>
+                <my-button class="admin" value="Adicionar livro">Adicionar livro</my-button>
+                <my-button class="admin" value="Atualizar livro">Atualizar livro</my-button>
+                <my-button class="admin" value="Realizar empréstimo">Realizar empréstimo</my-button>
+                <my-button class="admin" value="Realizar devolução">Realizar devolução</my-button>
             </section>
         `;
     }
