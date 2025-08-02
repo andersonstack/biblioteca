@@ -48,7 +48,6 @@ export async function renderLivros() {
 
     // Renderiza os livros
     livros.forEach((livroRaw: Livro) => {
-      console.log(livroRaw);
       const livro = {
         id: livroRaw.id,
         titulo: livroRaw.titulo,
