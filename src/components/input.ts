@@ -41,6 +41,10 @@ class MyInput extends HTMLElement {
   get value() {
     return this.shadowRoot!.querySelector("input")!.value;
   }
+
+  set value(val: string) {
+    this.shadowRoot!.querySelector("input")!.value = val;
+  }
 }
 
 customElements.define("my-input", MyInput);
