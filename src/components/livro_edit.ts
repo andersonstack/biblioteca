@@ -1,3 +1,5 @@
+import "./input.js";
+
 class LivroEdit extends HTMLElement {
     private shadow: ShadowRoot;
     private livros: any[] = [];
@@ -22,8 +24,10 @@ class LivroEdit extends HTMLElement {
                     flex-direction: column;
                     align-items: center;
                     gap: 1rem;
-                    max-width: 700px;
+                    width: 100%;
                     margin: auto;
+
+                    my-input {width: 100%;}
                 }
 
                 .card {
@@ -31,9 +35,10 @@ class LivroEdit extends HTMLElement {
                     border-radius: 1rem;
                     padding: 1rem;
                     width: 100%;
-                    max-width: 400px;
-                    background-color: #f9f9f9;
+                    max-width: 25rem;
+                    background-color: white;
                     text-align: left;
+                    margin: 0.5rem 0 0.5rem 0;
                 }
 
                 .card img {
@@ -50,7 +55,7 @@ class LivroEdit extends HTMLElement {
                     border: 0.1rem solid transparent;
                     outline: none;
                     color: var(--black, #000);
-                    background-color: var(--branco-gelo, #f9f9f9);
+                    background-color: var(--secondary);
                     border-radius: 1rem;
                     font-family: inherit;
                     resize: vertical;
@@ -74,7 +79,7 @@ class LivroEdit extends HTMLElement {
             </style>
 
             <div class="container">
-                <my-input id="inputBusca" placeholder="Buscar livro para editar..." aria-label="Busca"></my-input>
+                <my-input class="input__admin" id="inputBusca" placeholder="Buscar livro para editar..." aria-label="Busca"></my-input>
                 <div id="resultadoBusca"></div>
                 <div id="formularioEdicao" class="hidden"></div>
             </div>
@@ -118,7 +123,7 @@ class LivroEdit extends HTMLElement {
                 <p><strong>Ano:</strong> ${livro.ano}</p>
                 <p><strong>Descrição:</strong> ${livro.descricao}</p>
                 <p><strong>Disponível:</strong> ${livro.disponibilidade === 1 ? "Sim" : "Não"}</p>
-                <my-button class="login">Selecionar livro</my-button>
+                <my-button class="admin">Selecionar livro</my-button>
             `;
             div.querySelector("my-button")!.addEventListener("onClick", () => this.editarLivro(livro, i, div));
             container.appendChild(div);
@@ -128,27 +133,28 @@ class LivroEdit extends HTMLElement {
     private editarLivro(livro: any, index: number, div: HTMLElement) {
         this.livroSelecionado = { ...livro };
         this.shadow.querySelector("#resultadoBusca")!.innerHTML = "";
+        (this.shadow.querySelector("my-input#inputBusca") as HTMLInputElement)!.value = "";
 
         const container = this.shadow.querySelector("#formularioEdicao")!;
         container.classList.remove("hidden");
 
         container.innerHTML = `
             <p><strong>Título</strong></p>
-            <my-input id="titulo" placeholder="Título" aria-label="Título"></my-input>
+            <my-input class="input__admin" id="titulo" placeholder="Título" aria-label="Título"></my-input>
             <p><strong>Descrição</strong></p>
             <textarea id="descricao" placeholder="Descrição"></textarea>
             <p><strong>Ano</strong></p>
-            <my-input id="ano" type="number" placeholder="Ano" aria-label="Ano"></my-input>
+            <my-input class="input__admin" id="ano" type="number" placeholder="Ano" aria-label="Ano"></my-input>
             <p><strong>Imagem</strong></p>
             <label>Imagem (arquivo):</label>
             <input type="file" id="imagemArquivo" accept="image/*" />
 
             <label>Ou link da imagem:</label>
-            <my-input id="imagemLink" type="url" placeholder="Cole o link da imagem" aria-label="Link da imagem"></my-input>
+            <my-input class="input__admin" id="imagemLink" type="url" placeholder="Cole o link da imagem" aria-label="Link da imagem"></my-input>
 
             <img id="preview" class="preview" style="max-height: 200px; display:block; margin-top:1rem; border-radius:1rem;" src="${livro.imagem_caminho.startsWith("data") ? livro.imagem_caminho : "http://localhost:3000" + livro.imagem_caminho}" />
 
-            <my-button class="login" id="salvarEdicao">Salvar Alterações</my-button>
+            <my-button class="admin" id="salvarEdicao">Salvar Alterações</my-button>
             <div id="mensagemEdit" class="mensagem"></div>
         `;
 
