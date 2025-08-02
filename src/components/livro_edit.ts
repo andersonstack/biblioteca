@@ -126,10 +126,11 @@ class LivroEdit extends HTMLElement {
     }
 
     private editarLivro(livro: any, index: number, div: HTMLElement) {
-        div.style.display = "none";
         this.livroSelecionado = { ...livro };
+        this.shadow.querySelector("#resultadoBusca")!.innerHTML = "";
+
         const container = this.shadow.querySelector("#formularioEdicao")!;
-        const hidden = container.classList.remove("hidden");
+        container.classList.remove("hidden");
 
         container.innerHTML = `
             <p><strong>Título</strong></p>
