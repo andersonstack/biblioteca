@@ -1,6 +1,7 @@
+import "./input.js";
+
 class LivroView extends HTMLElement {
     private shadow: ShadowRoot;
-    private livros: any[] = [];
 
     constructor() {
         super();
@@ -63,16 +64,18 @@ class LivroView extends HTMLElement {
             </style>
 
             <div class="container">
-                <input type="text" placeholder="Digite o título do livro..." />
+                <my-input id="campoBusca" class="input__admin" type="text" placeholder="Digite o título do livro..." ></my-input>
                 <div class="livros-container" id="resultados">
                 </div>
             </div>
         `;
 
-        const input = this.shadow.querySelector("input")!;
-        input.addEventListener("input", () => this.buscar(input.value));
-        input.addEventListener("keypress", (e) => {
-            if (e.key === "Enter") this.buscar(input.value);
+        const myInput = this.shadow.querySelector("my-input#campoBusca")! as HTMLInputElement;
+        const realInput = myInput.shadowRoot!.querySelector("input")! as HTMLInputElement;
+
+        realInput.addEventListener("input", () => this.buscar(myInput.value));
+        realInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") this.buscar(myInput.value);
         });
     }
 
