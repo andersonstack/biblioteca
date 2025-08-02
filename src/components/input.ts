@@ -8,6 +8,7 @@ class MyInput extends HTMLElement {
     const typeInput = this.getAttribute("type") || "text";
     const placeHolder = this.getAttribute("placeholder");
     const arialLabel = this.getAttribute("aria-label");
+    const classInput = this.getAttribute("class") || "";
 
     this.shadowRoot!.innerHTML = `
             <style>
@@ -22,8 +23,14 @@ class MyInput extends HTMLElement {
                     position: relative;
                     width: 100%;
                 }
+                .input__admin {
+                  background-color: var(--secondary);
+                  color: black;
+                  font-weight: 500;
+                }
             </style>
             <input 
+                class=${classInput}
                 type=${typeInput}
                 placeholder=${placeHolder}
                 aria-label=${arialLabel}
