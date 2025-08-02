@@ -1,9 +1,4 @@
-interface Livro {
-  titulo: string;
-  imagem: string;
-  disponivel: boolean;
-}
-
+import { Livro } from "../interfaces/livros_api";
 class LivroEstante extends HTMLElement {
   livro!: Livro;
 
@@ -21,9 +16,10 @@ class LivroEstante extends HTMLElement {
     if (!this.livro) return;
 
     const token = sessionStorage.getItem("token");
+    const idLivro = this.livro.id;
     const titulo = this.livro.titulo;
-    const imagem = this.livro.imagem;
-    const disponivel = token != null ? this.livro.disponivel : false;
+    const imagem = this.livro.imagem_caminho;
+    const disponivel = token != null ? this.livro.disponibilidade : false;
 
     const esconderDisponibilidade = this.hasAttribute("esconder-disponibilidade");
 
@@ -103,18 +99,28 @@ class LivroEstante extends HTMLElement {
       }
     </style>
 
-    <div class="container_livro">
+    <div id=${idLivro} class="container_livro">
       <div class="livro_disponibilidade" title="${
         disponivel ? "Disponível" : "Indisponível"
       }"></div>
       <img src="${imagem}" alt="${titulo}" />
       <h2 class="titulo">${titulo}</h2>
-      <text-button class="actions">Visualizar</text-button>
+      <text-button id="btn-visualizar" class="actions">Visualizar</text-button>
     </div>
   `;
   }
 
-  connectedCallback() {}
+  connectedCallback() {
+    this.setup();
+  }
+
+  private setup() {
+    const btnVisualizar = this.shadowRoot!.querySelector("text-button#btn-visualizar")!;
+
+    btnVisualizar.addEventListener("click", () => {
+      console.log(this.livro);
+    })
+  }
 }
 
 customElements.define("livro-estante", LivroEstante);

@@ -1,5 +1,5 @@
 import { getLivros } from "../service/connection.js";
-import { LivroBD, LivroCache } from "../interfaces/livros_api.js";
+import { Livro, LivroCache } from "../interfaces/livros_api.js";
 import "../components/livro_estante.js";
 
 const CACHE_KEY = "livros";
@@ -11,7 +11,7 @@ export async function renderLivros() {
 
     // Tenta carregar do cache
     const cacheRaw = sessionStorage.getItem(CACHE_KEY);
-    let livros: LivroBD[] = [];
+    let livros: Livro[] = [];
 
     if (cacheRaw) {
       try {
@@ -47,11 +47,14 @@ export async function renderLivros() {
     }
 
     // Renderiza os livros
-    livros.forEach((livroRaw: LivroBD) => {
+    livros.forEach((livroRaw: Livro) => {
+      console.log(livroRaw);
       const livro = {
+        id: livroRaw.id,
         titulo: livroRaw.titulo,
-        imagem: `http://localhost:3000${livroRaw.imagem_caminho}`,
-        disponivel: livroRaw.disponibilidade,
+        imagem_caminho: `http://localhost:3000${livroRaw.imagem_caminho}`,
+        disponibilidade: livroRaw.disponibilidade,
+        descricao: livroRaw.descricao,
       };
 
       const elemento = document.createElement("livro-estante") as any;

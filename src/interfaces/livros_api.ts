@@ -1,11 +1,13 @@
-export interface LivroBD {
+export interface Livro {
+  id: number;
   titulo: string;
   imagem_caminho: string;
   disponibilidade: boolean;
+  descricao: string;
 }
 
 export interface LivroCache {
-  livros: LivroBD[];
+  livros: Livro[];
   timestamp: number;
 }
 
