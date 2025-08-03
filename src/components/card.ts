@@ -20,7 +20,7 @@ class MyCard extends HTMLElement {
         section {
           display: flex;
           flex-direction: column;
-          max-width: 15rem;
+          width: 15rem;
           margin: 1rem auto;
           background-color: #fff;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -43,6 +43,13 @@ class MyCard extends HTMLElement {
           margin: 0 0 0.5rem;
           font-family: var(--poppins);
           font-weight: 600;
+          height: 4.5rem;
+          max-height: 4.5rem;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+          text-overflow: ellipsis;
+          overflow: hidden;
         }
 
         .livro-ano {

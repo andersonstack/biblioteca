@@ -67,7 +67,6 @@ class Carrousel extends HTMLElement {
         descricao: livro.descricao,
         ano: livro.ano,
       }
-      console.log(livroCard);
       card.data = livroCard;
       
       if (this.livros.indexOf(livro) === 0) divCard.classList.add("first");
