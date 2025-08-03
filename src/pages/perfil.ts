@@ -33,7 +33,7 @@ class TelaPerfil extends HTMLElement {
           livroElement.setAttribute("esconder-disponibilidade", "");
           livroElement.data = {
             titulo: livro.titulo,
-            imagem: `http://localhost:3000${livro.imagem_caminho}`,
+            imagem_caminho: `http://localhost:3000${livro.imagem_caminho}`,
           };
 
           if (vencimento >= hoje) {
