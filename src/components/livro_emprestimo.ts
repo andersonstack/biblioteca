@@ -1,6 +1,7 @@
 import "./input.js";
 import "./button.js";
-import { Livro } from "../interfaces/livros_api.js";
+import { Livro, LivroEmprestimo } from "../interfaces/livros_api.js";
+import { fazerEmprestimo } from "../service/connection.js";
 
 class EmprestimoComponent extends HTMLElement {
     private shadow: ShadowRoot;
@@ -69,19 +70,30 @@ class EmprestimoComponent extends HTMLElement {
 
     private setup() {
         this.shadow.querySelector("my-button#enviar")!.addEventListener(
-            "click", () => {
+            "click", async () => {
                 const inputIdLivro = this.shadow.querySelector("my-input#id-livro") as HTMLInputElement;
                 const inputUsername = this.shadow.querySelector("my-input#id-usuario") as HTMLInputElement;
 
                 const idLivro = inputIdLivro.value;
                 const userName = inputUsername.value;
                 const localDisponivel = this.verifyLocale(Number(idLivro));
+
                 if (localDisponivel === false) {
                     this.showMessage(false);
                     inputIdLivro.value = "";
                     inputUsername.value = "";
                 } else if (localDisponivel === true) {
-                    this.showMessage(true);
+                    const livroEmprestado: LivroEmprestimo = {
+                        idBook: Number(idLivro),
+                        userName: userName,
+                    }
+                    const emprestimo = await fazerEmprestimo(livroEmprestado);
+                    if (emprestimo === 200) {
+                        this.showMessage(true);
+                    } else {
+                        this.showMessage(false);
+                    }
+                    
                     inputIdLivro.value = "";
                     inputUsername.value = "";
                 }
