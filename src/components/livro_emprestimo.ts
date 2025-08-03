@@ -1,7 +1,6 @@
 import "./input.js";
 import "./button.js";
-import { fazerEmprestimo } from "../service/connection.js";
-import { Livro, LivroEmprestimo, LivroCache } from "../interfaces/livros_api.js";
+import { Livro } from "../interfaces/livros_api.js";
 
 class EmprestimoComponent extends HTMLElement {
     private shadow: ShadowRoot;
@@ -48,33 +47,65 @@ class EmprestimoComponent extends HTMLElement {
                 <my-input id="id-livro" placeholder="Livro" aria-label="ID do Livro"></my-input>
                 <h2>UserName do usuário</h2>
                 <my-input id="id-usuario" placeholder="Usuário" aria-label="ID do usuário"></my-input>
+                <my-button class="admin" id="enviar">Enviar</my-button>
                 <div class="mensagem" id="msg"></div>
             </form>
         `;
     }
 
     private showMessage(message: boolean | null) {
-        switch (message) {
-            case true:
-                this.shadow.querySelector("#id")!.innerHTML = "Empréstimo realizado com sucesso!";
-            case false:
-                this.shadow.querySelector("#id")!.innerHTML = "Livro indisponível para empréstimo!";
-            default:
-                this.shadow.querySelector("#id")!.innerHTML = "Erro no servidor!";
+        const msgDiv = this.shadow.querySelector("#msg")! as HTMLElement;
+        if (message === true) {
+            msgDiv.textContent = "Empréstimo realizado com sucesso!";
+            msgDiv.style.color = "green";
+        } else if (message === false) {
+            msgDiv.textContent = "Livro indisponível para empréstimo!";
+            msgDiv.style.color = "orange";
+        } else {
+            msgDiv.textContent = "Erro no servidor!";
+            msgDiv.style.color = "red";
         }
     }
 
     private setup() {
-        const idLivro = (this.shadow.querySelector("my-input#id-livro") as HTMLInputElement).value;
-        const idUser = (this.shadow.querySelector("my-input#id-usuario") as HTMLInputElement).value;
-        this.verifyLocale(Number(idLivro), Number(idUser));
-        
-    };
+        this.shadow.querySelector("my-button#enviar")!.addEventListener(
+            "click", () => {
+                const inputIdLivro = this.shadow.querySelector("my-input#id-livro") as HTMLInputElement;
+                const inputUsername = this.shadow.querySelector("my-input#id-usuario") as HTMLInputElement;
+
+                const idLivro = inputIdLivro.value;
+                const userName = inputUsername.value;
+                const localDisponivel = this.verifyLocale(Number(idLivro));
+                if (localDisponivel === false) {
+                    this.showMessage(false);
+                    inputIdLivro.value = "";
+                    inputUsername.value = "";
+                } else if (localDisponivel === true) {
+                    this.showMessage(true);
+                    inputIdLivro.value = "";
+                    inputUsername.value = "";
+                }
+            }
+        )
+        };
     
-    private verifyLocale(idLivro: number, idUser: number): void {
+    private verifyLocale(idLivro: number): boolean {
         const livrosSession = sessionStorage.getItem("livros")!;
-        console.log(livrosSession);
+        const jsonLivrosSession = JSON.parse(livrosSession);
+        const todosLivros: Livro[] = jsonLivrosSession["livros"];
+        let livroDisponivel = true;
+
+        // Verifica se existe algum livro com o ID e que esteja disponível
+        todosLivros.forEach(livro => {
+            if (livro.id === idLivro) {
+                livroDisponivel = livro.disponibilidade === 1;
+                return;
+            }
+        });
+
+        return livroDisponivel;
     }
+
 
 }
 
