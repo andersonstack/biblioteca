@@ -107,6 +107,7 @@ class MyNav extends HTMLElement {
           align-items: center;
           justify-content: space-between;
           gap: 5rem;
+          width: 100%;
         }
 
         .menu__principal {
@@ -120,6 +121,7 @@ class MyNav extends HTMLElement {
           align-items: center;
           gap: 5rem;
           width: auto;
+          width: 100%;
         }
 
         @media screen and (max-width: 1120px) {
