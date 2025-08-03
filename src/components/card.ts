@@ -1,4 +1,5 @@
 import { LivroCarroussel } from "../interfaces/livros_api";
+import { abrirLivro } from "../utils/abrir_livro.js";
 
 class MyCard extends HTMLElement {
   livro!: LivroCarroussel;
@@ -111,14 +112,22 @@ class MyCard extends HTMLElement {
           <h3 class="livro-ano">${this.livro.ano}</h3>
           <p class="livro-descricao">${this.livro.descricao}</p>
           <div class="livro-btn">
-            <text-button>Ver livro</text-button>
+            <text-button id="viewBook">Ver livro</text-button>
           </div>
         </div>
       </section>
     `;
   }
 
-  connectedCallback() {}
+  private setup() {
+    this.shadowRoot!.querySelector("text-button#viewBook")!.addEventListener(
+      "click", () => abrirLivro(this.livro, this.shadowRoot!)
+    );
+  }
+
+  connectedCallback() {
+    this.setup();
+  }
 }
 
 customElements.define("my-card", MyCard);
