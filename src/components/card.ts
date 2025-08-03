@@ -1,16 +1,19 @@
+import { LivroCarroussel } from "../interfaces/livros_api";
+
 class MyCard extends HTMLElement {
+  livro!: LivroCarroussel;
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
   }
 
-  connectedCallback() {
-    const titulo = this.getAttribute("titulo") || "";
-    const ano = this.getAttribute("ano") || "";
-    const descricao = this.getAttribute("descricao") || "";
-    const imagem = this.getAttribute("imagem") || "";
-    const ariaLabel = `Livro ${titulo}`;
+  set data(livro: LivroCarroussel) {
+    this.livro = livro;
+    this.render();
+  }
 
+  private render() {
     this.shadowRoot!.innerHTML = `
       <style>
         section {
@@ -94,13 +97,6 @@ class MyCard extends HTMLElement {
             -webkit-box-orient: vertical;
           }
 
-          .livro-escritor {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #555;
-            margin-top: 0.5rem;
-          }
-
           .livro-btn {
             align-self: start;
             margin-top: 1rem;
@@ -108,13 +104,12 @@ class MyCard extends HTMLElement {
         }
       </style>
 
-      <section aria-label="${ariaLabel}">
-        <img src="${imagem}" alt="Capa do livro ${titulo}" class="livro-img" />
+      <section>
+        <img src="${this.livro.imagem_caminho}" alt="Capa do livro ${this.livro.titulo}" class="livro-img" />
         <div class="livro-content">
-          <h2 class="livro-titulo">${titulo}</h2>
-          <h3 class="livro-ano">${ano}</h3>
-          <p class="livro-descricao">${descricao}</p>
-          <div class="livro-escritor">Escritor desconhecido</div>
+          <h2 class="livro-titulo">${this.livro.titulo}</h2>
+          <h3 class="livro-ano">${this.livro.ano}</h3>
+          <p class="livro-descricao">${this.livro.descricao}</p>
           <div class="livro-btn">
             <text-button>Ver livro</text-button>
           </div>
@@ -122,6 +117,8 @@ class MyCard extends HTMLElement {
       </section>
     `;
   }
+
+  connectedCallback() {}
 }
 
 customElements.define("my-card", MyCard);

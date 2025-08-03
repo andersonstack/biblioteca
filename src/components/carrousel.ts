@@ -1,7 +1,8 @@
 import "./card.js";
+import { LivroCarroussel } from "../interfaces/livros_api.js";
 
 class Carrousel extends HTMLElement {
-  livros: CardInterface[] = [];
+  livros: LivroCarroussel[] = [];
 
   constructor() {
     super();
@@ -14,10 +15,11 @@ class Carrousel extends HTMLElement {
 
     const dataLivros = JSON.parse(data);
     const todos = dataLivros.livros.map((livroRaw: any) => ({
+      id: livroRaw.id,
       titulo: livroRaw.titulo,
       ano: livroRaw.ano,
       descricao: livroRaw.descricao,
-      imagem: `http://localhost:3000${livroRaw.imagem_caminho}`,
+      imagem_caminho: `http://localhost:3000${livroRaw.imagem_caminho}`,
       disponibilidade: livroRaw.disponibilidade,
     }));
 
@@ -56,11 +58,18 @@ class Carrousel extends HTMLElement {
       const divCard = document.createElement("div");
       divCard.setAttribute("class", "slide");
 
-      const card = document.createElement("my-card");
-      card.setAttribute("titulo", livro.titulo);
-      card.setAttribute("ano", livro.ano.toString());
-      card.setAttribute("descricao", livro.descricao);
-      card.setAttribute("imagem", livro.imagem);
+      const card = document.createElement("my-card") as any;
+      const livroCard: LivroCarroussel = {
+        id: livro.id,
+        titulo: livro.titulo,
+        imagem_caminho: livro.imagem_caminho,
+        disponibilidade: livro.disponibilidade,
+        descricao: livro.descricao,
+        ano: livro.ano,
+      }
+      console.log(livroCard);
+      card.data = livroCard;
+      
       if (this.livros.indexOf(livro) === 0) divCard.classList.add("first");
 
       slides.appendChild(divCard);
