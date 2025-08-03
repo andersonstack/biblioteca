@@ -6,6 +6,10 @@ export interface Livro {
   descricao: string;
 }
 
+export interface LivroCarroussel extends Livro {
+  ano: number
+}
+
 export interface LivroCache {
   livros: Livro[];
   timestamp: number;
