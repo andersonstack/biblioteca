@@ -4,6 +4,7 @@ import "../components/text_button.js";
 import "../components/livro_view.js";
 import "../components/livro_add.js";
 import "../components/livro_edit.js";
+import "../components/livro_emprestimo.js";
 import "../components/modal_component.js";
 
 class TelaAdmin extends HTMLElement {
@@ -75,6 +76,8 @@ class TelaAdmin extends HTMLElement {
             content = document.createElement("livro-add");
         } else if (title === "Atualizar livro") {
             content = document.createElement("livro-edit");
+        } else if (title === "Realizar empréstimo") {
+            content = document.createElement("livro-emprestimo");
         } else {
             content = document.createElement("p");
             content.innerHTML = `Conteúdo da opção: <strong>${title}</strong>`;
