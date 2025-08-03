@@ -1,4 +1,6 @@
-import { Livro } from "../interfaces/livros_api";
+import { abrirLivro } from "../utils/abrir_livro.js";
+import { Livro } from "../interfaces/livros_api.js";
+
 class LivroEstante extends HTMLElement {
   livro!: Livro;
 
@@ -118,7 +120,7 @@ class LivroEstante extends HTMLElement {
     const btnVisualizar = this.shadowRoot!.querySelector("text-button#btn-visualizar")!;
 
     btnVisualizar.addEventListener("click", () => {
-      console.log(this.livro);
+      abrirLivro(this.livro, this.shadowRoot!);
     })
   }
 }
