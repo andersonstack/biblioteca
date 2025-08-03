@@ -135,7 +135,7 @@ class Carrousel extends HTMLElement {
           background: linear-gradient(var(--primary) -90%, var(--branco-gelo));
           margin: 0 auto;
           width: 100%;
-          height: 25rem;
+          height: 30rem;
           overflow: hidden;
         }
 
