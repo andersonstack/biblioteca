@@ -137,6 +137,7 @@ class Carrousel extends HTMLElement {
           width: 100%;
           height: 30rem;
           overflow: hidden;
+          position: relative;
         }
 
         #slides {
@@ -160,6 +161,7 @@ class Carrousel extends HTMLElement {
 
         #manual-navigation {
           position: absolute;
+          top: 90%;
           width: 100%;
           display: flex;
           justify-content: center;
