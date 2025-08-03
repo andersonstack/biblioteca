@@ -15,6 +15,11 @@ export interface LivroCache {
   timestamp: number;
 }
 
+export interface LivroEmprestimo {
+  userName: string,
+  idBook: number,
+}
+
 export interface LivroCadastro {
   titulo: string;
   descricao: string;
