@@ -70,7 +70,7 @@ class MyCard extends HTMLElement {
         @media (min-width: 768px) {
           section {
             flex-direction: row;
-            max-width: 45rem;
+            width: 30%;
             height: 23rem;
           }
 
