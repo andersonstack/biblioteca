@@ -16,7 +16,7 @@ export async function login(usuario: UsuarioLogin): Promise<200 | 401 | 501> {
       sessionStorage.setItem("token", data.token);
       sessionStorage.setItem("name", data.name);
       sessionStorage.setItem("userName", data.userName);
-      sessionStorage.setItem("role", data.role);
+
       getEmprestimos();
       return 200;
     }

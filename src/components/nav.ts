@@ -3,6 +3,8 @@ import "./input_button.js";
 import "./input.js";
 import "./button.js";
 import "./hello_text.js";
+import { getDecodedToken } from "../service/configure.js";
+
 
 class MyNav extends HTMLElement {
   constructor() {
@@ -40,7 +42,7 @@ class MyNav extends HTMLElement {
   }
 
   render() {
-    const isAdmin = sessionStorage.getItem("role") === "admin";
+    const isAdmin = getDecodedToken()?.role === "admin";
 
     this.shadowRoot!.innerHTML = `
     <style>
