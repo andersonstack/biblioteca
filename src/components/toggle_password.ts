@@ -92,7 +92,7 @@ class TogglePassword extends HTMLElement {
     const img = this.shadowRoot!.querySelector(".eye-icon") as HTMLImageElement;
     const senha = this.shadowRoot!.getElementById("senha");
 
-    slot.addEventListener("slotchange", () => {
+    const configureInput = () => {
       const inputWrapper = slot
         .assignedElements()
         .find((el) => el.tagName === "MY-INPUT") as HTMLElement;
@@ -102,6 +102,8 @@ class TogglePassword extends HTMLElement {
       const realInput = inputWrapper.shadowRoot.querySelector(
         "input"
       ) as HTMLInputElement;
+
+      realInput.type = "password";
 
       img.addEventListener("click", () => {
         const isPassword = realInput.type === "password";
@@ -113,8 +115,13 @@ class TogglePassword extends HTMLElement {
 
         senha?.classList.toggle("active", isPassword);
       });
-    });
+    };
+
+    configureInput();
+
+    slot.addEventListener("slotchange", configureInput);
   }
+
 }
 
 customElements.define("toggle-password", TogglePassword);
