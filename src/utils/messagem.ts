@@ -40,6 +40,8 @@ export function mostrarMensagem(tipo: String, message: HTMLElement) {
       if (token != null) {
         window.location.href = "index.html";
       }
+    } else if (tipo == "sucessoC") {
+      window.location.href = "login.html";
     }
   }, 1500);
 }
