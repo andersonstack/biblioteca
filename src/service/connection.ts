@@ -1,5 +1,5 @@
 import "../interfaces/usuario.js";
-import { LivroCache, LivroCadastro, LivroEmprestimo } from "../interfaces/livros_api.js";
+import { LivroCache, LivroCadastro, LivroEmprestimo, LivroDevolucao } from "../interfaces/livros_api.js";
 
 export async function login(usuario: UsuarioLogin): Promise<200 | 401 | 501> {
   try {
@@ -133,6 +133,17 @@ export async function fazerEmprestimo(livroEmprestimo: LivroEmprestimo): Promise
     headers: {"Content-type": "application/json"},
     body: JSON.stringify(livroEmprestimo),
   });
+
+  if (response.status === 200) return 200;
+  return 400;
+}
+
+export async function fazerDevolucao(livroDevolucao: LivroDevolucao): Promise<200 | 400> {
+  const response = await fetch("http://localhost:3000/devolucao/", {
+    method: "POST",
+    headers: {"Content-type": "application/json"},
+    body: JSON.stringify(livroDevolucao)
+  })
 
   if (response.status === 200) return 200;
   return 400;
