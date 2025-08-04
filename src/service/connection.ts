@@ -4,7 +4,7 @@ import { authHeaders } from "../utils/auth.js";
 
 export async function login(usuario: UsuarioLogin): Promise<200 | 401 | 501> {
   try {
-    const url = "http://localhost:3000/login/";
+    const url = "https://biblioteca-api-cxpb.onrender.com/login/";
     const response = await fetch(url!, {
       method: "POST",
       headers: {
@@ -31,7 +31,7 @@ export async function singup(
   usuario: UsuarioCadastro
 ): Promise<200 | 400 | 500> {
   try {
-    const url = "http://localhost:3000/cadastro/";
+    const url = "https://biblioteca-api-cxpb.onrender.com/cadastro/";
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -50,7 +50,7 @@ export async function singup(
 
 export async function getLivros() {
   try {
-    const url = "http://localhost:3000/livros/";
+    const url = "https://biblioteca-api-cxpb.onrender.com/livros/";
     const response = await fetch(url);
 
     if (response.status === 200) {
@@ -76,7 +76,7 @@ export async function getLivros() {
 
 export async function getEmprestimos() {
   try {
-    const url = "http://localhost:3000/livrosEmprestimos";
+    const url = "https://biblioteca-api-cxpb.onrender.com/livrosEmprestimos";
     const userName = sessionStorage.getItem("userName");
 
     const response = await fetch(url, {
@@ -108,13 +108,13 @@ export async function addBook(livro: LivroCadastro, file?: File): Promise<200 | 
       formData.append("ano", livro.ano.toString());
       formData.append("imagem", file);
 
-      response = await fetch("http://localhost:3000/cadastrarLivro/", {
+      response = await fetch("https://biblioteca-api-cxpb.onrender.com/cadastrarLivro/", {
         method: "POST",
         headers: authHeaders("form"),
         body: formData,
       });
     } else {
-      response = await fetch("http://localhost:3000/cadastrarLivro/", {
+      response = await fetch("https://biblioteca-api-cxpb.onrender.com/cadastrarLivro/", {
         method: "POST",
         headers: authHeaders(),
         body: JSON.stringify(livro),
@@ -130,7 +130,7 @@ export async function addBook(livro: LivroCadastro, file?: File): Promise<200 | 
 }
 
 export async function fazerEmprestimo(livroEmprestimo: LivroEmprestimo): Promise<200 | 400> {
-  const response = await fetch("http://localhost:3000/fazerEmprestimo/", {
+  const response = await fetch("https://biblioteca-api-cxpb.onrender.com/fazerEmprestimo/", {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(livroEmprestimo),
@@ -141,7 +141,7 @@ export async function fazerEmprestimo(livroEmprestimo: LivroEmprestimo): Promise
 }
 
 export async function fazerDevolucao(livroDevolucao: LivroDevolucao): Promise<200 | 400> {
-  const response = await fetch("http://localhost:3000/devolucao/", {
+  const response = await fetch("https://biblioteca-api-cxpb.onrender.com/devolucao/", {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(livroDevolucao),
