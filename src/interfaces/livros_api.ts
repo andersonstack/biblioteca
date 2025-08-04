@@ -20,6 +20,11 @@ export interface LivroEmprestimo {
   idBook: number,
 }
 
+export interface LivroDevolucao {
+  userName: string,
+  titleBook: string,
+}
+
 export interface LivroCadastro {
   titulo: string;
   descricao: string;
