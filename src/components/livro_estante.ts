@@ -1,5 +1,6 @@
 import { abrirLivro } from "../utils/abrir_livro.js";
 import { Livro } from "../interfaces/livros_api.js";
+import "../components/button.js";
 
 class LivroEstante extends HTMLElement {
   livro!: Livro;
@@ -84,19 +85,11 @@ class LivroEstante extends HTMLElement {
         overflow: hidden;
       }
 
-      text-button.actions {
-        width: 80%;
-        margin: 0 0 1rem 0;
-        color: var(--secondary);
-        background: none;
-        border: none;
-        font-weight: 500;
-        cursor: pointer;
-        transition: color 0.2s;
+      my-button.actions {
         ${esconderDisponibilidade ? "display: none" : ""};
       }
 
-      text-button.actions:hover {
+      my-button.actions:hover {
         color: var(--destaque);
       }
     </style>
@@ -107,7 +100,7 @@ class LivroEstante extends HTMLElement {
       }"></div>
       <img src="${imagem}" alt="${titulo}" />
       <h2 class="titulo">${titulo}</h2>
-      <text-button id="btn-visualizar" class="actions">Visualizar</text-button>
+      <my-button id="btn-visualizar" class="actions">Visualizar</my-button>
     </div>
   `;
   }
@@ -117,7 +110,7 @@ class LivroEstante extends HTMLElement {
   }
 
   private setup() {
-    const btnVisualizar = this.shadowRoot!.querySelector("text-button#btn-visualizar")!;
+    const btnVisualizar = this.shadowRoot!.querySelector("my-button#btn-visualizar")!;
 
     btnVisualizar.addEventListener("click", () => {
       abrirLivro(this.livro, this.shadowRoot!);

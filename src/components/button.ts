@@ -24,6 +24,16 @@ class MyButton extends HTMLElement {
                   padding: 0.5rem 1rem;
               }
 
+              .actions {
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    padding: 0.5rem 0.5rem;
+                    background-color: var(--primary);
+                    color: var(--black, #000);
+                    margin-bottom: 0.5rem;
+                }
+
               .admin {
                   background-color: var(--onPrimary, #1a237e);
                   color: white;
