@@ -144,6 +144,17 @@ class LivroAdd extends HTMLElement {
             msgDiv.style.color = status === 200 ? "green" : "red";
 
             if (status === 200) {
+                // Atualiza sessionStorage com o novo livro:
+                const cacheRaw = sessionStorage.getItem("livros");
+                let cache = cacheRaw ? JSON.parse(cacheRaw) : { livros: [], timestamp: 0 };
+
+                // Adiciona o novo livro no array
+                cache.livros.push(novoLivro);
+                // Atualiza o timestamp
+                cache.timestamp = Date.now();
+
+                sessionStorage.setItem("livros", JSON.stringify(cache));
+
                 setTimeout(() => {
                 // Limpa inputs
                 (shadow.querySelector("my-input#titulo") as any).value = "";
