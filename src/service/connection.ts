@@ -1,5 +1,6 @@
 import "../interfaces/usuario.js";
 import { LivroCache, LivroCadastro, LivroEmprestimo, LivroDevolucao } from "../interfaces/livros_api.js";
+import { authHeaders } from "../utils/auth.js";
 
 export async function login(usuario: UsuarioLogin): Promise<200 | 401 | 501> {
   try {
@@ -109,12 +110,13 @@ export async function addBook(livro: LivroCadastro, file?: File): Promise<200 | 
 
       response = await fetch("http://localhost:3000/cadastrarLivro/", {
         method: "POST",
+        headers: authHeaders("form"),
         body: formData,
       });
     } else {
       response = await fetch("http://localhost:3000/cadastrarLivro/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: authHeaders(),
         body: JSON.stringify(livro),
       });
     }
@@ -130,7 +132,7 @@ export async function addBook(livro: LivroCadastro, file?: File): Promise<200 | 
 export async function fazerEmprestimo(livroEmprestimo: LivroEmprestimo): Promise<200 | 400> {
   const response = await fetch("http://localhost:3000/fazerEmprestimo/", {
     method: "POST",
-    headers: {"Content-type": "application/json"},
+    headers: authHeaders(),
     body: JSON.stringify(livroEmprestimo),
   });
 
@@ -141,9 +143,9 @@ export async function fazerEmprestimo(livroEmprestimo: LivroEmprestimo): Promise
 export async function fazerDevolucao(livroDevolucao: LivroDevolucao): Promise<200 | 400> {
   const response = await fetch("http://localhost:3000/devolucao/", {
     method: "POST",
-    headers: {"Content-type": "application/json"},
-    body: JSON.stringify(livroDevolucao)
-  })
+    headers: authHeaders(),
+    body: JSON.stringify(livroDevolucao),
+  });
 
   if (response.status === 200) return 200;
   return 400;
