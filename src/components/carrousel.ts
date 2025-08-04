@@ -19,7 +19,7 @@ class Carrousel extends HTMLElement {
       titulo: livroRaw.titulo,
       ano: livroRaw.ano,
       descricao: livroRaw.descricao,
-      imagem_caminho: `http://localhost:3000${livroRaw.imagem_caminho}`,
+      imagem_caminho: livroRaw.imagem_caminho,
       disponibilidade: livroRaw.disponibilidade,
     }));
 

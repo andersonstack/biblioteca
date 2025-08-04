@@ -51,7 +51,7 @@ export async function renderLivros() {
       const livro = {
         id: livroRaw.id,
         titulo: livroRaw.titulo,
-        imagem_caminho: `http://localhost:3000${livroRaw.imagem_caminho}`,
+        imagem_caminho: livroRaw.imagem_caminho,
         disponibilidade: livroRaw.disponibilidade,
         descricao: livroRaw.descricao,
       };
