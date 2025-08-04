@@ -5,7 +5,6 @@ import { fazerEmprestimo } from "../service/connection.js";
 
 class EmprestimoComponent extends HTMLElement {
     private shadow: ShadowRoot;
-    // private livros: Livro[];
 
     constructor() {
         super();
