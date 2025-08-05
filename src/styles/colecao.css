@@ -15,6 +15,11 @@
   text-align: center;
   color: var(--branco-gelo);
   font-family: var(--poppins);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 1rem;
 }
 
 .livro_container {

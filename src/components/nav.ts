@@ -1,5 +1,4 @@
 import "./text_button.js";
-import "./input_button.js";
 import "./input.js";
 import "./button.js";
 import "./hello_text.js";
@@ -210,7 +209,6 @@ class MyNav extends HTMLElement {
         <img class="logo__icon" src="./src/images/banners/bg.jpg" alt="Logo da Biblioteca" />
         
         <div>
-          <input-button></input-button>
           <my-button>
             <img src="./src/images/icons/menu.png" class="toggle-icon"/>
           </my-button>
