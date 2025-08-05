@@ -18,10 +18,11 @@ export function buscarLivro(shadowRoot: ShadowRoot, seletorContainer: string, ti
 
   try {
     const { livros }: { livros: Livro[] } = JSON.parse(cacheRaw);
+    const termo = titulo.trim().toLowerCase();
 
-    const filtrados = livros.filter((livro) =>
-      livro.titulo.toLowerCase().includes(titulo.toLowerCase())
-    );
+    const filtrados = termo
+    ? livros.filter((livro) =>livro.titulo.toLowerCase().includes(titulo.toLowerCase()))
+    : livros;
 
     if (filtrados.length === 0) {
       container.innerHTML = `<p style="grid-column: 1 / -1;">📚 Nenhum livro encontrado com "${titulo}".</p>`;
