@@ -1,7 +1,7 @@
 import "../components/nav.js";
 import "../components/text_button.js";
 import "../components/livro_estante.js";
-import "../components/input_button.js";
+////import "../components/input_button.js";
 
 class TelaPerfil extends HTMLElement {
   constructor() {
@@ -35,7 +35,7 @@ class TelaPerfil extends HTMLElement {
           livroElement.setAttribute("esconder-disponibilidade", "");
           livroElement.data = {
             titulo: livro.titulo,
-            imagem_caminho: `http://localhost:3000${livro.imagem_caminho}`,
+            imagem_caminho: livro.imagem_caminho,
           };
 
           if (vencimento >= hoje) {
@@ -80,7 +80,7 @@ class TelaPerfil extends HTMLElement {
         .container__titulo {
           background-color: var(--onPrimary);
           font-weight: 600;
-          padding: 0 0.5rem;
+          padding: 0.5rem 0.5rem;
           font-size: 1.8rem;
           text-align: center;
           color: var(--branco-gelo);
@@ -130,13 +130,11 @@ class TelaPerfil extends HTMLElement {
         <section class="container__emprestimo">
           <div class="container__titulo">
             <h2>Meus empréstimos ativos</h2>
-            <input-button></input-button>
           </div>
           <div class="estante" id="estante-livros-ativos"></div>
           
           <div class="container__titulo">
             <h2>Empréstimos vencidos</h2>
-            <input-button></input-button>
           </div>
           <div class="estante" id="estante-livros-vencidos"></div>
         </section>
