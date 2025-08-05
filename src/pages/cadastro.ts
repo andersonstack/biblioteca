@@ -27,7 +27,7 @@ class TelaCadastro extends HTMLElement {
           height: 100vh;
           width: 100vw;
           gap: 1rem;
-          background-image: url("src/images/banners/bg.jpg");
+          background-image: url("./images/banners/bg.jpg");
           background-size: cover;
           position: relative;
         }
@@ -129,14 +129,14 @@ class TelaCadastro extends HTMLElement {
         <form class="credenciais" id="credenciais">
           <h2>Cadastro</h2>
 
-          <my-input
+          <my-input class="input__credenciais"
             id="nome"
             type="text"
             placeholder="Nome"
             aria-label="Digite seu nome"
           ></my-input>
 
-          <my-input
+          <my-input class="input__credenciais"
             id="usuario"
             type="text"
             placeholder="Usuário"
@@ -144,7 +144,7 @@ class TelaCadastro extends HTMLElement {
           ></my-input>
 
           <toggle-password>
-            <my-input id="senha" type="password" placeholder="Senha" aria-label="Digite sua senha"></my-input>
+            <my-input class="input__credenciais" id="senha" type="password" placeholder="Senha" aria-label="Digite sua senha"></my-input>
           </toggle-password>
 
           <my-button class="login" id="submit">Confirmar</my-button>
