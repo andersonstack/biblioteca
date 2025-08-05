@@ -11,30 +11,30 @@ class MyInput extends HTMLElement {
     const classInput = this.getAttribute("class") || "";
 
     this.shadowRoot!.innerHTML = `
-            <style>
-                input {
-                    padding: 0.5rem;
-                    border: 0.1rem solid transparent;
-                    outline: none;
-                    color: var(--black);
-                    background-color: var(--branco-gelo);
-                    font-size: 1rem;
-                    border-radius: 1rem;
-                    position: relative;
-                    width: 100%;
-                }
-                .input__admin {
-                  background-color: var(--secondary);
-                  color: black;
-                  font-weight: 500;
-                }
-            </style>
-            <input 
-                class=${classInput}
-                type=${typeInput}
-                placeholder=${placeHolder}
-                aria-label=${arialLabel}
-            />
+      <style>
+        input {
+          padding: 0.5rem 0.75rem;
+          border: none;
+          outline: none;
+          background-color: transparent;
+          color: var(--black);
+          font-size: 1rem;
+          width: 100%;
+        }
+
+        .input__admin {
+          background-color: var(--secondary);
+          color: black;
+          font-weight: 500;
+        }
+      </style>
+
+      <input 
+          class=${classInput}
+          type=${typeInput}
+          placeholder=${placeHolder}
+          aria-label=${arialLabel}
+      />
         `;
   }
 
