@@ -17,6 +17,13 @@ class EstanteComponent extends HTMLElement {
   connectedCallback() {
     this.render();
     this.carregarLivros();
+
+    customElements.whenDefined("input-button").then(
+      () => {
+        const busca = this.shadow.querySelector("input-button") as any;
+        if (busca?.setTarget) busca.setTarget(this.shadow, ".livros_colecao");
+      }
+    )
   }
 
   private async carregarLivros() {
