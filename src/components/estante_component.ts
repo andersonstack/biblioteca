@@ -18,12 +18,10 @@ class EstanteComponent extends HTMLElement {
     this.render();
     this.carregarLivros();
 
-    customElements.whenDefined("input-button").then(
-      () => {
-        const busca = this.shadow.querySelector("input-button") as any;
-        if (busca?.setTarget) busca.setTarget(this.shadow, ".livros_colecao");
-      }
-    )
+    customElements.whenDefined("input-button").then(() => {
+      const busca = this.shadow.querySelector("input-button") as any;
+      if (busca?.setTarget) busca.setTarget(this.shadow, ".livros_colecao");
+    });
   }
 
   private async carregarLivros() {
@@ -73,52 +71,97 @@ class EstanteComponent extends HTMLElement {
   }
 
   private render() {
-    this.shadow.innerHTML =`
+    this.shadow.innerHTML = `
       <style>
+        :host {
+          display: block;
+          font-family: var(--poppins);
+        }
+
         #colecao_livros {
           overflow: hidden;
-          text-align: center;
           display: flex;
           flex-direction: column;
           align-items: center;
+          text-align: center;
         }
 
         .container_titulo {
           width: 100%;
           background-color: var(--onPrimary);
-          padding: 1.5rem;
-          font-weight: 600;
-          font-size: 1.8rem;
-          text-align: center;
           color: var(--branco-gelo);
-          font-family: var(--poppins);
+          padding: 1rem;
           display: flex;
-          align-items: center;
-          flex-direction: row;
-          justify-content: space-evenly;
+          flex-direction: column;
           gap: 1rem;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .container_titulo h2 {
+          font-size: clamp(1.25rem, 2.5vw, 2rem);
+          font-weight: 600;
+          margin: 0;
         }
 
         .livro_container {
           display: flex;
           flex-direction: column;
-          gap: 2rem;
           align-items: center;
+          gap: 2rem;
           width: 100%;
         }
 
         .livros_colecao {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-          gap: 2rem;
+          grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+          gap: 1.5rem;
           justify-items: center;
           width: 100%;
-          max-width: 1200px;
+          max-width: 1280px;
           padding: 1rem;
         }
 
-        h2 {
-            font-size: clamp(1rem, 1vw + 1rem, 1.5rem);
+        @media (min-width: 480px) {
+          .container_titulo {
+            justify-content: space-between;
+            padding: 1rem 2rem;
+          }
+
+          .livros_colecao {
+            gap: 2rem;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .livros_colecao {
+            grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+            padding: 2rem;
+          }
+        }
+
+        @media (min-width: 1024px) {
+
+          .container_titulo {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+          }
+
+          .container_titulo h2 {
+            font-size: 1.5rem;
+          }
+
+          .livros_colecao {
+            gap: 2.5rem;
+          }
+        }
+
+        @media (min-width: 1280px) {
+          .livros_colecao {
+            grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+            padding: 2rem 3rem;
+          }
         }
       </style>
 
