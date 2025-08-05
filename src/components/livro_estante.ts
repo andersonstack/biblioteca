@@ -1,6 +1,6 @@
 import { abrirLivro } from "../utils/abrir_livro.js";
 import { Livro } from "../interfaces/livros_api.js";
-import "../components/button.js";
+import "./button.js";
 
 class LivroEstante extends HTMLElement {
   livro!: Livro;
@@ -24,7 +24,9 @@ class LivroEstante extends HTMLElement {
     const imagem = this.livro.imagem_caminho;
     const disponivel = token != null ? this.livro.disponibilidade : false;
 
-    const esconderDisponibilidade = this.hasAttribute("esconder-disponibilidade");
+    const esconderDisponibilidade = this.hasAttribute(
+      "esconder-disponibilidade"
+    );
 
     this.shadowRoot!.innerHTML = `
     <style>
@@ -78,18 +80,18 @@ class LivroEstante extends HTMLElement {
         text-align: center;
         color: var(--branco-gelo);
         text-overflow: ellipsis;
-        withe-space: nowrap;
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
       }
 
-      my-button.actions {
+      my-button.visualizar {
+        width: 100%;
         ${esconderDisponibilidade ? "display: none" : ""};
       }
 
-      my-button.actions:hover {
+      my-button.visualizar:hover {
         color: var(--destaque);
       }
     </style>
@@ -100,7 +102,7 @@ class LivroEstante extends HTMLElement {
       }"></div>
       <img src="${imagem}" alt="${titulo}" />
       <h2 class="titulo">${titulo}</h2>
-      <my-button id="btn-visualizar" class="actions">Visualizar</my-button>
+      <my-button id="btn-visualizar" class="visualizar">Visualizar</my-button>
     </div>
   `;
   }
@@ -110,11 +112,13 @@ class LivroEstante extends HTMLElement {
   }
 
   private setup() {
-    const btnVisualizar = this.shadowRoot!.querySelector("my-button#btn-visualizar")!;
+    const btnVisualizar = this.shadowRoot!.querySelector(
+      "my-button#btn-visualizar"
+    )!;
 
     btnVisualizar.addEventListener("click", () => {
       abrirLivro(this.livro, this.shadowRoot!);
-    })
+    });
   }
 }
 
