@@ -4,7 +4,6 @@ import "./button.js";
 import "./hello_text.js";
 import { getDecodedToken } from "../service/configure.js";
 
-
 class MyNav extends HTMLElement {
   constructor() {
     super();
@@ -45,166 +44,169 @@ class MyNav extends HTMLElement {
 
     this.shadowRoot!.innerHTML = `
     <style>
-        :host {
-          font-family: var(--poppins);
-        }
-  
-        @keyframes rotation {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
+      :host {
+        font-family: var(--poppins);
+      }
 
-        .rotate {
-          animation: rotation 0.5s linear;
-        }
+      @keyframes rotation {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
 
-        nav {
-          display: flex;
-          background-color: var(--onPrimary);
-          justify-content: center;
+      .rotate {
+        animation: rotation 0.5s linear;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        background-color: var(--onPrimary);
+        position: relative;
+        overflow-x: clip;
+      }
+
+      .logo__icon {
+        width: 3rem;
+        height: auto;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      div img {
+        width: 2rem;
+        display: block;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+      }
+
+      .menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        width: 100%;
+        padding: 1rem 1rem 0 1rem;
+        gap: 1.5rem;
+        background-color: var(--primary);
+        border-radius: 0 0 1rem 1rem;
+        z-index: 2;
+
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.4s ease, opacity 0.3s ease;
+      }
+
+      .menu.active {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .menu__principal,
+      .menu__user {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+      }
+
+      .menu__user text-button {
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Breakpoints */
+      @media (min-width: 480px) {
+        /* sm */
+        ul {
+          flex-direction: column;
           align-items: center;
-          padding: 0.5rem;
-          position: relative; 
-          overflow-x: clip;
-          padding: 1rem;
-
-          img {
-            width: 3rem;
-            height: auto;
-          }
-
-        }
-        
-        .logo__icon {
-          border-radius: 50%;
-          cursor: pointer;
         }
 
         div {
-          display: flex;
-          align-items: center;
-          gap: 5rem;
+          gap: 2rem;
+        }
+      }
 
-          img {
-            width: 2rem;
-            display: none;
-          }
+      @media (min-width: 768px) {
+        /* md */
+        .menu {
+          display: flex !important;
+          flex-direction: row;
+          position: static;
+          padding: 0;
+          background-color: transparent;
+          border-radius: 0;
+        }
+
+        div img {
+          display: none;
+        }
+
+        .menu__principal,
+        .menu__user {
+          flex-direction: row;
+          gap: 2rem;
+          width: auto;
+        }
+
+        .menu__user text-button {
+          width: auto;
         }
 
         ul {
-          list-style: none;
-          padding: 0;
-          display: flex;
+          flex-direction: row;
           gap: 1rem;
         }
+      }
 
-        a {
-          text-decoration: none;
-          color: #333;
-          font-weight: bold;
-        }
-
-        .menu {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 5rem;
-          width: 100%;
-        }
-
-        .menu__principal {
-          width: 100%;
-          display: flex;
-          align-items: center;
+      @media (min-width: 1024px) {
+        /* lg */
+        div {
+          gap: 4rem;
         }
 
         .menu__user {
-          display: flex;
-          align-items: center;
-          gap: 5rem;
-          width: auto;
-          width: 100%;
+          gap: 3rem;
+        }
+      }
+
+      @media (min-width: 1280px) {
+        /* xl */
+        nav {
+          padding: 1.5rem 2rem;
         }
 
-        @media screen and (max-width: 1120px) {
-          nav {
-            padding: 1rem;
-            justify-content: space-between;
-          }
-
-          div {
-            gap: 2rem;
-
-            img {
-              display: block;
-            }
-          }
-
-          .menu {
-            flex-direction: column;
-            position: absolute;
-            right: 0;
-            top: 100%;
-            align-items: start;
-            gap: 2rem;
-            width: 100%;
-            transform: translateX(100%);
-            transition: transform 0.5s linear;
-            z-index: 2;
-            
-            &::after{
-              content: "";
-              background-color: var(--primary);
-              width: 100%;
-              height: 120%;
-              border-radius: 0 0 1rem 1rem;
-              top: 0;
-              left: 0;
-              position: absolute;
-              z-index: -1;
-            }
-          }
-
-          .menu.active {
-            transform: translateX(0);
-          }
-
-          .menu__user {
-            padding: 0;
-            padding: 1rem;
-            gap: 1rem;
-            width: 100%;
-            justify-content: center;
-          }
-
-          .menu__principal {
-            flex-direction: column;
-
-            ul {
-              display: flex;
-              flex-direction: column;
-            }
-          }
-
-          @media screen and (max-width: 480px){
-            nav {
-              align-items: center;
-              justify-content: space-between;
-              padding: 1rem;
-            }
-
-            div {
-              align-items: center;
-              justify-contente: center;
-              gap: 1rem;
-              
-              input-button {
-                width: 100%;
-              }
-            }
-          }
+        .logo__icon {
+          width: 3.5rem;
         }
-      </style>
+      }
+    </style>
 
       <nav>
         <img class="logo__icon" id="logo-home" src="./images/banners/bg.jpg" alt="Logo da Biblioteca" />
@@ -219,7 +221,11 @@ class MyNav extends HTMLElement {
               <ul>
                 <li><text-button href="index.html">Início</text-button></li>
                 <li><text-button href="profile.html" id="emprestimos">Meus empréstimos</text-button></li>
-                ${isAdmin ? `<li><text-button href="admin.html">Administração</text-button></li>` : ""}
+                ${
+                  isAdmin
+                    ? `<li><text-button href="admin.html">Administração</text-button></li>`
+                    : ""
+                }
               </ul>
             </section>
 
@@ -238,7 +244,10 @@ class MyNav extends HTMLElement {
     const menu = this.shadowRoot?.querySelector(".menu");
     const logo = this.shadowRoot?.querySelector("#logo-home");
 
-    logo?.addEventListener("click", () => window.location.href = "./index.html");
+    logo?.addEventListener(
+      "click",
+      () => (window.location.href = "./index.html")
+    );
 
     let isOpen = false;
 
