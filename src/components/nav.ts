@@ -188,7 +188,7 @@ class MyNav extends HTMLElement {
           @media screen and (max-width: 480px){
             nav {
               align-items: center;
-              justify-content: center;
+              justify-content: space-between;
               padding: 1rem;
             }
 
