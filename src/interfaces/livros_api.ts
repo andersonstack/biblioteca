@@ -26,9 +26,10 @@ export interface LivroDevolucao {
 }
 
 export interface LivroCadastro {
+  id?: number;
   titulo: string;
   descricao: string;
   ano: string;
   imagem_caminho: string;
-  disponivel: boolean;
+  disponibilidade: boolean;
 }
