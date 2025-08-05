@@ -29,6 +29,6 @@ export interface LivroCadastro {
   titulo: string;
   descricao: string;
   ano: string;
-  imagem: string;
+  imagem_caminho: string;
   disponivel: boolean;
 }
