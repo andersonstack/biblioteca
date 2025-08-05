@@ -34,10 +34,19 @@ class Carrousel extends HTMLElement {
   }
 
   connectedCallback() {
-    this.getLivros();
-    this.render();
-    this.renderLivros();
+    if (!sessionStorage.getItem("livros")) {
+      setTimeout(() => {
+        this.getLivros();
+        this.render();
+        this.renderLivros();
+      }, 100);
+    } else {
+      this.getLivros();
+      this.render();
+      this.renderLivros();
+    }
   }
+
 
   renderLivros() {
     const shadow = this.shadowRoot!;
