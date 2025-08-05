@@ -3,6 +3,7 @@ import "../components/button.js";
 import "../components/text_button.js";
 import "../components/toggle_password.js";
 import "../interfaces/usuario.js";
+
 import { mostrarMensagem } from "../utils/messagem.js";
 import { login } from "../service/connection.js";
 
@@ -50,7 +51,7 @@ class TelaLogin extends HTMLElement {
           height: 100vh;
           width: 100vw;
           gap: 1rem;
-          background-image: url("src/images/banners/bg.jpg");
+          background-image: url("./images/banners/bg.jpg");
           background-size: cover;
           position: relative;
         }
@@ -142,10 +143,11 @@ class TelaLogin extends HTMLElement {
             type="text"
             placeholder="Usuário"
             aria-label="Digite seu usuário"
+            class="input__credenciais"
           ></my-input>
 
           <toggle-password>
-            <my-input id="senha" type="password" placeholder="Senha" aria-label="Digite sua senha"></my-input>
+            <my-input class="input__credenciais" id="senha" type="password" placeholder="Senha" aria-label="Digite sua senha"></my-input>
           </toggle-password>
 
           <div class="buttons">
