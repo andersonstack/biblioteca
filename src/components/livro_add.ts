@@ -81,7 +81,7 @@ class LivroAdd extends HTMLElement {
         const preview = shadow.querySelector("#preview") as HTMLImageElement;
         const fileInput = shadow.querySelector("#imagemArquivo") as HTMLInputElement;
         const linkInput = shadow.querySelector("my-input#imagemLink")! as HTMLInputElement;
-        const salvarBtn = shadow.querySelector("my-button#salvar")!;
+        const salvarBtn = shadow.querySelector("my-button#salvar")! as HTMLButtonElement;
         const msgDiv = shadow.querySelector("#msg")! as HTMLElement;
 
         
@@ -112,6 +112,12 @@ class LivroAdd extends HTMLElement {
 
         
         salvarBtn.addEventListener("onClick", async () => {
+            const btnInterno = salvarBtn.shadowRoot?.querySelector("button");
+            const textoOriginal = btnInterno?.textContent || "Salvar livro";
+
+            salvarBtn.disabled = true;
+            if (btnInterno) btnInterno.textContent = "Carregando...";
+
             const titulo = (shadow.querySelector("my-input#titulo") as any).value.trim();
             const descricao = (shadow.querySelector("#descricao") as HTMLTextAreaElement).value.trim();
             const ano = (shadow.querySelector("my-input#ano") as any).value.trim();
@@ -122,6 +128,8 @@ class LivroAdd extends HTMLElement {
             if (!titulo || !descricao || !ano || (!file && !link)) {
                 msgDiv.textContent = "Preencha todos os campos corretamente.";
                 msgDiv.style.color = "red";
+                salvarBtn.disabled = false;
+                if (btnInterno) btnInterno.textContent = textoOriginal;
                 return;
             }
 
@@ -129,45 +137,36 @@ class LivroAdd extends HTMLElement {
                 titulo,
                 descricao,
                 ano,
-                imagem: file ? "" : link,
+                imagem_caminho: file ? "" : link,
                 disponivel: true,
             };
 
-            const status = await addBook(novoLivro, file);
+            const resultado = await addBook(novoLivro, file);
 
             msgDiv.textContent =
-                status === 200
-                ? "Livro adicionado com sucesso!"
-                : status === 401
-                ? "Erro ao adicionar o livro!"
-                : "Erro interno!";
-            msgDiv.style.color = status === 200 ? "green" : "red";
+                resultado.status === 201
+                    ? "Livro adicionado com sucesso!"
+                    : resultado.status === 501
+                    ? "Erro ao adicionar o livro!"
+                    : "Erro interno!";
+            msgDiv.style.color = resultado.status === 201 ? "green" : "red";
 
-            if (status === 200) {
-                // Atualiza sessionStorage com o novo livro:
-                const cacheRaw = sessionStorage.getItem("livros");
-                let cache = cacheRaw ? JSON.parse(cacheRaw) : { livros: [], timestamp: 0 };
-
-                // Adiciona o novo livro no array
-                cache.livros.push(novoLivro);
-                // Atualiza o timestamp
-                cache.timestamp = Date.now();
-
-                sessionStorage.setItem("livros", JSON.stringify(cache));
-
+            if (resultado.status === 201) {
                 setTimeout(() => {
-                // Limpa inputs
-                (shadow.querySelector("my-input#titulo") as any).value = "";
-                (shadow.querySelector("#descricao") as HTMLTextAreaElement).value = "";
-                (shadow.querySelector("my-input#ano") as any).value = "";
-                (shadow.querySelector("my-input#imagemLink") as any).value = "";
-                fileInput.value = "";
-                preview.src = "";
-                preview.style.display = "none";
-                this.imagemPreviewUrl = "";
-                msgDiv.textContent = "";
+                    (shadow.querySelector("my-input#titulo") as any).value = "";
+                    (shadow.querySelector("#descricao") as HTMLTextAreaElement).value = "";
+                    (shadow.querySelector("my-input#ano") as any).value = "";
+                    (shadow.querySelector("my-input#imagemLink") as any).value = "";
+                    fileInput.value = "";
+                    preview.src = "";
+                    preview.style.display = "none";
+                    this.imagemPreviewUrl = "";
+                    msgDiv.textContent = "";
                 }, 1000);
             }
+
+            salvarBtn.disabled = false;
+            if (btnInterno) btnInterno.textContent = textoOriginal;
         });
     }
 }
