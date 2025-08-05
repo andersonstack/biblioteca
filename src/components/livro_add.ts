@@ -138,7 +138,7 @@ class LivroAdd extends HTMLElement {
                 descricao,
                 ano,
                 imagem_caminho: file ? "" : link,
-                disponivel: true,
+                disponibilidade: true,
             };
 
             const resultado = await addBook(novoLivro, file);
