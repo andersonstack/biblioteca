@@ -77,7 +77,7 @@ class TogglePassword extends HTMLElement {
       <div class="container">
         <slot></slot>
         <div class="container_row">
-          <img class="eye-icon" src="./src/images/icons/eye-closed.png" alt="mostrar senha" />
+          <img class="eye-icon" src="./images/icons/eye-closed.png" alt="mostrar senha" />
           <p id="senha">
             <span class="text-slide mostrar">Mostrar senha</span>
             <span class="text-slide esconder">Esconder senha</span>
@@ -110,8 +110,8 @@ class TogglePassword extends HTMLElement {
 
         realInput.type = isPassword ? "text" : "password";
         img.src = isPassword
-          ? "./src/images/icons/eye-open.png"
-          : "./src/images/icons/eye-closed.png";
+          ? "./images/icons/eye-open.png"
+          : "./images/icons/eye-closed.png";
 
         senha?.classList.toggle("active", isPassword);
       });
@@ -121,7 +121,6 @@ class TogglePassword extends HTMLElement {
 
     slot.addEventListener("slotchange", configureInput);
   }
-
 }
 
 customElements.define("toggle-password", TogglePassword);
