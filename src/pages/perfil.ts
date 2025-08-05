@@ -1,12 +1,11 @@
 import "../components/nav.js";
 import "../components/text_button.js";
 import "../components/livro_estante.js";
-////import "../components/input_button.js";
 
 class TelaPerfil extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
@@ -16,8 +15,12 @@ class TelaPerfil extends HTMLElement {
 
   setup() {
     window.addEventListener("DOMContentLoaded", () => {
-      const containerAtivos = this.shadowRoot!.querySelector("#estante-livros-ativos");
-      const containerVencidos = this.shadowRoot!.querySelector("#estante-livros-vencidos");
+      const containerAtivos = this.shadowRoot!.querySelector(
+        "#estante-livros-ativos"
+      );
+      const containerVencidos = this.shadowRoot!.querySelector(
+        "#estante-livros-vencidos"
+      );
 
       if (!containerAtivos || !containerVencidos) return;
 
@@ -27,6 +30,7 @@ class TelaPerfil extends HTMLElement {
       try {
         const livros = JSON.parse(livrosJSON);
         if (livros === null) return;
+
         const hoje = new Date();
 
         livros.forEach((livro: any) => {
@@ -40,10 +44,8 @@ class TelaPerfil extends HTMLElement {
 
           if (vencimento >= hoje) {
             containerAtivos.appendChild(livroElement);
-          } else {
-            if (livro.devolucao === 0){
-              containerVencidos.appendChild(livroElement);
-            }
+          } else if (livro.devolucao === 0) {
+            containerVencidos.appendChild(livroElement);
           }
         });
       } catch (error) {
@@ -56,56 +58,51 @@ class TelaPerfil extends HTMLElement {
     this.shadowRoot!.innerHTML = `
       <style>
         :host {
-          font-family: "Poppins";
+          font-family: "Poppins", sans-serif;
         }
 
         .container__perfil {
           display: flex;
           flex-direction: column;
           background-color: var(--primary);
-          height: 100vh;
+          min-height: 100vh;
           padding: 1rem;
-          overflow: hidden;
         }
 
         .container__emprestimo {
           margin-top: 1rem;
           background-color: var(--branco-gelo);
           border: 1px solid var(--destaque);
-          border-radius: 0.625rem;
-          overflow-y: auto;
-          flex: 1;
-        }
-
-        .container__titulo {
-          background-color: var(--onPrimary);
-          font-weight: 600;
-          padding: 0.5rem 0.5rem;
-          font-size: 1.8rem;
-          text-align: center;
-          color: var(--branco-gelo);
-          font-family: var(--poppins);
+          border-radius: 10px;
+          padding: 1rem;
           display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin: 1rem 0;
+          flex-direction: column;
+          gap: 2rem;
         }
 
-        h2 {
-          font-size: 1.2rem;
+        .titulo {
+          background-color: var(--onPrimary);
+          color: var(--branco-gelo);
+          padding: 0.75rem 1rem;
+          font-size: 1.4rem;
           font-weight: 600;
-          color: var(--primary);
-          margin-top: 1rem;
-          margin-bottom: 0.5rem;
+          border-radius: 0.5rem;
+          text-align: center;
+        }
+
+        .coluna {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
         }
 
         .estante {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
           gap: 1rem;
-          width: 100%;
         }
 
+        /* Scrollbar customizado */
         ::-webkit-scrollbar {
           width: 8px;
         }
@@ -119,24 +116,48 @@ class TelaPerfil extends HTMLElement {
           background-color: transparent;
         }
 
-        @media (min-width: 600px) {
+        /* RESPONSIVO */
+
+        @media (min-width: 768px) {
           .estante {
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .container__emprestimo {
+            flex-direction: row;
+            justify-content: space-between;
+          }
+
+          .coluna {
+            flex: 1;
+          }
+
+          .titulo {
+            font-size: 1.6rem;
+            text-align: left;
+          }
+        }
+
+        @media (min-width: 1280px) {
+          .estante {
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
           }
         }
       </style>
 
+      <my-nav></my-nav>
       <section class="container__perfil" aria-label="Perfil do Usuário">
         <section class="container__emprestimo">
-          <div class="container__titulo">
-            <h2>Meus empréstimos ativos</h2>
+          <div class="coluna">
+            <div class="titulo">Meus empréstimos ativos</div>
+            <div class="estante" id="estante-livros-ativos"></div>
           </div>
-          <div class="estante" id="estante-livros-ativos"></div>
-          
-          <div class="container__titulo">
-            <h2>Empréstimos vencidos</h2>
+          <div class="coluna">
+            <div class="titulo">Empréstimos vencidos</div>
+            <div class="estante" id="estante-livros-vencidos"></div>
           </div>
-          <div class="estante" id="estante-livros-vencidos"></div>
         </section>
       </section>
     `;
