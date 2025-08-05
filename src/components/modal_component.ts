@@ -1,21 +1,21 @@
 class ModalComponent extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
 
-    connectedCallback() {
-        this.render();
-        this.setupCloseEvents();
-        requestAnimationFrame(() => {
-            this.shadowRoot!.querySelector(".modal")?.classList.add("show");
-        });
-    }
+  connectedCallback() {
+    this.render();
+    this.setupCloseEvents();
+    requestAnimationFrame(() => {
+      this.shadowRoot!.querySelector(".modal")?.classList.add("show");
+    });
+  }
 
-    private render() {
-        const title = this.getAttribute("title") || "";
+  private render() {
+    const title = this.getAttribute("title") || "";
 
-        this.shadowRoot!.innerHTML = `
+    this.shadowRoot!.innerHTML = `
             <style>
                 .overlay {
                     position: fixed;
@@ -72,35 +72,35 @@ class ModalComponent extends HTMLElement {
 
             <div class="overlay">
                 <div class="modal">
-                    <img src="./src/images/icons/close-modal.png" alt="Fechar" class="close-btn" />
+                    <img src="./images/icons/close-modal.png" alt="Fechar" class="close-btn" />
                     <h2>${title}</h2>
                     <slot></slot>
                 </div>
             </div>
         `;
-    }
+  }
 
-    private setupCloseEvents() {
-        const overlay = this.shadowRoot!.querySelector(".overlay")!;
-        const modal = this.shadowRoot!.querySelector(".modal")!;
-        const closeBtn = this.shadowRoot!.querySelector(".close-btn")!;
+  private setupCloseEvents() {
+    const overlay = this.shadowRoot!.querySelector(".overlay")!;
+    const modal = this.shadowRoot!.querySelector(".modal")!;
+    const closeBtn = this.shadowRoot!.querySelector(".close-btn")!;
 
-        // Clique no X
-        closeBtn.addEventListener("click", () => this.closeModal());
+    // Clique no X
+    closeBtn.addEventListener("click", () => this.closeModal());
 
-        // Clique fora do modal
-        overlay.addEventListener("click", (e) => {
-            if (e.target === overlay) {
-                this.closeModal();
-            }
-        });
-    }
+    // Clique fora do modal
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) {
+        this.closeModal();
+      }
+    });
+  }
 
-    private closeModal() {
-        const modal = this.shadowRoot!.querySelector(".modal")!;
-        modal.classList.remove("show");
-        setTimeout(() => this.remove(), 300);
-    }
+  private closeModal() {
+    const modal = this.shadowRoot!.querySelector(".modal")!;
+    modal.classList.remove("show");
+    setTimeout(() => this.remove(), 300);
+  }
 }
 
 customElements.define("modal-component", ModalComponent);
