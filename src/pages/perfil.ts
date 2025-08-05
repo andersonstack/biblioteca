@@ -1,6 +1,7 @@
 import "../components/nav.js";
 import "../components/text_button.js";
 import "../components/livro_estante.js";
+import "../components/input_button.js";
 
 class TelaPerfil extends HTMLElement {
   constructor() {
@@ -25,6 +26,7 @@ class TelaPerfil extends HTMLElement {
 
       try {
         const livros = JSON.parse(livrosJSON);
+        if (livros === null) return;
         const hoje = new Date();
 
         livros.forEach((livro: any) => {
@@ -71,15 +73,28 @@ class TelaPerfil extends HTMLElement {
           background-color: var(--branco-gelo);
           border: 1px solid var(--destaque);
           border-radius: 0.625rem;
-          padding: 1rem;
           overflow-y: auto;
           flex: 1;
         }
 
         .container__titulo {
+          background-color: var(--onPrimary);
+          font-weight: 600;
+          padding: 0 0.5rem;
+          font-size: 1.8rem;
+          text-align: center;
+          color: var(--branco-gelo);
+          font-family: var(--poppins);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin: 1rem 0;
+        }
+
+        h2 {
           font-size: 1.2rem;
           font-weight: 600;
-          color: var(--onPrimary);
+          color: var(--primary);
           margin-top: 1rem;
           margin-bottom: 0.5rem;
         }
@@ -113,10 +128,16 @@ class TelaPerfil extends HTMLElement {
 
       <section class="container__perfil" aria-label="Perfil do Usuário">
         <section class="container__emprestimo">
-          <h2 class="container__titulo">Meus empréstimos ativos</h2>
+          <div class="container__titulo">
+            <h2>Meus empréstimos ativos</h2>
+            <input-button></input-button>
+          </div>
           <div class="estante" id="estante-livros-ativos"></div>
-
-          <h2 class="container__titulo">Empréstimos vencidos</h2>
+          
+          <div class="container__titulo">
+            <h2>Empréstimos vencidos</h2>
+            <input-button></input-button>
+          </div>
           <div class="estante" id="estante-livros-vencidos"></div>
         </section>
       </section>
