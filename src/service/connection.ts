@@ -97,7 +97,7 @@ export async function getEmprestimos() {
   }
 }
 
-export async function addBook(livro: LivroCadastro, file?: File): Promise<200 | 401 | 501> {
+export async function addBook(livro: LivroCadastro, file?: File): Promise<{ status: number, livro?: string }> {
   try {
     let response: Response;
 
@@ -121,11 +121,17 @@ export async function addBook(livro: LivroCadastro, file?: File): Promise<200 | 
       });
     }
 
-    if (response.status === 201) return 200;
-    if (response.status === 400) return 401;
-    return 501;
+    const json = await response.json();
+
+    if (json?.livro) {
+      const livrosCache = JSON.parse(sessionStorage.getItem("livros") || '{"livros":[],"timestamp":0}');
+      livrosCache.livros.push(json.livro);
+      sessionStorage.setItem("livros", JSON.stringify(livrosCache));
+    }
+
+    return { status: response.status, livro: json?.livro };
   } catch (error) {
-    return 501;
+    return {status: 501};
   }
 }
 
