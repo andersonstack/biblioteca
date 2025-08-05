@@ -207,11 +207,11 @@ class MyNav extends HTMLElement {
       </style>
 
       <nav>
-        <img class="logo__icon" id="logo-home" src="./src/images/banners/bg.jpg" alt="Logo da Biblioteca" />
+        <img class="logo__icon" id="logo-home" src="./images/banners/bg.jpg" alt="Logo da Biblioteca" />
         
         <div>
           <my-button>
-            <img src="./src/images/icons/menu.png" class="toggle-icon"/>
+            <img src="./images/icons/menu.png" class="toggle-icon"/>
           </my-button>
 
           <section aria-label="Menu" class="menu">
@@ -252,8 +252,8 @@ class MyNav extends HTMLElement {
         img.classList.add("rotate");
 
         img.src = isOpen
-          ? "./src/images/icons/close.png"
-          : "./src/images/icons/menu.png";
+          ? "./images/icons/close.png"
+          : "./images/icons/menu.png";
       }
 
       menu?.classList.toggle("open", isOpen);

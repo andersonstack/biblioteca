@@ -115,7 +115,7 @@ class InputButton extends HTMLElement {
           id="input"
         ></my-input>
         <my-button aria-label="Pesquisar livro" id="btn-lupa">
-          <img src="./src/images/icons/lupa.png" alt="Lupa" />
+          <img src="./images/icons/lupa.png" alt="Lupa" />
         </my-button>
       </section>
     `;

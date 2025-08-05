@@ -1,0 +1,8 @@
+{
+  "buildCommand": "tsc",
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/dist/(.*)", "destination": "/dist/$1" }
+  ]
+}
