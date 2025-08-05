@@ -77,6 +77,7 @@ class MyNav extends HTMLElement {
         
         .logo__icon {
           border-radius: 50%;
+          cursor: pointer;
         }
 
         div {
@@ -206,7 +207,7 @@ class MyNav extends HTMLElement {
       </style>
 
       <nav>
-        <img class="logo__icon" src="./src/images/banners/bg.jpg" alt="Logo da Biblioteca" />
+        <img class="logo__icon" id="logo-home" src="./src/images/banners/bg.jpg" alt="Logo da Biblioteca" />
         
         <div>
           <my-button>
@@ -235,6 +236,10 @@ class MyNav extends HTMLElement {
     const btn = this.shadowRoot?.querySelector("my-button");
     const img = btn?.querySelector("img");
     const menu = this.shadowRoot?.querySelector(".menu");
+    const logo = this.shadowRoot?.querySelector("#logo-home");
+
+    logo?.addEventListener("click", () => window.location.href = "./index.html");
+
     let isOpen = false;
 
     btn?.addEventListener("click", () => {
