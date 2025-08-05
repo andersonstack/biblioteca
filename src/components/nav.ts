@@ -14,6 +14,7 @@ class MyNav extends HTMLElement {
     this.render();
     this.setupMenuToggle();
     this.setupLogoutHandler();
+    this.setupResizeHandler();
   }
 
   getUserName(): string | null {
@@ -22,6 +23,23 @@ class MyNav extends HTMLElement {
 
   isAuthenticated(): boolean {
     return !!this.getUserName();
+  }
+
+  setupResizeHandler() {
+    const menu = this.shadowRoot?.querySelector(".menu");
+
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        menu?.classList.remove("active");
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Opcional: remove o listener ao destruir o componente
+    this.addEventListener("disconnected", () => {
+      window.removeEventListener("resize", handleResize);
+    });
   }
 
   renderUserSection(): string {
@@ -156,12 +174,15 @@ class MyNav extends HTMLElement {
       @media (min-width: 768px) {
         /* md */
         .menu {
-          display: flex !important;
+          display: flex;
           flex-direction: row;
           position: static;
           padding: 0;
           background-color: transparent;
           border-radius: 0;
+          transform: none;
+          opacity: 1;
+          visibility: visible;
         }
 
         div img {
