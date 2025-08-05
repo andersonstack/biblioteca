@@ -9,4 +9,9 @@ async function init() {
   await import("./components/carrousel.js");
 }
 
-init();
+if(!sessionStorage.getItem("livros")) init();
+else {
+  import("./components/nav.js");
+  import("./components/estante_component.js");
+  import("./components/carrousel.js");
+};
