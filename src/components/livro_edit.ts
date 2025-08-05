@@ -1,4 +1,5 @@
 import "./input.js";
+import { editBook } from "../service/connection.js";
 
 class LivroEdit extends HTMLElement {
     private shadow: ShadowRoot;
@@ -118,7 +119,7 @@ class LivroEdit extends HTMLElement {
             const div = document.createElement("div");
             div.classList.add("card");
             div.innerHTML = `
-                <img src="http://localhost:3000${livro.imagem_caminho}" />
+                <img src="${livro.imagem_caminho}" />
                 <p><strong>Título:</strong> ${livro.titulo}</p>
                 <p><strong>Ano:</strong> ${livro.ano}</p>
                 <p><strong>Descrição:</strong> ${livro.descricao}</p>
@@ -162,8 +163,7 @@ class LivroEdit extends HTMLElement {
         (container.querySelector("my-input#titulo") as any).shadowRoot.querySelector("input")!.value = livro.titulo;
         container.querySelector("textarea")!.value = livro.descricao;
         (container.querySelector("my-input#ano") as any).shadowRoot.querySelector("input")!.value = livro.ano;
-        (container.querySelector("my-input#imagemLink") as any).shadowRoot.querySelector("input")!.value =
-            livro.imagem_caminho.startsWith("data") ? "" : "http://localhost:3000" + livro.imagem_caminho;
+        (container.querySelector("my-input#imagemLink") as any).shadowRoot.querySelector("input")!.value = livro.imagem_caminho;
 
         // Imagem preview
         const fileInput = container.querySelector("#imagemArquivo") as HTMLInputElement;
@@ -191,27 +191,40 @@ class LivroEdit extends HTMLElement {
         });
 
         // Salvar alterações
-        container.querySelector("my-button#salvarEdicao")!.addEventListener("onClick", () => {
+        container.querySelector("my-button#salvarEdicao")!.addEventListener("onClick", async () => {
             const novoTitulo = (container.querySelector("my-input#titulo") as any).value.trim();
             const novaDescricao = container.querySelector("textarea")!.value.trim();
             const novoAno = parseInt((container.querySelector("my-input#ano") as any).value);
+            const file = (container.querySelector("#imagemArquivo") as HTMLInputElement).files?.[0];
+            const mensagem = container.querySelector("#mensagemEdit")!;
 
             if (!novoTitulo || !novaDescricao || !novoAno || !novaImagem) {
-                container.querySelector("#mensagemEdit")!.textContent = "Preencha todos os campos.";
+                mensagem.textContent = "Preencha todos os campos.";
                 return;
             }
 
-            const atualizado = {
+            // Monta o livro atualizado para envio
+            const livroAtualizado = {
                 ...livro,
                 titulo: novoTitulo,
                 descricao: novaDescricao,
                 ano: novoAno,
-                imagem_caminho: novaImagem
+                imagem_caminho: novaImagem,
+                disponibilidade: livro.disponibilidade ?? 1,
+                id: livro.id
             };
 
-            this.livros[index] = atualizado;
-            sessionStorage.setItem("livros", JSON.stringify({ livros: this.livros, timestamp: Date.now() }));
-            container.querySelector("#mensagemEdit")!.textContent = "✅ Livro atualizado com sucesso!";
+            mensagem.textContent = "Salvando...";
+
+            const response = await editBook(livroAtualizado, file);
+
+            if (response.status === 201 && response.livro) {
+                this.livros[index] = response.livro;
+                sessionStorage.setItem("livros", JSON.stringify({ livros: this.livros, timestamp: Date.now() }));
+                mensagem.textContent = "Livro atualizado com sucesso!";
+            } else {
+                mensagem.textContent = "Erro ao atualizar o livro. Tente novamente.";
+            }
         });
     }
 }
