@@ -219,7 +219,11 @@ class LivroEdit extends HTMLElement {
             const response = await editBook(livroAtualizado, file);
 
             if (response.status === 201 && response.livro) {
-                this.livros[index] = response.livro;
+                const realIndex = this.livros.findIndex((l) => l.id === livro.id);
+                if (realIndex !== -1) {
+                    this.livros[realIndex] = response.livro;
+                }
+                this.livros[realIndex] = response.livro;
                 sessionStorage.setItem("livros", JSON.stringify({ livros: this.livros, timestamp: Date.now() }));
                 mensagem.textContent = "Livro atualizado com sucesso!";
             } else {
