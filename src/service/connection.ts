@@ -135,6 +135,54 @@ export async function addBook(livro: LivroCadastro, file?: File): Promise<{ stat
   }
 }
 
+export async function editBook(livro: LivroCadastro & { id: number }, file?: File): Promise<{ status: number; livro?: any }> {
+  try {
+    let response: Response;
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("id", livro.id.toString());
+      formData.append("titulo", livro.titulo);
+      formData.append("descricao", livro.descricao);
+      formData.append("ano", livro.ano.toString());
+      formData.append("disponivel", livro.disponibilidade?.toString() || "1");
+      formData.append("imagem", file);
+
+      response = await fetch("https://biblioteca-api-cxpb.onrender.com/atualizarLivro", {
+        method: "POST",
+        headers: authHeaders("form"),
+        body: formData,
+      });
+
+    } else {
+      const payload = {
+        id: livro.id,
+        titulo: livro.titulo,
+        descricao: livro.descricao,
+        ano: livro.ano,
+        imagem: livro.imagem_caminho,
+        disponivel: livro.disponibilidade ?? 1,
+      };
+
+      response = await fetch("https://biblioteca-api-cxpb.onrender.com/atualizarLivro", {
+        method: "POST",
+        headers: authHeaders(),
+        body: JSON.stringify(payload),
+      });
+    }
+
+    const json = await response.json();
+
+    return {
+      status: response.status,
+      livro: json?.livro,
+    };
+  } catch (error) {
+    console.error("Erro ao editar livro:", error);
+    return { status: 501 };
+  }
+}
+
 export async function fazerEmprestimo(livroEmprestimo: LivroEmprestimo): Promise<200 | 400> {
   const response = await fetch("https://biblioteca-api-cxpb.onrender.com/fazerEmprestimo/", {
     method: "POST",
