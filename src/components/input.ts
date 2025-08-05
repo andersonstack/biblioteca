@@ -22,6 +22,12 @@ class MyInput extends HTMLElement {
           width: 100%;
         }
 
+        .input__credenciais {
+          padding: 1rem;
+          background-color: white;
+          border-radius: 1rem;
+        }
+
         .input__admin {
           background-color: var(--secondary);
           color: black;
