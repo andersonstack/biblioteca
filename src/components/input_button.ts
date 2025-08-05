@@ -25,17 +25,17 @@ class InputButton extends HTMLElement {
   }
 
   private setupListeners() {
-    const btn = this.shadowRoot?.querySelector('#btn-lupa');
-    const my_input = this.shadowRoot?.querySelector('my-input');
-    const section = this.shadowRoot?.querySelector('section');
+    const btn = this.shadowRoot?.querySelector("#btn-lupa");
+    const my_input = this.shadowRoot?.querySelector("my-input");
+    const section = this.shadowRoot?.querySelector("section");
     const inputElement = my_input?.shadowRoot?.querySelector("input");
 
     const toggleActive = () => {
-      section?.classList.toggle('active');
-      my_input?.classList.toggle('active');
+      section?.classList.toggle("active");
+      my_input?.classList.toggle("active");
     };
 
-    btn?.addEventListener('click', () => {
+    btn?.addEventListener("click", () => {
       toggleActive();
       this.executarBusca();
     });
@@ -49,63 +49,62 @@ class InputButton extends HTMLElement {
     inputElement?.addEventListener("input", () => this.executarBusca());
   }
 
-    private executarBusca() {
-        if (this.targetRoot) {
-            const valor = this.value.trim();
-            buscarLivro(this.targetRoot, this.containerSelector, valor);
-        }
+  private executarBusca() {
+    if (this.targetRoot) {
+      const valor = this.value.trim();
+      buscarLivro(this.targetRoot, this.containerSelector, valor);
     }
+  }
 
   private render() {
     this.shadowRoot!.innerHTML = `
       <style>
-        my-input,
-        my-button {
-          z-index: 1;
-        }
         section {
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          background-color: transparent;
-          width: 100%;
-          padding: 0.5rem;
-          border-radius: 1rem;
-          position: relative;
-          overflow: hidden;
-
-          img {
-            width: 2rem;
-          }
-        }
-
-        section::after {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
+          gap: 0.5rem;
           background-color: var(--branco-gelo);
-          border-radius: 1rem;
-          transform: translateX(100%);
-          transition: transform 1s ease-in-out;
-          z-index: 0;
+          padding: 0.5rem 1rem;
+          border-radius: 2rem;
+          width: 100%;
+          max-width: 400px;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+          transition: box-shadow 0.3s ease;
         }
 
-        section.active::after {
-          transform: translateX(0);
+        section:focus-within {
+          box-shadow: 0 0 0 2px var(--primary);
         }
 
         my-input {
-          opacity: 1;
-          transform: translateX(200%);
-          transition: transform 1s ease-in-out;
+          flex: 1;
         }
 
-        my-input.active {
-          opacity: 1;
-          transform: translateY(0);
+        my-button {
+          background: none;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+        }
+
+        my-button img {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+
+        @media (max-width: 480px) {
+          section {
+            max-width: 100%;
+            padding: 0.5rem 0.75rem;
+          }
+
+          my-button img {
+            width: 1.25rem;
+            height: 1.25rem;
+          }
         }
       </style>
+
 
       <section aria-label="Buscar de livro" role="search">
         <my-input 
