@@ -84,11 +84,11 @@ class TextButton extends HTMLElement {
           }
 
           .default:hover {
-            color: var(--destaque, #ff4081);
+            color: white;
           }
 
           .with_background:hover {
-            background-color: var(--onSecondary, #444);
+            background-color: var(--onSecondary);
             color: var(--branco-gelo, #fdfdfd);
           }
         }
