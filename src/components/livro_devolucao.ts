@@ -28,8 +28,9 @@ class DevolucaoComponent extends HTMLElement {
                     flex-direction: column;
                     gap: 1rem;
                     width: 100%;
+                    height: 100%;
                     margin: auto;
-                    align-items: start;
+                    align-items: center;
                 }
 
                 .mensagem {
@@ -43,6 +44,16 @@ class DevolucaoComponent extends HTMLElement {
                     font-weight: 600;
                     color: #333;
                     margin-bottom: 1rem;
+                    width: 100%;
+                }
+
+                my-input {
+                  width: 100%;
+                  margin-right: 1rem;
+                }
+
+                my-button {
+                  width: 50%;
                 }
             </style>
 
