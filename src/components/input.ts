@@ -33,6 +33,12 @@ class MyInput extends HTMLElement {
           color: black;
           font-weight: 500;
         }
+
+        .input__preencher {
+          background-color: white;
+          border-radius: 1rem;
+          padding: 0.5rem;
+        }
       </style>
 
       <input 

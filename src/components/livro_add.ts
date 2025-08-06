@@ -4,21 +4,21 @@ import "./button.js";
 import "./input.js";
 
 class LivroAdd extends HTMLElement {
-    private shadow: ShadowRoot;
-    private imagemPreviewUrl: string = "";
+  private shadow: ShadowRoot;
+  private imagemPreviewUrl: string = "";
 
-    constructor() {
-        super();
-        this.shadow = this.attachShadow({ mode: "open" });
-    }
+  constructor() {
+    super();
+    this.shadow = this.attachShadow({ mode: "open" });
+  }
 
-    connectedCallback() {
-        this.render();
-        this.setupListeners();
-    }
+  connectedCallback() {
+    this.render();
+    this.setupListeners();
+  }
 
-    private render() {
-        this.shadow.innerHTML = `
+  private render() {
+    this.shadow.innerHTML = `
             <style>
                 form {
                     display: flex;
@@ -54,18 +54,22 @@ class LivroAdd extends HTMLElement {
                     font-style: italic;
                     color: green;
                 }
+
+                my-input {
+                    width: 100%;
+                }
             </style>
 
             <form>
-                <my-input id="titulo" placeholder="Título do livro" aria-label="Título"></my-input>
+                <my-input class="input__preencher" id="titulo" placeholder="Título do livro" aria-label="Título"></my-input>
                 <textarea id="descricao" placeholder="Descrição"></textarea>
-                <my-input id="ano" type="number" placeholder="Ano de publicação" aria-label="Ano"></my-input>
+                <my-input class="input__preencher" id="ano" type="number" placeholder="Ano de publicação" aria-label="Ano"></my-input>
                 
                 <label>Imagem (arquivo):</label>
                 <input type="file" id="imagemArquivo" accept="image/*" />
 
                 <label>Ou link da imagem:</label>
-                <my-input id="imagemLink" type="url" placeholder="Cole o link da imagem" aria-label="Link da imagem"></my-input>
+                <my-input class="input__preencher" id="imagemLink" type="url" placeholder="Cole o link da imagem" aria-label="Link da imagem"></my-input>
 
                 <img id="preview" class="preview" src="" alt="Pré-visualização da imagem" style="display:none;" />
 
@@ -74,101 +78,111 @@ class LivroAdd extends HTMLElement {
                 <div class="mensagem" id="msg"></div>
             </form>
         `;
-    }
+  }
 
-    private setupListeners() {
-        const shadow = this.shadow;
-        const preview = shadow.querySelector("#preview") as HTMLImageElement;
-        const fileInput = shadow.querySelector("#imagemArquivo") as HTMLInputElement;
-        const linkInput = shadow.querySelector("my-input#imagemLink")! as HTMLInputElement;
-        const salvarBtn = shadow.querySelector("my-button#salvar")! as HTMLButtonElement;
-        const msgDiv = shadow.querySelector("#msg")! as HTMLElement;
+  private setupListeners() {
+    const shadow = this.shadow;
+    const preview = shadow.querySelector("#preview") as HTMLImageElement;
+    const fileInput = shadow.querySelector(
+      "#imagemArquivo"
+    ) as HTMLInputElement;
+    const linkInput = shadow.querySelector(
+      "my-input#imagemLink"
+    )! as HTMLInputElement;
+    const salvarBtn = shadow.querySelector(
+      "my-button#salvar"
+    )! as HTMLButtonElement;
+    const msgDiv = shadow.querySelector("#msg")! as HTMLElement;
 
-        
-        fileInput.addEventListener("change", () => {
-            const file = fileInput.files?.[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = () => {
-                    this.imagemPreviewUrl = reader.result as string;
-                    preview.src = this.imagemPreviewUrl;
-                    preview.style.display = "block";
-                };
-                reader.readAsDataURL(file);
-                (linkInput as any).value = ""; 
-            }
-        });
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.imagemPreviewUrl = reader.result as string;
+          preview.src = this.imagemPreviewUrl;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+        (linkInput as any).value = "";
+      }
+    });
 
-        
-        linkInput.shadowRoot!.querySelector("input")!.addEventListener("input", () => {
-            const url = linkInput.value.trim();
-            if (url) {
-                this.imagemPreviewUrl = url;
-                preview.src = url;
-                preview.style.display = "block";
-                fileInput.value = ""; 
-            }
-        });
+    linkInput
+      .shadowRoot!.querySelector("input")!
+      .addEventListener("input", () => {
+        const url = linkInput.value.trim();
+        if (url) {
+          this.imagemPreviewUrl = url;
+          preview.src = url;
+          preview.style.display = "block";
+          fileInput.value = "";
+        }
+      });
 
-        
-        salvarBtn.addEventListener("onClick", async () => {
-            const btnInterno = salvarBtn.shadowRoot?.querySelector("button");
-            const textoOriginal = btnInterno?.textContent || "Salvar livro";
+    salvarBtn.addEventListener("onClick", async () => {
+      const btnInterno = salvarBtn.shadowRoot?.querySelector("button");
+      const textoOriginal = btnInterno?.textContent || "Salvar livro";
 
-            salvarBtn.disabled = true;
-            if (btnInterno) btnInterno.textContent = "Carregando...";
+      salvarBtn.disabled = true;
+      if (btnInterno) btnInterno.textContent = "Carregando...";
 
-            const titulo = (shadow.querySelector("my-input#titulo") as any).value.trim();
-            const descricao = (shadow.querySelector("#descricao") as HTMLTextAreaElement).value.trim();
-            const ano = (shadow.querySelector("my-input#ano") as any).value.trim();
+      const titulo = (
+        shadow.querySelector("my-input#titulo") as any
+      ).value.trim();
+      const descricao = (
+        shadow.querySelector("#descricao") as HTMLTextAreaElement
+      ).value.trim();
+      const ano = (shadow.querySelector("my-input#ano") as any).value.trim();
 
-            const file = fileInput.files?.[0];
-            const link = linkInput.value.trim();
+      const file = fileInput.files?.[0];
+      const link = linkInput.value.trim();
 
-            if (!titulo || !descricao || !ano || (!file && !link)) {
-                msgDiv.textContent = "Preencha todos os campos corretamente.";
-                msgDiv.style.color = "red";
-                salvarBtn.disabled = false;
-                if (btnInterno) btnInterno.textContent = textoOriginal;
-                return;
-            }
+      if (!titulo || !descricao || !ano || (!file && !link)) {
+        msgDiv.textContent = "Preencha todos os campos corretamente.";
+        msgDiv.style.color = "red";
+        salvarBtn.disabled = false;
+        if (btnInterno) btnInterno.textContent = textoOriginal;
+        return;
+      }
 
-            const novoLivro: LivroCadastro = {
-                titulo,
-                descricao,
-                ano,
-                imagem_caminho: file ? "" : link,
-                disponibilidade: true,
-            };
+      const novoLivro: LivroCadastro = {
+        titulo,
+        descricao,
+        ano,
+        imagem_caminho: file ? "" : link,
+        disponibilidade: true,
+      };
 
-            const resultado = await addBook(novoLivro, file);
+      const resultado = await addBook(novoLivro, file);
 
-            msgDiv.textContent =
-                resultado.status === 201
-                    ? "Livro adicionado com sucesso!"
-                    : resultado.status === 501
-                    ? "Erro ao adicionar o livro!"
-                    : "Erro interno!";
-            msgDiv.style.color = resultado.status === 201 ? "green" : "red";
+      msgDiv.textContent =
+        resultado.status === 201
+          ? "Livro adicionado com sucesso!"
+          : resultado.status === 501
+          ? "Erro ao adicionar o livro!"
+          : "Erro interno!";
+      msgDiv.style.color = resultado.status === 201 ? "green" : "red";
 
-            if (resultado.status === 201) {
-                setTimeout(() => {
-                    (shadow.querySelector("my-input#titulo") as any).value = "";
-                    (shadow.querySelector("#descricao") as HTMLTextAreaElement).value = "";
-                    (shadow.querySelector("my-input#ano") as any).value = "";
-                    (shadow.querySelector("my-input#imagemLink") as any).value = "";
-                    fileInput.value = "";
-                    preview.src = "";
-                    preview.style.display = "none";
-                    this.imagemPreviewUrl = "";
-                    msgDiv.textContent = "";
-                }, 1000);
-            }
+      if (resultado.status === 201) {
+        setTimeout(() => {
+          (shadow.querySelector("my-input#titulo") as any).value = "";
+          (shadow.querySelector("#descricao") as HTMLTextAreaElement).value =
+            "";
+          (shadow.querySelector("my-input#ano") as any).value = "";
+          (shadow.querySelector("my-input#imagemLink") as any).value = "";
+          fileInput.value = "";
+          preview.src = "";
+          preview.style.display = "none";
+          this.imagemPreviewUrl = "";
+          msgDiv.textContent = "";
+        }, 1000);
+      }
 
-            salvarBtn.disabled = false;
-            if (btnInterno) btnInterno.textContent = textoOriginal;
-        });
-    }
+      salvarBtn.disabled = false;
+      if (btnInterno) btnInterno.textContent = textoOriginal;
+    });
+  }
 }
 
 customElements.define("livro-add", LivroAdd);

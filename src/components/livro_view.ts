@@ -1,19 +1,19 @@
 import "./input.js";
 
 class LivroView extends HTMLElement {
-    private shadow: ShadowRoot;
+  private shadow: ShadowRoot;
 
-    constructor() {
-        super();
-        this.shadow = this.attachShadow({ mode: "open" });
-    }
+  constructor() {
+    super();
+    this.shadow = this.attachShadow({ mode: "open" });
+  }
 
-    connectedCallback() {
-        this.render();
-    }
+  connectedCallback() {
+    this.render();
+  }
 
-    private render() {
-        this.shadow.innerHTML = `
+  private render() {
+    this.shadow.innerHTML = `
             <style>
                 .container {
                     display: flex;
@@ -64,50 +64,60 @@ class LivroView extends HTMLElement {
             </style>
 
             <div class="container">
-                <my-input id="campoBusca" class="input__admin" type="text" placeholder="Digite o título do livro..." ></my-input>
+                <my-input id="campoBusca" class="input__preencher" type="text" placeholder="Digite o título do livro..." ></my-input>
                 <div class="livros-container" id="resultados">
                 </div>
             </div>
         `;
 
-        const myInput = this.shadow.querySelector("my-input#campoBusca")! as HTMLInputElement;
-        const realInput = myInput.shadowRoot!.querySelector("input")! as HTMLInputElement;
+    const myInput = this.shadow.querySelector(
+      "my-input#campoBusca"
+    )! as HTMLInputElement;
+    const realInput = myInput.shadowRoot!.querySelector(
+      "input"
+    )! as HTMLInputElement;
 
-        realInput.addEventListener("input", () => this.buscar(myInput.value));
-        realInput.addEventListener("keypress", (e) => {
-            if (e.key === "Enter") this.buscar(myInput.value);
-        });
+    realInput.addEventListener("input", () => this.buscar(myInput.value));
+    realInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") this.buscar(myInput.value);
+    });
+  }
+
+  private buscar(termo: string) {
+    const livrosRaw = sessionStorage.getItem("livros");
+    if (!livrosRaw) return;
+
+    const livros = JSON.parse(livrosRaw).livros;
+    const resultado = livros.filter((l: any) =>
+      l.titulo.toLowerCase().includes(termo.trim().toLowerCase())
+    );
+
+    this.renderLivros(resultado);
+  }
+
+  private renderLivros(livros: any[]) {
+    const container = this.shadow.querySelector("#resultados")!;
+    if (!livros.length) {
+      container.innerHTML = `<p>Nenhum livro encontrado.</p>`;
+      return;
     }
 
-    private buscar(termo: string) {
-        const livrosRaw = sessionStorage.getItem("livros");
-        if (!livrosRaw) return;
-
-        const livros = JSON.parse(livrosRaw).livros;
-        const resultado = livros.filter((l: any) =>
-            l.titulo.toLowerCase().includes(termo.trim().toLowerCase())
-        );
-
-        this.renderLivros(resultado);
-    }
-
-    private renderLivros(livros: any[]) {
-        const container = this.shadow.querySelector("#resultados")!;
-        if (!livros.length) {
-            container.innerHTML = `<p>Nenhum livro encontrado.</p>`;
-            return;
-        }
-
-        container.innerHTML = livros.map((livro) => `
+    container.innerHTML = livros
+      .map(
+        (livro) => `
             <div class="livro-card">
-                <img src="http://localhost:3000${livro.imagem_caminho}" alt="${livro.titulo}">
+                <img src="${livro.imagem_caminho}" alt="${livro.titulo}">
                 <p><strong>Título:</strong> ${livro.titulo}</p>
                 <p><strong>Ano:</strong> ${livro.ano}</p>
                 <p><strong>Descrição:</strong> ${livro.descricao}</p>
-                <p><strong>Disponível:</strong> ${livro.disponibilidade === 1 ? "Sim" : "Não"}</p>
+                <p><strong>Disponível:</strong> ${
+                  livro.disponibilidade === 1 ? "Sim" : "Não"
+                }</p>
             </div>
-        `).join("");
-    }
+        `
+      )
+      .join("");
+  }
 }
 
 customElements.define("livro-view", LivroView);
