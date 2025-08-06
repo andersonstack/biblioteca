@@ -39,6 +39,16 @@ class MyButton extends HTMLElement {
               font-size: clamp(0.5rem, 1vw + 0.5rem, 1rem);
               font-weight: bold;
             }
+            .admin {
+              background-color: var(--onPrimary);
+              border: none;
+              cursor: pointer;
+              width: 100%;
+              padding: 0.5rem;
+              font-size: 1rem;
+              font-weight: 500;
+              border-radius: 1rem;
+            }
             </style>
             <button class=${style}><slot></slot></button>
         `;

@@ -244,7 +244,7 @@ class MyNav extends HTMLElement {
                 <li><text-button href="profile.html" id="emprestimos">Meus empréstimos</text-button></li>
                 ${
                   isAdmin
-                    ? `<li><text-button href="admin.html">Administração</text-button></li>`
+                    ? `<li><text-button href="./admin.html">Administração</text-button></li>`
                     : ""
                 }
               </ul>
