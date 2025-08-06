@@ -19,10 +19,13 @@ export function mostrarMensagem(tipo: String, message: HTMLElement) {
       `;
       break;
     case "erroL":
+      console.log("estou aqui");
       message.innerHTML = `
       <span class="tile-message error active">Login incorreto!</span>
       `;
+      break;
     case "server":
+      console.log("erro de server?");
       message.innerHTML = `
         <span class="tile-message error active">Erro no servidor!</span>
       `;
