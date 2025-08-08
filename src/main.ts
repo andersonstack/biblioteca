@@ -7,11 +7,16 @@ async function init() {
   await import("./components/nav.js");
   await import("./components/estante_component.js");
   await import("./components/carrousel.js");
+  welcomeDiv!.style.display = "none";
 }
 
-if(!sessionStorage.getItem("livros")) init();
+const welcomeDiv = document.getElementById("welcome-div");
+welcomeDiv!.innerHTML = "<p>Carregando... </p>";
+
+if (!sessionStorage.getItem("livros")) init();
 else {
   import("./components/nav.js");
   import("./components/estante_component.js");
   import("./components/carrousel.js");
-};
+  welcomeDiv!.style.display = "none";
+}
